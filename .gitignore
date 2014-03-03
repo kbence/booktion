@@ -1,0 +1,5 @@
+.gradle/
+.idea/
+booktion.iml
+build/
+old.build.gradle

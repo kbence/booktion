@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java.srcDir 'src'
+    }
+}
+
+dependencies {
+    compile group: 'org.apache.thrift', name: 'libthrift', version: '0.9.1'
+}
