@@ -11,6 +11,5 @@ public class BooktionServer
 
     public static void main(String[] args)
     {
-        new BooktionServer().run();
     }
 }
