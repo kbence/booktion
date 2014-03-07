@@ -1,4 +1,4 @@
 
-include 'server', 'client'
+include 'server', 'client', 'shared'
 
 rootProject.name = 'booktion'

@@ -1,4 +1,8 @@
 
+dependencies {
+    compile project(':shared')
+}
+
 mainClassName = 'com.booktion.server.BooktionClient'
 
 jar {

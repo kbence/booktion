@@ -1,7 +1,6 @@
 
 dependencies {
-    compile 'org.apache.thrift:libthrift:0.9.1'
-    compile 'org.slf4j:slf4j-simple:1.6.1' // Thrift needs this but does not reference
+    compile project(':shared')
 }
 
 mainClassName = 'com.booktion.server.BooktionServer'
