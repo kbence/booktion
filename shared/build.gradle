@@ -2,3 +2,13 @@
 jar {
     baseName = 'booktion-shared'
 }
+
+task thrift << {
+    def files = fileTree(dir: 'src/main/thrift/').matching { include '**/*.thrift' }
+    exec {
+        executable = 'thrift'
+        args = ['--gen', 'java', '-out', 'src/main/java/', files.collect { relativePath(it) }.join(",")]
+    }
+}
+
+compileJava.dependsOn(thrift)

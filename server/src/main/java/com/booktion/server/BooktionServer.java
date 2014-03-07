@@ -1,6 +1,6 @@
 package com.booktion.server;
 
-import com.booktion.thrift.Booktion;
+import com.booktion.thrift.BooktionService;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.transport.TServerSocket;
@@ -8,12 +8,12 @@ import org.apache.thrift.transport.TServerTransport;
 
 public class BooktionServer
 {
-    public Booktion.Processor processor;
+    public BooktionService.Processor processor;
 
     public BooktionServer()
     {
         BooktionHandler booktionHandler = new BooktionHandler();
-        processor = new Booktion.Processor(booktionHandler);
+        processor = new BooktionService.Processor(booktionHandler);
     }
 
     public void run()

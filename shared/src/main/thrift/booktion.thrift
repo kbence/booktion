@@ -4,6 +4,6 @@ struct Message {
     1: string text
 }
 
-service Service {
+service BooktionService {
     void echo(1:Message message)
 }
