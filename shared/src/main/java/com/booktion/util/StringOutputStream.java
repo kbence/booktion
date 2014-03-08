@@ -1,4 +1,4 @@
-package com.booktion.log;
+package com.booktion.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -1,5 +1,6 @@
 package com.booktion.log;
 
+import com.booktion.util.StringOutputStream;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -54,5 +55,19 @@ public class LoggerTest
         String output = outputStream.toString();
         Assert.assertEquals("log should end with given text",
                 "[2014-03-08 06:49:34] this is a log\n", output);
+    }
+
+    @Test
+    public void shouldNotFailWhenMocked()
+    {
+        new Logger(new PrintStream(new StringOutputStream())).log("something");
+    }
+
+    @Test
+    public void shouldNotFailWhenFirstLoggerPushed()
+    {
+        Logger.push(new Logger());
+        Logger.pop();
+        Logger.get();
     }
 }

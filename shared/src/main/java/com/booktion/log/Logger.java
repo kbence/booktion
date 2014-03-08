@@ -25,17 +25,21 @@ public class Logger
 
     public static Logger get()
     {
+        return getTopLogger();
+    }
+
+    private static List<Logger> getLoggers() {
         // lazy init
         if (loggers == null) {
             loggers = new LinkedList<Logger>();
             loggers.add(new Logger());
         }
 
-        return getTopLogger();
+        return loggers;
     }
 
     private static Logger getTopLogger() {
-        if (loggers.isEmpty())
+        if (getLoggers().isEmpty())
             throw new IndexOutOfBoundsException("No available loggers!");
 
         return loggers.get(0);
@@ -43,7 +47,7 @@ public class Logger
 
     public static void push(Logger logger)
     {
-        loggers.add(0, logger);
+        getLoggers().add(0, logger);
     }
 
     public static Logger pop()
@@ -67,6 +71,7 @@ public class Logger
 
     public Logger(PrintStream output)
     {
+        this();
         printStream = output;
     }
 
