@@ -77,6 +77,6 @@ public class Logger
 
     public void log(String message)
     {
-        printStream.printf("[%s] %s", dateUtil.getTimestamp(), message);
+        printStream.printf("[%s] %s\n", dateUtil.getTimestamp(), message);
     }
 }

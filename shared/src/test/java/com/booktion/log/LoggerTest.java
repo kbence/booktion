@@ -52,6 +52,7 @@ public class LoggerTest
         logger.log("this is a log");
 
         String output = outputStream.toString();
-        Assert.assertEquals("log should end with given text", "[2014-03-08 06:49:34] this is a log", output);
+        Assert.assertEquals("log should end with given text",
+                "[2014-03-08 06:49:34] this is a log\n", output);
     }
 }
