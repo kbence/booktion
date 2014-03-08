@@ -19,7 +19,7 @@ public class BooktionClient
 
             TProtocol protocol = new TBinaryProtocol(transport);
             BooktionService.Client client = new BooktionService.Client(protocol);
-            client.echo(new Message("I am Client!"));
+            Message message = client.echo(new Message("I am Client!"));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -8,8 +8,10 @@ import org.apache.thrift.TException;
 public class BooktionHandler implements BooktionService.Iface
 {
     @Override
-    public void echo(Message message) throws TException
+    public Message echo(Message message) throws TException
     {
-        Logger.get().log(message.getText());
+        Logger.get().log("CLIENT: " + message.getText());
+
+        return new Message("Server is up and running");
     }
 }

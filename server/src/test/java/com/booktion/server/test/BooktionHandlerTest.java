@@ -46,9 +46,9 @@ public class BooktionHandlerTest
     public void echoShouldLogMessage() throws TException
     {
         BooktionHandler handler = new BooktionHandler();
-        String logEntry = "test message for echo";
+        String message = "test message for echo";
 
-        handler.echo(new Message(logEntry));
-        assertLog("should log the correct string", logEntry);
+        handler.echo(new Message(message));
+        assertLog("should log the correct string", "CLIENT: " + message);
     }
 }

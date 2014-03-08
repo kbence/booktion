@@ -5,5 +5,5 @@ struct Message {
 }
 
 service BooktionService {
-    void echo(1:Message message)
+    Message echo(1:Message message)
 }
