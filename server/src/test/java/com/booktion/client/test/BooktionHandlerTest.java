@@ -1,8 +1,8 @@
-package com.booktion.server.test;
+package com.booktion.client.test;
 
 import com.booktion.log.Logger;
 import com.booktion.util.StringOutputStream;
-import com.booktion.server.BooktionHandler;
+import com.booktion.client.BooktionHandler;
 import com.booktion.thrift.Message;
 import org.apache.thrift.TException;
 import org.junit.After;

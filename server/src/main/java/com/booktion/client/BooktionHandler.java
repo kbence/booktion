@@ -1,4 +1,4 @@
-package com.booktion.server;
+package com.booktion.client;
 
 import com.booktion.log.Logger;
 import com.booktion.thrift.BooktionService;
