@@ -8,14 +8,14 @@ import org.apache.thrift.protocol.TProtocol;
 
 public class BooktionConnector
 {
-    private TProtocolFactory protocolFactory;
+    private ProtocolFactory protocolFactory;
     private BooktionService.Client client;
 
     BooktionConnector()
     {
     }
 
-    public void setProtocolFactory(TProtocolFactory factory)
+    public void setProtocolFactory(ProtocolFactory factory)
     {
         protocolFactory = factory;
     }

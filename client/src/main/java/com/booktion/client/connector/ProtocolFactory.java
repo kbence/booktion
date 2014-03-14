@@ -6,10 +6,7 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
-/**
- * Created by bnc on 3/8/14.
- */
-public class TProtocolFactory
+public class ProtocolFactory
 {
     public TProtocol createBinary(String host, int port) throws TException
     {
