@@ -1,4 +1,4 @@
-package com.booktion.client;
+package com.booktion.server;
 
 import com.booktion.thrift.BooktionService;
 import org.apache.thrift.server.TServer;
