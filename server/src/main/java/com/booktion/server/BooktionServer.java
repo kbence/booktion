@@ -18,7 +18,7 @@ public class BooktionServer
 
     public void run()
     {
-        System.out.println("Booktion client is starting up...");
+        System.out.println("Booktion server is starting up...");
 
         try {
             TServerTransport serverTransport = new TServerSocket(1234);
