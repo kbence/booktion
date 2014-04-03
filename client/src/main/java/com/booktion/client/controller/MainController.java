@@ -3,7 +3,6 @@ package com.booktion.client.controller;
 import com.booktion.client.connector.BooktionConnector;
 import com.booktion.client.connector.BooktionConnectorFactory;
 import com.booktion.client.gui.MainWindow;
-import com.booktion.log.Logger;
 import org.apache.thrift.TException;
 
 import javax.swing.*;
