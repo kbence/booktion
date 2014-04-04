@@ -36,13 +36,13 @@ public class BooktionService {
 
   public interface Iface {
 
-    public Message echo(Message message) throws org.apache.thrift.TException;
+    public com.booktion.thrift.Message echo(com.booktion.thrift.Message message) throws org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void echo(Message message, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void echo(com.booktion.thrift.Message message, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -66,20 +66,20 @@ public class BooktionService {
       super(iprot, oprot);
     }
 
-    public Message echo(Message message) throws org.apache.thrift.TException
+    public com.booktion.thrift.Message echo(com.booktion.thrift.Message message) throws org.apache.thrift.TException
     {
       send_echo(message);
       return recv_echo();
     }
 
-    public void send_echo(Message message) throws org.apache.thrift.TException
+    public void send_echo(com.booktion.thrift.Message message) throws org.apache.thrift.TException
     {
       echo_args args = new echo_args();
       args.setMessage(message);
       sendBase("echo", args);
     }
 
-    public Message recv_echo() throws org.apache.thrift.TException
+    public com.booktion.thrift.Message recv_echo() throws org.apache.thrift.TException
     {
       echo_result result = new echo_result();
       receiveBase(result, "echo");
@@ -107,7 +107,7 @@ public class BooktionService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void echo(Message message, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void echo(com.booktion.thrift.Message message, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       echo_call method_call = new echo_call(message, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -115,8 +115,8 @@ public class BooktionService {
     }
 
     public static class echo_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private Message message;
-      public echo_call(Message message, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private com.booktion.thrift.Message message;
+      public echo_call(com.booktion.thrift.Message message, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.message = message;
       }
@@ -129,7 +129,7 @@ public class BooktionService {
         prot.writeMessageEnd();
       }
 
-      public Message getResult() throws org.apache.thrift.TException {
+      public com.booktion.thrift.Message getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -193,7 +193,7 @@ public class BooktionService {
       return processMap;
     }
 
-    public static class echo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, echo_args, Message> {
+    public static class echo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, echo_args, com.booktion.thrift.Message> {
       public echo() {
         super("echo");
       }
@@ -202,10 +202,10 @@ public class BooktionService {
         return new echo_args();
       }
 
-      public AsyncMethodCallback<Message> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<com.booktion.thrift.Message> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<Message>() { 
-          public void onComplete(Message o) {
+        return new AsyncMethodCallback<com.booktion.thrift.Message>() { 
+          public void onComplete(com.booktion.thrift.Message o) {
             echo_result result = new echo_result();
             result.success = o;
             try {
@@ -239,7 +239,7 @@ public class BooktionService {
         return false;
       }
 
-      public void start(I iface, echo_args args, org.apache.thrift.async.AsyncMethodCallback<Message> resultHandler) throws TException {
+      public void start(I iface, echo_args args, org.apache.thrift.async.AsyncMethodCallback<com.booktion.thrift.Message> resultHandler) throws TException {
         iface.echo(args.message,resultHandler);
       }
     }
@@ -257,7 +257,7 @@ public class BooktionService {
       schemes.put(TupleScheme.class, new echo_argsTupleSchemeFactory());
     }
 
-    public Message message; // required
+    public com.booktion.thrift.Message message; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -322,7 +322,7 @@ public class BooktionService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.MESSAGE, new org.apache.thrift.meta_data.FieldMetaData("message", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Message.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.booktion.thrift.Message.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(echo_args.class, metaDataMap);
     }
@@ -331,7 +331,7 @@ public class BooktionService {
     }
 
     public echo_args(
-      Message message)
+      com.booktion.thrift.Message message)
     {
       this();
       this.message = message;
@@ -342,7 +342,7 @@ public class BooktionService {
      */
     public echo_args(echo_args other) {
       if (other.isSetMessage()) {
-        this.message = new Message(other.message);
+        this.message = new com.booktion.thrift.Message(other.message);
       }
     }
 
@@ -355,11 +355,11 @@ public class BooktionService {
       this.message = null;
     }
 
-    public Message getMessage() {
+    public com.booktion.thrift.Message getMessage() {
       return this.message;
     }
 
-    public echo_args setMessage(Message message) {
+    public echo_args setMessage(com.booktion.thrift.Message message) {
       this.message = message;
       return this;
     }
@@ -385,7 +385,7 @@ public class BooktionService {
         if (value == null) {
           unsetMessage();
         } else {
-          setMessage((Message)value);
+          setMessage((com.booktion.thrift.Message)value);
         }
         break;
 
@@ -537,7 +537,7 @@ public class BooktionService {
           switch (schemeField.id) {
             case 1: // MESSAGE
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.message = new Message();
+                struct.message = new com.booktion.thrift.Message();
                 struct.message.read(iprot);
                 struct.setMessageIsSet(true);
               } else { 
@@ -596,7 +596,7 @@ public class BooktionService {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.message = new Message();
+          struct.message = new com.booktion.thrift.Message();
           struct.message.read(iprot);
           struct.setMessageIsSet(true);
         }
@@ -616,7 +616,7 @@ public class BooktionService {
       schemes.put(TupleScheme.class, new echo_resultTupleSchemeFactory());
     }
 
-    public Message success; // required
+    public com.booktion.thrift.Message success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -681,7 +681,7 @@ public class BooktionService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Message.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.booktion.thrift.Message.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(echo_result.class, metaDataMap);
     }
@@ -690,7 +690,7 @@ public class BooktionService {
     }
 
     public echo_result(
-      Message success)
+      com.booktion.thrift.Message success)
     {
       this();
       this.success = success;
@@ -701,7 +701,7 @@ public class BooktionService {
      */
     public echo_result(echo_result other) {
       if (other.isSetSuccess()) {
-        this.success = new Message(other.success);
+        this.success = new com.booktion.thrift.Message(other.success);
       }
     }
 
@@ -714,11 +714,11 @@ public class BooktionService {
       this.success = null;
     }
 
-    public Message getSuccess() {
+    public com.booktion.thrift.Message getSuccess() {
       return this.success;
     }
 
-    public echo_result setSuccess(Message success) {
+    public echo_result setSuccess(com.booktion.thrift.Message success) {
       this.success = success;
       return this;
     }
@@ -744,7 +744,7 @@ public class BooktionService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((Message)value);
+          setSuccess((com.booktion.thrift.Message)value);
         }
         break;
 
@@ -896,7 +896,7 @@ public class BooktionService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new Message();
+                struct.success = new com.booktion.thrift.Message();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -955,7 +955,7 @@ public class BooktionService {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new Message();
+          struct.success = new com.booktion.thrift.Message();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
