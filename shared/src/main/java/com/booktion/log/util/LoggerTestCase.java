@@ -1,5 +1,6 @@
-package com.booktion.log;
+package com.booktion.log.util;
 
+import com.booktion.log.Logger;
 import com.booktion.util.StringOutputStream;
 import org.junit.After;
 import org.junit.Assert;

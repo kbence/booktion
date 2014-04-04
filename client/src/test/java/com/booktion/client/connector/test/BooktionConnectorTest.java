@@ -2,7 +2,7 @@ package com.booktion.client.connector.test;
 
 import com.booktion.client.connector.BooktionConnector;
 import com.booktion.client.connector.ClientFactory;
-import com.booktion.log.LoggerTestCase;
+import com.booktion.log.util.LoggerTestCase;
 import com.booktion.thrift.BooktionService;
 import com.booktion.thrift.Message;
 import org.apache.thrift.TException;

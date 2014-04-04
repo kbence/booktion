@@ -1,6 +1,6 @@
 package com.booktion.client.test;
 
-import com.booktion.log.LoggerTestCase;
+import com.booktion.log.util.LoggerTestCase;
 import com.booktion.server.BooktionHandler;
 import com.booktion.thrift.Message;
 import org.apache.thrift.TException;
