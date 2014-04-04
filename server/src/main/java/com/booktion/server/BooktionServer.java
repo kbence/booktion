@@ -13,7 +13,7 @@ public class BooktionServer
     public BooktionServer()
     {
         BooktionHandler booktionHandler = new BooktionHandler();
-        processor = new BooktionService.Processor(booktionHandler);
+        processor = new BooktionService.Processor<BooktionHandler>(booktionHandler);
     }
 
     public void run()
