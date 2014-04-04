@@ -1,47 +1,13 @@
 package com.booktion.client.test;
 
-import com.booktion.log.Logger;
-import com.booktion.util.StringOutputStream;
+import com.booktion.log.LoggerTestCase;
 import com.booktion.server.BooktionHandler;
 import com.booktion.thrift.Message;
 import org.apache.thrift.TException;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintStream;
-
-public class BooktionHandlerTest
+public class BooktionHandlerTest extends LoggerTestCase
 {
-    StringOutputStream logOutputStream;
-    @Before
-    public void pushTestLogger()
-    {
-        logOutputStream = new StringOutputStream();
-        Logger logger = new Logger(new PrintStream(logOutputStream));
-        Logger.push(logger);
-    }
-
-    @After
-    public void popTestLogger()
-    {
-        Logger.pop();
-    }
-
-    public void assertLog(String message, String logEntry)
-    {
-        String[] logLines = logOutputStream.toString().split("\n");
-
-        for (String line : logLines) {
-            if (line.substring(22).equals(logEntry)) {
-                return;
-            }
-        }
-
-        Assert.fail("Log entry \"" + logEntry + "\" has not been logged: " + message);
-    }
-
     @Test
     public void echoShouldLogMessage() throws TException
     {
