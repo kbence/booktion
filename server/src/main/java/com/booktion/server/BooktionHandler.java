@@ -1,16 +1,22 @@
 package com.booktion.server;
 
 import com.booktion.log.Logger;
+import com.booktion.server.db.AdvertDatabase;
 import com.booktion.thrift.*;
 import org.apache.thrift.TException;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.booktion.server.model.Book.fromThriftBook;
+
 public class BooktionHandler implements BooktionService.Iface
 {
-    public BooktionHandler()
+    private AdvertDatabase db;
+
+    public BooktionHandler(AdvertDatabase db)
     {
+        this.db = db;
     }
 
     @Override
@@ -30,7 +36,7 @@ public class BooktionHandler implements BooktionService.Iface
     @Override
     public boolean addBook(Book book) throws TException
     {
-        return false;
+        return db.createBook(fromThriftBook(book));
     }
 
     @Override

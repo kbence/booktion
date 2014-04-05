@@ -1,5 +1,6 @@
 package com.booktion.server;
 
+import com.booktion.server.db.AdvertDatabase;
 import com.booktion.thrift.BooktionService;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
@@ -8,11 +9,11 @@ import org.apache.thrift.transport.TServerTransport;
 
 public class BooktionServer
 {
-    public BooktionService.Processor processor;
+    private BooktionService.Processor processor;
 
     public BooktionServer()
     {
-        BooktionHandler booktionHandler = new BooktionHandler();
+        BooktionHandler booktionHandler = new BooktionHandler(new AdvertDatabase());
         processor = new BooktionService.Processor<BooktionHandler>(booktionHandler);
     }
 
