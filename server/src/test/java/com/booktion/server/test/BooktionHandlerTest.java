@@ -1,4 +1,4 @@
-package com.booktion.client.test;
+package com.booktion.server.test;
 
 import com.booktion.log.util.LoggerTestCase;
 import com.booktion.server.BooktionHandler;
