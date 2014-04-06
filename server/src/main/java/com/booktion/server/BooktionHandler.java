@@ -30,7 +30,12 @@ public class BooktionHandler implements BooktionService.Iface
     @Override
     public Book getBook(int bookId) throws TException
     {
-        return null;
+        com.booktion.server.model.Book book = db.getBook(bookId);
+
+        if (book == null)
+            return null;
+
+        return book.toThriftBook();
     }
 
     @Override

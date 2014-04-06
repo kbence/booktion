@@ -139,4 +139,21 @@ public class BookTest
         // Act, Assert
         assertFalse("should return false when year of publication mismatches", book1.equals(book2));
     }
+
+    @Test
+    public void cloneShouldCreateExactMatch()
+    {
+        // Arrange
+        Book book = createTestBook();
+
+        // Act
+        Book clonedBook = (Book)book.clone();
+
+        // Assert
+        assertEquals("id should match", book.id, clonedBook.id);
+        assertEquals("author should match", book.author, clonedBook.author);
+        assertEquals("title should match", book.title, clonedBook.title);
+        assertEquals("publisher id should match", book.publisherId, clonedBook.publisherId);
+        assertEquals("year of publication should match", book.yearOfPublication, clonedBook.yearOfPublication);
+    }
 }

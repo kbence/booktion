@@ -5,13 +5,12 @@ import com.booktion.server.BooktionHandler;
 import com.booktion.server.db.AdvertDatabase;
 import com.booktion.thrift.Book;
 import com.booktion.thrift.Message;
-
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
 import org.apache.thrift.TException;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.booktion.server.model.Book.fromThriftBook;
+import static junit.framework.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
@@ -90,5 +89,34 @@ public class BooktionHandlerTest extends LoggerTestCase
         com.booktion.server.model.Book modelBook = thriftToModelBook(book);
         assertFalse("should return false", result);
         verify(dbMock).createBook(modelBook);
+    }
+
+    @Test
+    public void getBookReturnsMatchingBook() throws TException
+    {
+        // Arrange
+        Book book = createTestBook();
+        when(dbMock.getBook(book.id)).thenReturn(fromThriftBook(book));
+
+        // Act
+        Book result = handler.getBook(book.id);
+
+        // Assert
+        assertEquals("book should match", book, result);
+        verify(dbMock).getBook(book.id);
+    }
+
+    @Test
+    public void getBookReturnsNullIfNotFound() throws TException
+    {
+        // Arrange
+        when(dbMock.getBook(1234)).thenReturn(null);
+
+        // Act
+        Book result = handler.getBook(1234);
+
+        // Assert
+        assertNull("book should match", result);
+        verify(dbMock).getBook(1234);
     }
 }

@@ -1,6 +1,6 @@
 package com.booktion.server.model;
 
-public class Book
+public class Book implements Cloneable
 {
     public int id;
     public String title;
@@ -42,6 +42,20 @@ public class Book
         book.author = thriftBook.author;
         book.publisherId = thriftBook.publisherId;
         book.yearOfPublication = thriftBook.yearOfPublication;
+
+        return book;
+    }
+
+    @Override
+    public Object clone()
+    {
+        Book book = new Book();
+
+        book.id = id;
+        book.title = title;
+        book.author = author;
+        book.publisherId = publisherId;
+        book.yearOfPublication = yearOfPublication;
 
         return book;
     }
