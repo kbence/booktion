@@ -5,9 +5,6 @@ import com.booktion.client.connector.BooktionConnectorFactory;
 import com.booktion.client.gui.MainWindow;
 import org.apache.thrift.TException;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-
 public class MainController
 {
     MainWindow window;
@@ -23,13 +20,6 @@ public class MainController
 
     private void addListeners()
     {
-        window.getPingButton().addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                ping();
-            }
-        });
     }
 
     private void connect()
@@ -38,21 +28,11 @@ public class MainController
             if (connector == null) {
                 connector = BooktionConnectorFactory.create();
                 connector.connect("localhost", 1234);
-                window.setResponseText("Connected");
+                window.getStatusLabel().setText("Connected");
             }
         } catch (TException e) {
             connector = null;
-            window.setResponseText("Disconnected");
-        }
-    }
-
-    private void ping()
-    {
-        try {
-            connect();
-            connector.ping();
-        } catch (TException e) {
-            window.setResponseText("Connection failed: " + e.getMessage());
+            window.getStatusLabel().setText("Disconnected");
         }
     }
 }
