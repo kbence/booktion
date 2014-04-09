@@ -4,7 +4,6 @@ import com.booktion.client.connector.BooktionConnector;
 import com.booktion.client.connector.ClientFactory;
 import com.booktion.log.util.LoggerTestCase;
 import com.booktion.thrift.BooktionService;
-import com.booktion.thrift.Message;
 import org.apache.thrift.TException;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,20 +39,5 @@ public class BooktionConnectorTest extends LoggerTestCase
 
         // Assert
         verify(clientFactoryMock).createClient(TEST_HOSTNAME, TEST_PORT);
-    }
-
-    @Test
-    public void pingSendsAMessageAndLogsAnswer() throws TException
-    {
-        // Arrange
-        connector.connect(TEST_HOSTNAME, TEST_PORT);
-        when(clientMock.echo(any(Message.class))).thenReturn(new Message("Message to be logged"));
-
-        // Act
-        connector.ping();
-
-        // Assert
-        verify(clientMock).echo(new Message("PING"));
-        assertLog("Should log answer", "SERVER: Message to be logged");
     }
 }

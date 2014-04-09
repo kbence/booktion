@@ -24,7 +24,6 @@ public class AdvertDatabaseTest
         Book book = new Book();
         book.title = "Testing Explained";
         book.author = "Test Ingur";
-        book.publisherId = 2345;
         book.yearOfPublication = 2014;
 
         // Act
@@ -37,7 +36,6 @@ public class AdvertDatabaseTest
         assertEquals("id should be 1", 1, resultBook.id);
         assertEquals("title should match", book.title, resultBook.title);
         assertEquals("author should match", book.author, resultBook.author);
-        assertEquals("publisher should match", book.publisherId, resultBook.publisherId);
         assertEquals("year of publication should match", book.yearOfPublication, resultBook.yearOfPublication);
     }
 

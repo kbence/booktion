@@ -8,4 +8,5 @@ struct Advert {
     2: i32 issuer,
     3: Book.Book book,
     4: AdvertType.AdvertType advertType,
+    5: double price
 }

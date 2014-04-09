@@ -39,6 +39,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
   private static final org.apache.thrift.protocol.TField ISSUER_FIELD_DESC = new org.apache.thrift.protocol.TField("issuer", org.apache.thrift.protocol.TType.I32, (short)2);
   private static final org.apache.thrift.protocol.TField BOOK_FIELD_DESC = new org.apache.thrift.protocol.TField("book", org.apache.thrift.protocol.TType.STRUCT, (short)3);
   private static final org.apache.thrift.protocol.TField ADVERT_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("advertType", org.apache.thrift.protocol.TType.I32, (short)4);
+  private static final org.apache.thrift.protocol.TField PRICE_FIELD_DESC = new org.apache.thrift.protocol.TField("price", org.apache.thrift.protocol.TType.DOUBLE, (short)5);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -54,6 +55,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
    * @see com.booktion.thrift.AdvertType
    */
   public com.booktion.thrift.AdvertType advertType; // required
+  public double price; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -64,7 +66,8 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
      * 
      * @see com.booktion.thrift.AdvertType
      */
-    ADVERT_TYPE((short)4, "advertType");
+    ADVERT_TYPE((short)4, "advertType"),
+    PRICE((short)5, "price");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -87,6 +90,8 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
           return BOOK;
         case 4: // ADVERT_TYPE
           return ADVERT_TYPE;
+        case 5: // PRICE
+          return PRICE;
         default:
           return null;
       }
@@ -129,6 +134,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
   // isset id assignments
   private static final int __ID_ISSET_ID = 0;
   private static final int __ISSUER_ISSET_ID = 1;
+  private static final int __PRICE_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -141,6 +147,8 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.booktion.thrift.Book.class)));
     tmpMap.put(_Fields.ADVERT_TYPE, new org.apache.thrift.meta_data.FieldMetaData("advertType", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, com.booktion.thrift.AdvertType.class)));
+    tmpMap.put(_Fields.PRICE, new org.apache.thrift.meta_data.FieldMetaData("price", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Advert.class, metaDataMap);
   }
@@ -152,7 +160,8 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     int id,
     int issuer,
     com.booktion.thrift.Book book,
-    com.booktion.thrift.AdvertType advertType)
+    com.booktion.thrift.AdvertType advertType,
+    double price)
   {
     this();
     this.id = id;
@@ -161,6 +170,8 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     setIssuerIsSet(true);
     this.book = book;
     this.advertType = advertType;
+    this.price = price;
+    setPriceIsSet(true);
   }
 
   /**
@@ -176,6 +187,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     if (other.isSetAdvertType()) {
       this.advertType = other.advertType;
     }
+    this.price = other.price;
   }
 
   public Advert deepCopy() {
@@ -190,6 +202,8 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     this.issuer = 0;
     this.book = null;
     this.advertType = null;
+    setPriceIsSet(false);
+    this.price = 0.0;
   }
 
   public int getId() {
@@ -294,6 +308,29 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     }
   }
 
+  public double getPrice() {
+    return this.price;
+  }
+
+  public Advert setPrice(double price) {
+    this.price = price;
+    setPriceIsSet(true);
+    return this;
+  }
+
+  public void unsetPrice() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __PRICE_ISSET_ID);
+  }
+
+  /** Returns true if field price is set (has been assigned a value) and false otherwise */
+  public boolean isSetPrice() {
+    return EncodingUtils.testBit(__isset_bitfield, __PRICE_ISSET_ID);
+  }
+
+  public void setPriceIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __PRICE_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case ID:
@@ -328,6 +365,14 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       }
       break;
 
+    case PRICE:
+      if (value == null) {
+        unsetPrice();
+      } else {
+        setPrice((Double)value);
+      }
+      break;
+
     }
   }
 
@@ -344,6 +389,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
 
     case ADVERT_TYPE:
       return getAdvertType();
+
+    case PRICE:
+      return Double.valueOf(getPrice());
 
     }
     throw new IllegalStateException();
@@ -364,6 +412,8 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       return isSetBook();
     case ADVERT_TYPE:
       return isSetAdvertType();
+    case PRICE:
+      return isSetPrice();
     }
     throw new IllegalStateException();
   }
@@ -414,6 +464,15 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       if (!(this_present_advertType && that_present_advertType))
         return false;
       if (!this.advertType.equals(that.advertType))
+        return false;
+    }
+
+    boolean this_present_price = true;
+    boolean that_present_price = true;
+    if (this_present_price || that_present_price) {
+      if (!(this_present_price && that_present_price))
+        return false;
+      if (this.price != that.price)
         return false;
     }
 
@@ -473,6 +532,16 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetPrice()).compareTo(other.isSetPrice());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetPrice()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.price, other.price);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -515,6 +584,10 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     } else {
       sb.append(this.advertType);
     }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("price:");
+    sb.append(this.price);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -597,6 +670,14 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 5: // PRICE
+            if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+              struct.price = iprot.readDouble();
+              struct.setPriceIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -628,6 +709,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         oprot.writeI32(struct.advertType.getValue());
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(PRICE_FIELD_DESC);
+      oprot.writeDouble(struct.price);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -658,7 +742,10 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       if (struct.isSetAdvertType()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetPrice()) {
+        optionals.set(4);
+      }
+      oprot.writeBitSet(optionals, 5);
       if (struct.isSetId()) {
         oprot.writeI32(struct.id);
       }
@@ -671,12 +758,15 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       if (struct.isSetAdvertType()) {
         oprot.writeI32(struct.advertType.getValue());
       }
+      if (struct.isSetPrice()) {
+        oprot.writeDouble(struct.price);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, Advert struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(4);
+      BitSet incoming = iprot.readBitSet(5);
       if (incoming.get(0)) {
         struct.id = iprot.readI32();
         struct.setIdIsSet(true);
@@ -693,6 +783,10 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       if (incoming.get(3)) {
         struct.advertType = com.booktion.thrift.AdvertType.findByValue(iprot.readI32());
         struct.setAdvertTypeIsSet(true);
+      }
+      if (incoming.get(4)) {
+        struct.price = iprot.readDouble();
+        struct.setPriceIsSet(true);
       }
     }
   }

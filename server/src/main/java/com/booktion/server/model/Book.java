@@ -5,8 +5,9 @@ public class Book implements Cloneable
     public int id;
     public String title;
     public String author;
-    public int publisherId;
+    public String publisher;
     public short yearOfPublication;
+    public short condition;
 
     public com.booktion.thrift.Book toThriftBook()
     {
@@ -15,8 +16,9 @@ public class Book implements Cloneable
         book.id = id;
         book.title = title;
         book.author = author;
-        book.publisherId = publisherId;
+        book.publisher = publisher;
         book.yearOfPublication = yearOfPublication;
+        book.condition = condition;
 
         return book;
     }
@@ -30,7 +32,8 @@ public class Book implements Cloneable
         Book book = (Book)object;
 
         return book.id == id && book.title.equals(title) && book.author.equals(author) &&
-                book.publisherId == publisherId && book.yearOfPublication == yearOfPublication;
+                book.publisher == publisher && book.yearOfPublication == yearOfPublication &&
+                book.condition == condition;
     }
 
     public static Book fromThriftBook(com.booktion.thrift.Book thriftBook)
@@ -40,8 +43,9 @@ public class Book implements Cloneable
         book.id = thriftBook.id;
         book.title = thriftBook.title;
         book.author = thriftBook.author;
-        book.publisherId = thriftBook.publisherId;
+        book.publisher = thriftBook.publisher;
         book.yearOfPublication = thriftBook.yearOfPublication;
+        book.condition = thriftBook.condition;
 
         return book;
     }
@@ -54,8 +58,9 @@ public class Book implements Cloneable
         book.id = id;
         book.title = title;
         book.author = author;
-        book.publisherId = publisherId;
+        book.publisher = publisher;
         book.yearOfPublication = yearOfPublication;
+        book.condition = condition;
 
         return book;
     }

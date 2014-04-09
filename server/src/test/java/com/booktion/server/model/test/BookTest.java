@@ -3,9 +3,7 @@ package com.booktion.server.model.test;
 import com.booktion.server.model.Book;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class BookTest
 {
@@ -15,8 +13,9 @@ public class BookTest
         book.id = 1234;
         book.author = "Alpha";
         book.title = "Beta";
-        book.publisherId = 2345;
+        book.publisher = "Publisher Inc.";
         book.yearOfPublication = 2014;
+        book.condition = 55;
         return book;
     }
 
@@ -33,8 +32,9 @@ public class BookTest
         assertEquals("id should match", book.id, thriftBook.id);
         assertEquals("author should match", book.author, thriftBook.author);
         assertEquals("title should match", book.title, thriftBook.title);
-        assertEquals("publisher id should match", book.publisherId, thriftBook.publisherId);
+        assertEquals("publisher should match", book.publisher, thriftBook.publisher);
         assertEquals("year of publication should match", book.yearOfPublication, thriftBook.yearOfPublication);
+        assertEquals("condition should match", book.condition, thriftBook.condition);
     }
 
     @Test
@@ -45,7 +45,6 @@ public class BookTest
         book.id = 1234;
         book.author = "Alpha";
         book.title = "Beta";
-        book.publisherId = 2345;
         book.yearOfPublication = 2014;
 
         // Act
@@ -55,7 +54,6 @@ public class BookTest
         assertEquals("id should match", book.id, modelBook.id);
         assertEquals("author should match", book.author, modelBook.author);
         assertEquals("title should match", book.title, modelBook.title);
-        assertEquals("publisher id should match", book.publisherId, modelBook.publisherId);
         assertEquals("year of publication should match", book.yearOfPublication, modelBook.yearOfPublication);
     }
 
@@ -117,15 +115,15 @@ public class BookTest
     }
 
     @Test
-    public void equalsShouldReturnFalseWhenPublisherIdMismatches()
+    public void equalsShouldReturnFalseWhenPublisherMismatches()
     {
         // Arrange
         Book book1 = createTestBook();
         Book book2 = Book.fromThriftBook(book1.toThriftBook());
-        book2.publisherId = 3467;
+        book2.publisher = "Other Publisher";
 
         // Act, Assert
-        assertFalse("should return false when publisher id mismatches", book1.equals(book2));
+        assertFalse("should return false when publisher mismatches", book1.equals(book2));
     }
 
     @Test
@@ -135,6 +133,18 @@ public class BookTest
         Book book1 = createTestBook();
         Book book2 = Book.fromThriftBook(book1.toThriftBook());
         book2.yearOfPublication = 2013;
+
+        // Act, Assert
+        assertFalse("should return false when year of publication mismatches", book1.equals(book2));
+    }
+
+    @Test
+    public void equalsShouldReturnFalseWhenConditionMismatches()
+    {
+        // Arrange
+        Book book1 = createTestBook();
+        Book book2 = Book.fromThriftBook(book1.toThriftBook());
+        book2.condition = 65;
 
         // Act, Assert
         assertFalse("should return false when year of publication mismatches", book1.equals(book2));
@@ -153,7 +163,8 @@ public class BookTest
         assertEquals("id should match", book.id, clonedBook.id);
         assertEquals("author should match", book.author, clonedBook.author);
         assertEquals("title should match", book.title, clonedBook.title);
-        assertEquals("publisher id should match", book.publisherId, clonedBook.publisherId);
+        assertEquals("publisher should match", book.publisher, clonedBook.publisher);
         assertEquals("year of publication should match", book.yearOfPublication, clonedBook.yearOfPublication);
+        assertEquals("condition should match", book.condition, clonedBook.condition);
     }
 }

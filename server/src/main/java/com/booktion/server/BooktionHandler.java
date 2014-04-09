@@ -20,14 +20,6 @@ public class BooktionHandler implements BooktionService.Iface
     }
 
     @Override
-    public Message echo(Message message) throws TException
-    {
-        Logger.get().log("CLIENT: " + message.getText());
-
-        return new Message("Server is up and running");
-    }
-
-    @Override
     public Book getBook(int bookId) throws TException
     {
         com.booktion.server.model.Book book = db.getBook(bookId);
@@ -42,12 +34,6 @@ public class BooktionHandler implements BooktionService.Iface
     public boolean addBook(Book book) throws TException
     {
         return db.createBook(fromThriftBook(book));
-    }
-
-    @Override
-    public Publisher getPublisher(int publisherId) throws TException
-    {
-        return null;
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.booktion.log.util.LoggerTestCase;
 import com.booktion.server.BooktionHandler;
 import com.booktion.server.db.AdvertDatabase;
 import com.booktion.thrift.Book;
-import com.booktion.thrift.Message;
 import org.apache.thrift.TException;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +30,6 @@ public class BooktionHandlerTest extends LoggerTestCase
         Book book = new Book();
         book.title = "Testing Explained";
         book.author = "Test Ingur";
-        book.publisherId = 1234;
         book.yearOfPublication = 2014;
         return book;
     }
@@ -41,22 +39,8 @@ public class BooktionHandlerTest extends LoggerTestCase
         com.booktion.server.model.Book modelBook = new com.booktion.server.model.Book();
         modelBook.title = book.title;
         modelBook.author = book.author;
-        modelBook.publisherId = book.publisherId;
         modelBook.yearOfPublication = book.yearOfPublication;
         return modelBook;
-    }
-
-    @Test
-    public void echoShouldLogMessage() throws TException
-    {
-        // Arrange
-        String message = "test message for echo";
-
-        // Act
-        handler.echo(new Message(message));
-
-        // Assert
-        assertLog("should log the correct string", "CLIENT: " + message);
     }
 
     @Test
