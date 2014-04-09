@@ -1,7 +1,7 @@
 package com.booktion.client;
 
 import com.booktion.client.controller.MainController;
-import com.booktion.client.gui.MainWindow;
+import com.booktion.client.gui.JMainWindow;
 
 public class BooktionClient
 {
@@ -9,7 +9,7 @@ public class BooktionClient
     {
         System.out.println("Booktion client is starting up...");
 
-        MainWindow window = new MainWindow();
+        JMainWindow window = new JMainWindow();
         window.setVisible(true);
 
         new MainController(window);

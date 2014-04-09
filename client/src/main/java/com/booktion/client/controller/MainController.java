@@ -2,15 +2,15 @@ package com.booktion.client.controller;
 
 import com.booktion.client.connector.BooktionConnector;
 import com.booktion.client.connector.BooktionConnectorFactory;
-import com.booktion.client.gui.MainWindow;
+import com.booktion.client.gui.JMainWindow;
 import org.apache.thrift.TException;
 
 public class MainController
 {
-    MainWindow window;
+    JMainWindow window;
     BooktionConnector connector;
 
-    public MainController(MainWindow mainWindow)
+    public MainController(JMainWindow mainWindow)
     {
         window = mainWindow;
 

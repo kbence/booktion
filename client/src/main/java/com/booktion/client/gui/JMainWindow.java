@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class MainWindow extends JDialog
+public class JMainWindow extends JDialog
 {
     private final int GAP = 5;
 
@@ -12,7 +12,7 @@ public class MainWindow extends JDialog
     private JAdvertList searchResults;
     private JLabel statusLabel;
 
-    public MainWindow()
+    public JMainWindow()
     {
         super();
 
