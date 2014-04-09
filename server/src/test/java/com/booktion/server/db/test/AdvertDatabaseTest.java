@@ -24,7 +24,9 @@ public class AdvertDatabaseTest
         Book book = new Book();
         book.title = "Testing Explained";
         book.author = "Test Ingur";
+        book.publisher = "Publisher, Inc.";
         book.yearOfPublication = 2014;
+        book.condition = 95;
 
         // Act
         boolean result = db.createBook(book);
@@ -36,7 +38,9 @@ public class AdvertDatabaseTest
         assertEquals("id should be 1", 1, resultBook.id);
         assertEquals("title should match", book.title, resultBook.title);
         assertEquals("author should match", book.author, resultBook.author);
+        assertEquals("publisher should match", book.publisher, resultBook.publisher);
         assertEquals("year of publication should match", book.yearOfPublication, resultBook.yearOfPublication);
+        assertEquals("condition should match", book.condition, resultBook.condition);
     }
 
     @Test
