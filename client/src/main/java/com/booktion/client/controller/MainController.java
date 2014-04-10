@@ -69,20 +69,25 @@ public class MainController
             adverts = connector.listAdverts(0, 1000);
             advertListModel.setAdvertList(adverts);
             window.getAdvertList().invalidate();
-        } catch (TException e) {}
+        } catch (TException e) {
+            window.getStatusLabel().setText("A kapcsolat megszakadt: " + e.getMessage());
+        }
     }
 
     private void connect()
     {
+        int port = 1234;
+        String host = "localhost";
+
         try {
             if (connector == null) {
                 connector = BooktionConnectorFactory.create();
-                connector.connect("localhost", 1234);
-                window.getStatusLabel().setText("Connected");
+                connector.connect(host, port);
+                window.getStatusLabel().setText("Kapcsolódva ide: " + host + ":" + port);
             }
         } catch (TException e) {
             connector = null;
-            window.getStatusLabel().setText("Disconnected");
+            window.getStatusLabel().setText("Sikertelen kapcsolódás!");
         }
     }
 }

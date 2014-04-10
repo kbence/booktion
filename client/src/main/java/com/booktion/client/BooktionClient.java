@@ -7,8 +7,6 @@ public class BooktionClient
 {
     public void run()
     {
-        System.out.println("Booktion client is starting up...");
-
         JMainWindow window = new JMainWindow();
         window.setVisible(true);
 
