@@ -12,6 +12,8 @@ public class JMainWindow extends JDialog
     private JAdvertList searchResults;
     private JLabel statusLabel;
 
+    private JButton createAdvertButton;
+
     public JMainWindow()
     {
         super();
@@ -21,6 +23,7 @@ public class JMainWindow extends JDialog
         setTitle("Booktion client");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setMinimumSize(new Dimension(600, 400));
+        setLocationRelativeTo(null);
 
         System.gc();
     }
@@ -32,7 +35,7 @@ public class JMainWindow extends JDialog
         statusLabel = new JLabel();
         advertList = new JAdvertList();
         searchResults = new JAdvertList();
-        JButton createAdvert = new JButton("Hirdetés feladása");
+        createAdvertButton = new JButton("Hirdetés feladása");
 
         JPanel advertListPanel = new JPanel();
         advertListPanel.setLayout(new BorderLayout(GAP, GAP));
@@ -44,7 +47,7 @@ public class JMainWindow extends JDialog
 
         JPanel ownPanel = new JPanel();
         ownPanel.setLayout(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
-        ownPanel.add(createAdvert);
+        ownPanel.add(createAdvertButton);
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.add("Hirdetések", advertListPanel);
@@ -72,5 +75,10 @@ public class JMainWindow extends JDialog
     public JLabel getStatusLabel()
     {
         return statusLabel;
+    }
+
+    public JButton getCreateAdvertButton()
+    {
+        return createAdvertButton;
     }
 }
