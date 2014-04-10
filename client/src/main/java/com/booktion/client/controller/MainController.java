@@ -19,7 +19,6 @@ public class MainController
 {
     JMainWindow window;
     BooktionConnector connector;
-    private List<Advert> adverts;
     private AdvertTableModel advertListModel;
 
     public MainController(JMainWindow mainWindow)
@@ -66,8 +65,7 @@ public class MainController
     private void loadAdvertList()
     {
         try {
-            adverts = connector.listAdverts(0, 1000);
-            advertListModel.setAdvertList(adverts);
+            advertListModel.setAdvertList(connector.listAdverts(0, 1000));
             window.getAdvertList().invalidate();
         } catch (TException e) {
             window.getStatusLabel().setText("A kapcsolat megszakadt: " + e.getMessage());
