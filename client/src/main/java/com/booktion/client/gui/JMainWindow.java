@@ -8,10 +8,11 @@ public class JMainWindow extends JDialog
 {
     private final int GAP = 5;
 
+    private JTabbedPane tabbedPane;
+
     private JAdvertList advertList;
     private JAdvertList searchResults;
     private JLabel statusLabel;
-
     private JButton createAdvertButton;
 
     public JMainWindow()
@@ -49,7 +50,7 @@ public class JMainWindow extends JDialog
         ownPanel.setLayout(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
         ownPanel.add(createAdvertButton);
 
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.add("Hirdetések", advertListPanel);
         tabbedPane.add("Keresés", searchPanel);
         tabbedPane.add("Saját oldal", ownPanel);
@@ -60,6 +61,11 @@ public class JMainWindow extends JDialog
         contentPane.add(statusLabel, BorderLayout.SOUTH);
 
         pack();
+    }
+
+    public JTabbedPane getTabbedPane()
+    {
+        return tabbedPane;
     }
 
     public JAdvertList getAdvertList()

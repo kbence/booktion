@@ -1,7 +1,10 @@
 package com.booktion.client.connector;
 
+import com.booktion.thrift.Advert;
 import com.booktion.thrift.BooktionService;
 import org.apache.thrift.TException;
+
+import java.util.List;
 
 public class BooktionConnector
 {
@@ -21,5 +24,15 @@ public class BooktionConnector
     public void connect(String host, int port) throws TException
     {
         client = protocolFactory.createClient(host, port);
+    }
+
+    public List<Advert> listAdverts(int first, int last) throws TException
+    {
+        return client.listAdverts(first, last);
+    }
+
+    public List<Advert> searchForAdverts(String name) throws TException
+    {
+        return client.searchForAdverts(name);
     }
 }

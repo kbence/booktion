@@ -18,4 +18,9 @@ public class JAdvertList extends JPanel
         setLayout(new BorderLayout());
         add(new JScrollPane(advertTable), BorderLayout.CENTER);
     }
+
+    public JTable getAdvertTable()
+    {
+        return advertTable;
+    }
 }

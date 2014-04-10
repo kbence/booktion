@@ -1,8 +1,10 @@
 package com.booktion.server;
 
-import com.booktion.log.Logger;
 import com.booktion.server.db.AdvertDatabase;
-import com.booktion.thrift.*;
+import com.booktion.thrift.Advert;
+import com.booktion.thrift.AdvertType;
+import com.booktion.thrift.Book;
+import com.booktion.thrift.BooktionService;
 import org.apache.thrift.TException;
 
 import java.util.LinkedList;
@@ -39,12 +41,35 @@ public class BooktionHandler implements BooktionService.Iface
     @Override
     public List<Advert> searchForAdverts(String name) throws TException
     {
-        return new LinkedList<Advert>();
+        return getHardCodedAdverts();
     }
 
     @Override
     public List<Advert> listAdverts(int first, int last) throws TException
     {
-        return new LinkedList<Advert>();
+        return getHardCodedAdverts();
+    }
+
+    private LinkedList<Advert> getHardCodedAdverts()
+    {
+        LinkedList<Advert> adverts = new LinkedList<Advert>();
+
+        adverts.add(
+            new Advert(
+                1,
+                1,
+                new Book(
+                    1,
+                    "A C++ Programozási nyelv",
+                    "Bjarne Stroustrup",
+                    "Addison-Weasley",
+                    (short)1982,
+                    (short)84
+                ),
+                AdvertType.AUCTION,
+                5
+            )
+        );
+        return adverts;
     }
 }
