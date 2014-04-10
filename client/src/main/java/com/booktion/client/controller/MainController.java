@@ -2,6 +2,7 @@ package com.booktion.client.controller;
 
 import com.booktion.client.connector.BooktionConnector;
 import com.booktion.client.connector.BooktionConnectorFactory;
+import com.booktion.client.gui.JBidWindow;
 import com.booktion.client.gui.JMainWindow;
 import com.booktion.client.gui.JNewAdvertWindow;
 import com.booktion.client.model.AdvertTableModel;
@@ -11,8 +12,11 @@ import org.apache.thrift.TException;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.MouseInputAdapter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class MainController
@@ -20,6 +24,7 @@ public class MainController
     JMainWindow window;
     BooktionConnector connector;
     private AdvertTableModel advertListModel;
+    private List<Advert> adverts;
 
     public MainController(JMainWindow mainWindow)
     {
@@ -50,6 +55,23 @@ public class MainController
             }
         });
 
+        window.getAdvertList().getAdvertTable().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                if (e.getClickCount() == 2) {
+                    JTable table = (JTable)e.getSource();
+
+                    int selectedRow = table.getSelectedRow();
+
+                    JBidWindow bidWindow = new JBidWindow(adverts.get(selectedRow));
+                    new BidController(bidWindow);
+                    bidWindow.setVisible(true);
+                }
+            }
+        });
+
         window.getTabbedPane().addChangeListener(new ChangeListener()
         {
             @Override
@@ -65,7 +87,8 @@ public class MainController
     private void loadAdvertList()
     {
         try {
-            advertListModel.setAdvertList(connector.listAdverts(0, 1000));
+            adverts = connector.listAdverts(0, 1000);
+            advertListModel.setAdvertList(adverts);
             window.getAdvertList().invalidate();
         } catch (TException e) {
             window.getStatusLabel().setText("A kapcsolat megszakadt: " + e.getMessage());
