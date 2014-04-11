@@ -91,15 +91,15 @@ public class MainController
     private void startBidding(Advert advert)
     {
         JBidWindow bidWindow = new JBidWindow(advert);
-        new BidController(bidWindow);
+        new BidController(this, bidWindow);
         bidWindow.setVisible(true);
     }
 
     private void startPurchase(Advert advert)
     {
-        JPurchaseWindow bidWindow = new JPurchaseWindow(advert);
-        new PurchaseController(bidWindow);
-        bidWindow.setVisible(true);
+        JPurchaseWindow purchaseWindow = new JPurchaseWindow(advert);
+        new PurchaseController(this, purchaseWindow);
+        purchaseWindow.setVisible(true);
     }
 
     private void loadAdvertList()
@@ -128,5 +128,10 @@ public class MainController
             connector = null;
             window.getStatusLabel().setText("Sikertelen kapcsolódás!");
         }
+    }
+
+    public BooktionConnector getConnector()
+    {
+        return connector;
     }
 }
