@@ -4,11 +4,9 @@ import com.booktion.thrift.Advert;
 
 import javax.swing.*;
 
-public class JBidWindow extends JActionDialog
+public class JPurchaseWindow extends JActionDialog
 {
-    private final int GAP = 5;
-
-    public JBidWindow(Advert advert)
+    public JPurchaseWindow(Advert advert)
     {
         super(advert);
     }

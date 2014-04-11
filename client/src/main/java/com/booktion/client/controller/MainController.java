@@ -5,8 +5,10 @@ import com.booktion.client.connector.BooktionConnectorFactory;
 import com.booktion.client.gui.JBidWindow;
 import com.booktion.client.gui.JMainWindow;
 import com.booktion.client.gui.JNewAdvertWindow;
+import com.booktion.client.gui.JPurchaseWindow;
 import com.booktion.client.model.AdvertTableModel;
 import com.booktion.thrift.Advert;
+import com.booktion.thrift.AdvertType;
 import org.apache.thrift.TException;
 
 import javax.swing.*;
@@ -63,11 +65,13 @@ public class MainController
                 if (e.getClickCount() == 2) {
                     JTable table = (JTable)e.getSource();
 
-                    int selectedRow = table.getSelectedRow();
+                    Advert advert = adverts.get(table.getSelectedRow());
 
-                    JBidWindow bidWindow = new JBidWindow(adverts.get(selectedRow));
-                    new BidController(bidWindow);
-                    bidWindow.setVisible(true);
+                    if (advert.advertType == AdvertType.AUCTION) {
+                        startBidding(advert);
+                    } else {
+                        startPurchase(advert);
+                    }
                 }
             }
         });
@@ -77,11 +81,25 @@ public class MainController
             @Override
             public void stateChanged(ChangeEvent e)
             {
-                if (((JTabbedPane)e.getSource()).getSelectedIndex() == 0) {
+                if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
                     loadAdvertList();
                 }
             }
         });
+    }
+
+    private void startBidding(Advert advert)
+    {
+        JBidWindow bidWindow = new JBidWindow(advert);
+        new BidController(bidWindow);
+        bidWindow.setVisible(true);
+    }
+
+    private void startPurchase(Advert advert)
+    {
+        JPurchaseWindow bidWindow = new JPurchaseWindow(advert);
+        new PurchaseController(bidWindow);
+        bidWindow.setVisible(true);
     }
 
     private void loadAdvertList()
