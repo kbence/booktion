@@ -42,6 +42,12 @@ public class Advert
         this.price = price;
     }
 
+    public boolean bid(Bid bid)
+    {
+        // TODO: implement bidding logic
+        return true;
+    }
+
     public com.booktion.thrift.Advert toThrift()
     {
         return new com.booktion.thrift.Advert(id, issuer, book.toThriftBook(), type.toThrift(), price);
