@@ -1,12 +1,12 @@
 package com.booktion.client.controller;
 
-import com.booktion.client.gui.JNewAdvertWindow;
+import com.booktion.client.gui.JNewAdvertDialog;
 
 public class NewAdvertController
 {
-    private JNewAdvertWindow window;
+    private JNewAdvertDialog window;
 
-    public NewAdvertController(JNewAdvertWindow window)
+    public NewAdvertController(JNewAdvertDialog window)
     {
         this.window = window;
     }

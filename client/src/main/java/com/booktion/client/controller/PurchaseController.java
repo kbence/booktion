@@ -1,6 +1,6 @@
 package com.booktion.client.controller;
 
-import com.booktion.client.gui.JPurchaseWindow;
+import com.booktion.client.gui.JPurchaseDialog;
 import org.apache.thrift.TException;
 
 import javax.swing.*;
@@ -9,9 +9,9 @@ import java.awt.event.ActionEvent;
 public class PurchaseController
 {
     private MainController mainController;
-    private JPurchaseWindow purchaseWindow;
+    private JPurchaseDialog purchaseWindow;
 
-    public PurchaseController(MainController mainController, JPurchaseWindow window)
+    public PurchaseController(MainController mainController, JPurchaseDialog window)
     {
         this.mainController = mainController;
         this.purchaseWindow = window;

@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class JNewAdvertWindow extends JDialog
+public class JNewAdvertDialog extends JDialog
 {
     private JTextField authorTextField;
 
@@ -16,7 +16,7 @@ public class JNewAdvertWindow extends JDialog
     private Button okButton;
     private Button cancelButton;
 
-    public JNewAdvertWindow(JDialog owner)
+    public JNewAdvertDialog(JDialog owner)
     {
         super(owner);
 

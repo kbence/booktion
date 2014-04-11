@@ -4,9 +4,9 @@ import com.booktion.thrift.Advert;
 
 import javax.swing.*;
 
-public class JPurchaseWindow extends JActionDialog
+public class JPurchaseDialog extends JActionDialog
 {
-    public JPurchaseWindow(Advert advert)
+    public JPurchaseDialog(Advert advert)
     {
         super(advert);
     }

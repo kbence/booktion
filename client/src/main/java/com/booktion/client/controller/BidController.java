@@ -1,6 +1,6 @@
 package com.booktion.client.controller;
 
-import com.booktion.client.gui.JBidWindow;
+import com.booktion.client.gui.JBidDialog;
 import org.apache.thrift.TException;
 
 import javax.swing.*;
@@ -9,9 +9,9 @@ import java.awt.event.ActionEvent;
 public class BidController
 {
     private MainController mainController;
-    private JBidWindow bidWindow;
+    private JBidDialog bidWindow;
 
-    public BidController(MainController mainController, JBidWindow window)
+    public BidController(MainController mainController, JBidDialog window)
     {
         this.mainController = mainController;
         this.bidWindow = window;
@@ -19,7 +19,7 @@ public class BidController
         addListeners(window);
     }
 
-    private void addListeners(JBidWindow window)
+    private void addListeners(JBidDialog window)
     {
         window.getOkButton().addActionListener(new AbstractAction()
         {
