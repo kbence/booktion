@@ -50,6 +50,18 @@ public class BooktionHandler implements BooktionService.Iface
         return getHardCodedAdverts();
     }
 
+    @Override
+    public boolean purchase(int bookId) throws TException
+    {
+        return true;
+    }
+
+    @Override
+    public boolean bid(int bookId) throws TException
+    {
+        return true;
+    }
+
     private LinkedList<Advert> getHardCodedAdverts()
     {
         LinkedList<Advert> adverts = new LinkedList<Advert>();

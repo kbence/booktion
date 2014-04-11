@@ -11,4 +11,8 @@ service BooktionService {
     list<Advert.Advert> searchForAdverts(1:string name),
 
     list<Advert.Advert> listAdverts(1:i32 first, 2:i32 last),
+
+    bool purchase(1:i32 bookId),
+
+    bool bid(1:i32 bookId),
 }
