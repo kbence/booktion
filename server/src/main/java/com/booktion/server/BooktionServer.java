@@ -2,8 +2,11 @@ package com.booktion.server;
 
 import com.booktion.server.db.AdvertDatabase;
 import com.booktion.thrift.BooktionService;
+import org.apache.thrift.server.TNonblockingServer;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
+import org.apache.thrift.transport.TNonblockingServerSocket;
+import org.apache.thrift.transport.TNonblockingServerTransport;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 
@@ -22,8 +25,8 @@ public class BooktionServer
         System.out.println("Booktion server is starting up...");
 
         try {
-            TServerTransport serverTransport = new TServerSocket(1234);
-            TServer server = new TSimpleServer(new TServer.Args(serverTransport).processor(processor));
+            TNonblockingServerTransport serverTransport = new TNonblockingServerSocket(1234);
+            TNonblockingServer server = new TNonblockingServer(new TNonblockingServer.Args(serverTransport).processor(processor));
 
             server.serve();
         } catch (Exception e) {
