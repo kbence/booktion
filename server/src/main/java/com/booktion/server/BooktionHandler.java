@@ -1,5 +1,6 @@
 package com.booktion.server;
 
+import com.booktion.log.Logger;
 import com.booktion.server.db.AdvertDatabase;
 import com.booktion.thrift.Advert;
 import com.booktion.thrift.AdvertType;
@@ -53,12 +54,14 @@ public class BooktionHandler implements BooktionService.Iface
     @Override
     public boolean purchase(int bookId) throws TException
     {
+        Logger.get().log("USER purchased the book " + bookId);
         return true;
     }
 
     @Override
     public boolean bid(int bookId) throws TException
     {
+        Logger.get().log("USER put a bid on book " + bookId);
         return true;
     }
 
