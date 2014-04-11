@@ -54,7 +54,7 @@ public class BooktionHandler implements BooktionService.Iface
     @Override
     public boolean purchase(int bookId) throws TException
     {
-        Logger.get().log("USER purchased the book " + bookId);
+        Logger.get().log("USER purchased book " + bookId);
         return true;
     }
 
