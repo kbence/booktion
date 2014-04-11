@@ -32,7 +32,7 @@ public class Book implements Cloneable
         Book book = (Book)object;
 
         return book.id == id && book.title.equals(title) && book.author.equals(author) &&
-                book.publisher == publisher && book.yearOfPublication == yearOfPublication &&
+                book.publisher.equals(publisher) && book.yearOfPublication == yearOfPublication &&
                 book.condition == condition;
     }
 
