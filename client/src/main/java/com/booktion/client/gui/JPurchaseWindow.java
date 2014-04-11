@@ -20,4 +20,12 @@ public class JPurchaseWindow extends JActionDialog
 
         pack();
     }
+
+    @Override
+    protected String getTranslation(String id)
+    {
+        if (id.equals("advert.price")) return "Ár";
+
+        return super.getTranslation(id);
+    }
 }

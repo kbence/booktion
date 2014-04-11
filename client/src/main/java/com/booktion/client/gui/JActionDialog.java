@@ -40,11 +40,11 @@ public class JActionDialog extends JDialog
         contentPane.setLayout(new GridBagLayout());
 
         int row = 0;
-        addField("Cím", advert.book.title, row++);
-        addField("Szerző", advert.book.author, row++);
-        addField("Kiadó", advert.book.publisher, row++);
-        addField("Típus", advert.advertType == AdvertType.FIX_PRICE ? "Fix áras" : "Aukció", row++);
-        addField("Minimálár", String.format("%.0f", advert.price), row++);
+        addField(getTranslation("book.title"), advert.book.title, row++);
+        addField(getTranslation("book.author"), advert.book.author, row++);
+        addField(getTranslation("book.publisher"), advert.book.publisher, row++);
+        addField(getTranslation("advert.type"), advert.advertType == AdvertType.FIX_PRICE ? "Fix áras" : "Aukció", row++);
+        addField(getTranslation("advert.price"), String.format("%.0f", advert.price), row++);
 
         contentPane.add(new JLabel("Licit:"), cell(0, row));
         contentPane.add(new JTextField("0.0", 8), cell(1, row++));
@@ -60,6 +60,17 @@ public class JActionDialog extends JDialog
 
         contentPane.setBorder(new EmptyBorder(GAP, GAP, GAP, GAP));
         pack();
+    }
+
+    protected String getTranslation(String id)
+    {
+        if (id.equals("book.title")) return "Cím";
+        if (id.equals("book.author")) return "Szerző";
+        if (id.equals("book.publisher")) return "Kiadó";
+        if (id.equals("advert.type")) return "Típus";
+        if (id.equals("advert.price")) return "Minimálár";
+
+        return "-- UNKNOWN ID --";
     }
 
     private void addField(String field, String value, int row)
