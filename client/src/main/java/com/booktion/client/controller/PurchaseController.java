@@ -9,12 +9,12 @@ import java.awt.event.ActionEvent;
 public class PurchaseController
 {
     private MainController mainController;
-    private JPurchaseDialog purchaseWindow;
+    private JPurchaseDialog purchaseDialog;
 
     public PurchaseController(MainController mainController, JPurchaseDialog window)
     {
         this.mainController = mainController;
-        this.purchaseWindow = window;
+        this.purchaseDialog = window;
 
         window.getOkButton().addActionListener(new AbstractAction()
         {
@@ -39,14 +39,14 @@ public class PurchaseController
     private void onOk()
     {
         try {
-            mainController.getConnector().purchase(purchaseWindow.getAdvert().book);
+            mainController.getConnector().purchase(purchaseDialog.getAdvert().book);
         } catch (TException e) {}
 
-        purchaseWindow.close();
+        purchaseDialog.close();
     }
 
     private void onCancel()
     {
-        purchaseWindow.close();
+        purchaseDialog.close();
     }
 }

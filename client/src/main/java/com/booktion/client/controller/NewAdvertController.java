@@ -7,18 +7,18 @@ import java.awt.event.ActionEvent;
 
 public class NewAdvertController
 {
-    private JNewAdvertDialog window;
+    private JNewAdvertDialog newAdvertDialog;
 
     public NewAdvertController(JNewAdvertDialog window)
     {
-        this.window = window;
+        this.newAdvertDialog = window;
 
         addListeners();
     }
 
     private void addListeners()
     {
-        window.getOkButton().addActionListener(new AbstractAction()
+        newAdvertDialog.getOkButton().addActionListener(new AbstractAction()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -27,7 +27,7 @@ public class NewAdvertController
             }
         });
 
-        window.getCancelButton().addActionListener(new AbstractAction()
+        newAdvertDialog.getCancelButton().addActionListener(new AbstractAction()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -39,11 +39,11 @@ public class NewAdvertController
 
     private void onOk()
     {
-        window.close();
+        newAdvertDialog.close();
     }
 
     private void onCancel()
     {
-        window.close();
+        newAdvertDialog.close();
     }
 }

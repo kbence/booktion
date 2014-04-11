@@ -9,12 +9,12 @@ import java.awt.event.ActionEvent;
 public class BidController
 {
     private MainController mainController;
-    private JBidDialog bidWindow;
+    private JBidDialog bidDialog;
 
     public BidController(MainController mainController, JBidDialog window)
     {
         this.mainController = mainController;
-        this.bidWindow = window;
+        this.bidDialog = window;
 
         addListeners(window);
     }
@@ -44,15 +44,15 @@ public class BidController
     private void onOk()
     {
         try {
-            mainController.getConnector().bid(bidWindow.getAdvert().book);
+            mainController.getConnector().bid(bidDialog.getAdvert().book);
         } catch (TException e) {}
 
-        bidWindow.close();
+        bidDialog.close();
     }
 
     private void onCancel()
     {
-        bidWindow.close();
+        bidDialog.close();
     }
 
 }
