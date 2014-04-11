@@ -15,6 +15,7 @@ public class JActionDialog extends JDialog
 
     private JButton okButton;
     private JButton cancelButton;
+    protected int componentRow;
 
     public JActionDialog(Advert advert)
     {
@@ -39,15 +40,14 @@ public class JActionDialog extends JDialog
         JPanel contentPane = (JPanel) getContentPane();
         contentPane.setLayout(new GridBagLayout());
 
-        int row = 0;
-        addField(getTranslation("book.title"), advert.book.title, row++);
-        addField(getTranslation("book.author"), advert.book.author, row++);
-        addField(getTranslation("book.publisher"), advert.book.publisher, row++);
-        addField(getTranslation("advert.type"), advert.advertType == AdvertType.FIX_PRICE ? "Fix áras" : "Aukció", row++);
-        addField(getTranslation("advert.price"), String.format("%.0f", advert.price), row++);
+        componentRow = 0;
+        addField(getTranslation("book.title"), advert.book.title, componentRow++);
+        addField(getTranslation("book.author"), advert.book.author, componentRow++);
+        addField(getTranslation("book.publisher"), advert.book.publisher, componentRow++);
+        addField(getTranslation("advert.type"), advert.advertType == AdvertType.FIX_PRICE ? "Fix áras" : "Aukció", componentRow++);
+        addField(getTranslation("advert.price"), String.format("%.0f", advert.price), componentRow++);
 
-        contentPane.add(new JLabel("Licit:"), cell(0, row));
-        contentPane.add(new JTextField("0.0", 8), cell(1, row++));
+        initCustomComponents();
 
         okButton = new JButton("OK");
         cancelButton = new JButton("Mégsem");
@@ -56,10 +56,14 @@ public class JActionDialog extends JDialog
         buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT, GAP, GAP));
         buttonPane.add(okButton);
         buttonPane.add(cancelButton);
-        contentPane.add(buttonPane, cell(0, row++, 2, 1));
+        contentPane.add(buttonPane, cell(0, componentRow++, 2, 1));
 
         contentPane.setBorder(new EmptyBorder(GAP, GAP, GAP, GAP));
         pack();
+    }
+
+    protected void initCustomComponents()
+    {
     }
 
     protected String getTranslation(String id)
@@ -83,7 +87,7 @@ public class JActionDialog extends JDialog
         contentPane.add(valueLabel, cell(1, row));
     }
 
-    private GridBagConstraints cell(int x, int y)
+    protected GridBagConstraints cell(int x, int y)
     {
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = x;
@@ -95,7 +99,7 @@ public class JActionDialog extends JDialog
         return c;
     }
 
-    private GridBagConstraints cell(int x, int y, int w, int h)
+    protected GridBagConstraints cell(int x, int y, int w, int h)
     {
         GridBagConstraints c = cell(x, y);
         c.gridwidth = w;

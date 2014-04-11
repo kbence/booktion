@@ -22,4 +22,14 @@ public class JBidDialog extends JActionDialog
 
         pack();
     }
+
+    @Override
+    protected void initCustomComponents()
+    {
+        super.initCustomComponents();
+        JPanel contentPane = (JPanel)getContentPane();
+
+        contentPane.add(new JLabel("Licit:"), cell(0, componentRow));
+        contentPane.add(new JTextField("0.0", 8), cell(1, componentRow++));
+    }
 }
