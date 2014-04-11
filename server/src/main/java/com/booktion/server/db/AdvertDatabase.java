@@ -19,9 +19,13 @@ public class AdvertDatabase
     {
         Integer nextId = getNextId();
 
-        Book copy = (Book)book.clone();
-        copy.id = nextId;
-        bookMap.put(nextId, copy);
+        try {
+            Book copy = (Book) book.clone();
+            copy.id = nextId;
+            bookMap.put(nextId, copy);
+        } catch (CloneNotSupportedException e) {
+            return false;
+        }
 
         return true;
     }
