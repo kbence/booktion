@@ -42,16 +42,11 @@ public class PurchaseController
             mainController.getConnector().purchase(purchaseWindow.getAdvert().book);
         } catch (TException e) {}
 
-        closeWindow();
+        purchaseWindow.close();
     }
 
     private void onCancel()
     {
-        closeWindow();
-    }
-
-    private void closeWindow()
-    {
-        this.purchaseWindow.setVisible(false);
+        purchaseWindow.close();
     }
 }

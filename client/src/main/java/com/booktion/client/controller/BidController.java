@@ -47,16 +47,12 @@ public class BidController
             mainController.getConnector().bid(bidWindow.getAdvert().book);
         } catch (TException e) {}
 
-        closeWindow();
+        bidWindow.close();
     }
 
     private void onCancel()
     {
-        closeWindow();
+        bidWindow.close();
     }
 
-    private void closeWindow()
-    {
-        this.bidWindow.setVisible(false);
-    }
 }
