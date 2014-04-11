@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class JActionDialog extends JDialog
+public class JActionDialog extends JGridBagDialog
 {
     protected final int GAP = 5;
 
@@ -85,27 +85,6 @@ public class JActionDialog extends JDialog
         valueLabel.setFont(valueLabel.getFont().deriveFont(Font.BOLD));
         contentPane.add(new JLabel(field), cell(0, row));
         contentPane.add(valueLabel, cell(1, row));
-    }
-
-    protected GridBagConstraints cell(int x, int y)
-    {
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = x;
-        c.gridy = y;
-        c.ipadx = 3;
-        c.ipady = 3;
-        c.anchor = GridBagConstraints.WEST;
-
-        return c;
-    }
-
-    protected GridBagConstraints cell(int x, int y, int w, int h)
-    {
-        GridBagConstraints c = cell(x, y);
-        c.gridwidth = w;
-        c.gridheight = h;
-
-        return c;
     }
 
     public JButton getOkButton()

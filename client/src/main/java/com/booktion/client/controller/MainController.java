@@ -51,7 +51,7 @@ public class MainController
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                JNewAdvertDialog newAdvertWindow = new JNewAdvertDialog(window);
+                JNewAdvertDialog newAdvertWindow = new JNewAdvertDialog();
                 new NewAdvertController(newAdvertWindow);
                 newAdvertWindow.setVisible(true);
             }
