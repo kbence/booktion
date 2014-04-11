@@ -11,12 +11,15 @@ public class JActionDialog extends JDialog
 {
     protected final int GAP = 5;
 
-    private JButton okButton;
+    private Advert advert;
 
+    private JButton okButton;
     private JButton cancelButton;
+
     public JActionDialog(Advert advert)
     {
         super();
+        this.advert = advert;
 
         initComponents(advert);
 
@@ -24,6 +27,11 @@ public class JActionDialog extends JDialog
         setResizable(false);
         setLocationRelativeTo(getParent());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    public Advert getAdvert()
+    {
+        return advert;
     }
 
     protected void initComponents(Advert advert)

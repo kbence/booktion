@@ -1,6 +1,7 @@
 package com.booktion.client.connector;
 
 import com.booktion.thrift.Advert;
+import com.booktion.thrift.Book;
 import com.booktion.thrift.BooktionService;
 import org.apache.thrift.TException;
 
@@ -34,5 +35,15 @@ public class BooktionConnector
     public List<Advert> searchForAdverts(String name) throws TException
     {
         return client.searchForAdverts(name);
+    }
+
+    public boolean purchase(Book book) throws TException
+    {
+        return client.purchase(book.id);
+    }
+
+    public boolean bid(Book book) throws TException
+    {
+        return client.bid(book.id);
     }
 }

@@ -1,6 +1,7 @@
 package com.booktion.client.controller;
 
 import com.booktion.client.gui.JBidWindow;
+import org.apache.thrift.TException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +43,10 @@ public class BidController
 
     private void onOk()
     {
-        // TODO: implement bidding
+        try {
+            mainController.getConnector().bid(bidWindow.getAdvert().book);
+        } catch (TException e) {}
+
         closeWindow();
     }
 

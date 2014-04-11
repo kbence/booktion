@@ -1,6 +1,7 @@
 package com.booktion.client.controller;
 
 import com.booktion.client.gui.JPurchaseWindow;
+import org.apache.thrift.TException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -37,7 +38,10 @@ public class PurchaseController
 
     private void onOk()
     {
-        // TODO: implement purchase
+        try {
+            mainController.getConnector().purchase(purchaseWindow.getAdvert().book);
+        } catch (TException e) {}
+
         closeWindow();
     }
 

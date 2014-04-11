@@ -24,7 +24,8 @@ import java.util.List;
 public class MainController
 {
     JMainWindow window;
-    BooktionConnector connector;
+    private BooktionConnector connector;
+
     private AdvertTableModel advertListModel;
     private List<Advert> adverts;
 
