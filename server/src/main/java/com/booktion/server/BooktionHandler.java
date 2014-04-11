@@ -71,18 +71,29 @@ public class BooktionHandler implements BooktionService.Iface
 
         adverts.add(
             new Advert(
-                1,
-                1,
-                new Book(
+                1, 1, new Book(
                     1,
                     "A C++ Programozási nyelv",
                     "Bjarne Stroustrup",
-                    "Addison-Weasley",
+                    "Kiskapu",
                     (short)1982,
                     (short)84
                 ),
-                AdvertType.AUCTION,
-                5
+                AdvertType.AUCTION, 4300
+            )
+        );
+
+        adverts.add(
+            new Advert(
+                1, 1, new Book(
+                    1,
+                    "Számítógép-hálózatok",
+                    "Andrew S. Tanenbaum",
+                    "Addison-Weasley",
+                    (short)1992,
+                    (short)45
+                ),
+                AdvertType.FIX_PRICE, 2590
             )
         );
         return adverts;
