@@ -12,7 +12,6 @@ public class JNewAdvertWindow extends JDialog
     private JTextField publisherTextField;
     private JTextArea descriptionTextArea;
     private JTextField priceTextField;
-    private JComboBox<String> typeComboBox;
 
     private Button okButton;
     private Button cancelButton;
@@ -44,7 +43,7 @@ public class JNewAdvertWindow extends JDialog
         publisherTextField = new JTextField(25);
         descriptionTextArea = new JTextArea(4, 25);
         priceTextField = new JTextField(25);
-        typeComboBox = new JComboBox<String>(new String[] {"Fix áras", "Aukció"});
+        JComboBox<String> typeComboBox = new JComboBox<String>(new String[]{"Fix áras", "Aukció"});
 
         contentPane.add(authorLabel, singleCell(0, 0));
         contentPane.add(authorTextField, singleCell(1, 0));

@@ -51,9 +51,9 @@ public class Book implements Cloneable
     }
 
     @Override
-    public Object clone()
+    public Object clone() throws CloneNotSupportedException
     {
-        Book book = new Book();
+        Book book = (Book)super.clone();
 
         book.id = id;
         book.title = title;

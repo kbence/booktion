@@ -6,8 +6,6 @@ import java.awt.*;
 
 public class JMainWindow extends JDialog
 {
-    private final int GAP = 5;
-
     private JTabbedPane tabbedPane;
 
     private JAdvertList advertList;
@@ -39,6 +37,7 @@ public class JMainWindow extends JDialog
         createAdvertButton = new JButton("Hirdetés feladása");
 
         JPanel advertListPanel = new JPanel();
+        int GAP = 5;
         advertListPanel.setLayout(new BorderLayout(GAP, GAP));
         advertListPanel.add(advertList, BorderLayout.CENTER);
 

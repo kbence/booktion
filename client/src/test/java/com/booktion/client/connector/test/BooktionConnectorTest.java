@@ -15,14 +15,13 @@ public class BooktionConnectorTest extends LoggerTestCase
     private final String TEST_HOSTNAME = "hostname";
     private final int TEST_PORT = 1234;
 
-    private BooktionService.Client clientMock;
     private ClientFactory clientFactoryMock;
     private BooktionConnector connector;
 
     @Before
     public void setUp() throws TException
     {
-        clientMock = mock(BooktionService.Client.class);
+        BooktionService.Client clientMock = mock(BooktionService.Client.class);
         clientFactoryMock = mock(ClientFactory.class);
 
         when(clientFactoryMock.createClient(TEST_HOSTNAME, TEST_PORT)).thenReturn(clientMock);
