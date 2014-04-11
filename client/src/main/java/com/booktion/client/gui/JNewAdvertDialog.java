@@ -12,6 +12,7 @@ public class JNewAdvertDialog extends JGridBagDialog
     private JTextField publisherTextField;
     private JTextArea descriptionTextArea;
     private JTextField priceTextField;
+    private JComboBox<String> typeComboBox;
 
     private Button okButton;
     private Button cancelButton;
@@ -26,31 +27,20 @@ public class JNewAdvertDialog extends JGridBagDialog
         JPanel contentPane = (JPanel)getContentPane();
         contentPane.setLayout(new GridBagLayout());
 
-        JLabel authorLabel = createLabel("Szerző:");
-        JLabel titleLabel = createLabel("Cím:");
-        JLabel publisherLabel = createLabel("Kiadó:");
-        JLabel descriptionLabel = createLabel("Leírás:");
-        JLabel priceLabel = createLabel("Ár:");
-        JLabel typeLabel = createLabel("Típus:");
         authorTextField = new JTextField(25);
         titleTextField = new JTextField(25);
         publisherTextField = new JTextField(25);
         descriptionTextArea = new JTextArea(4, 25);
         priceTextField = new JTextField(25);
-        JComboBox<String> typeComboBox = new JComboBox<String>(new String[]{"Fix áras", "Aukció"});
+        typeComboBox = new JComboBox<String>(new String[]{"Fix áras", "Aukció"});
 
-        contentPane.add(authorLabel, cell(0, 0));
-        contentPane.add(authorTextField, cell(1, 0));
-        contentPane.add(titleLabel, cell(0, 1));
-        contentPane.add(titleTextField, cell(1, 1));
-        contentPane.add(publisherLabel, cell(0, 2));
-        contentPane.add(publisherTextField, cell(1, 2));
-        contentPane.add(descriptionLabel, cell(0, 3));
-        contentPane.add(new JScrollPane(descriptionTextArea), cell(1, 3, GridBagConstraints.CENTER));
-        contentPane.add(typeLabel, cell(0, 4));
-        contentPane.add(typeComboBox, cell(1, 4));
-        contentPane.add(priceLabel, cell(0, 5));
-        contentPane.add(priceTextField, cell(1, 5));
+        int row = 0;
+        addField("Szerző:", authorTextField, row++);
+        addField("Cím:", titleTextField, row++);
+        addField("Kiadó:", publisherTextField, row++);
+        addField("Leírás:", new JScrollPane(descriptionTextArea), row++);
+        addField("Típus:", typeComboBox, row++);
+        addField("Ár:", priceTextField, row++);
 
         okButton = new Button("OK");
         cancelButton = new Button("Mégsem");
@@ -59,11 +49,17 @@ public class JNewAdvertDialog extends JGridBagDialog
         buttonPane.setLayout(new FlowLayout());
         buttonPane.add(okButton);
         buttonPane.add(cancelButton);
-        contentPane.add(buttonPane, cell(0, 5, 2, 1, GridBagConstraints.EAST));
+        contentPane.add(buttonPane, cell(0, row++, 2, 1, GridBagConstraints.WEST));
 
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         pack();
+    }
+
+    private void addField(String name, JComponent component, int row)
+    {
+        getContentPane().add(new JLabel(name), cell(0, row));
+        getContentPane().add(component, cell(1, row));
     }
 
     private JLabel createLabel(String caption)
