@@ -155,9 +155,14 @@ public class BookTest
     {
         // Arrange
         Book book = createTestBook();
+        Book clonedBook = null;
 
         // Act
-        Book clonedBook = (Book)book.clone();
+        try {
+            clonedBook = (Book)book.clone();
+        } catch (CloneNotSupportedException e) {
+            fail(e.getMessage());
+        }
 
         // Assert
         assertEquals("id should match", book.id, clonedBook.id);

@@ -31,9 +31,16 @@ public class Book implements Cloneable
 
         Book book = (Book)object;
 
-        return book.id == id && book.title.equals(title) && book.author.equals(author) &&
-                book.publisher.equals(publisher) && book.yearOfPublication == yearOfPublication &&
+        return book.id == id && isStringEquals(title, book.title) &&
+                isStringEquals(author, book.author) &&
+                isStringEquals(publisher, book.publisher) &&
+                book.yearOfPublication == yearOfPublication &&
                 book.condition == condition;
+    }
+
+    private boolean isStringEquals(String firstString, String secondString)
+    {
+        return firstString == null && secondString == null || firstString.equals(secondString);
     }
 
     public static Book fromThriftBook(com.booktion.thrift.Book thriftBook)
@@ -63,5 +70,14 @@ public class Book implements Cloneable
         book.condition = condition;
 
         return book;
+    }
+
+    @Override
+    public String toString()
+    {
+        return String.format(
+            "%d/%s/%s/%s/%d/%d",
+            id, title, author, publisher, yearOfPublication, condition
+        );
     }
 }

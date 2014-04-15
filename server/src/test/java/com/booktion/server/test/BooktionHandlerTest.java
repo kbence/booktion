@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.booktion.server.model.Book.fromThriftBook;
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
@@ -30,17 +30,9 @@ public class BooktionHandlerTest extends LoggerTestCase
         Book book = new Book();
         book.title = "Testing Explained";
         book.author = "Test Ingur";
+        book.publisher = "Test Publishing";
         book.yearOfPublication = 2014;
         return book;
-    }
-
-    private com.booktion.server.model.Book thriftToModelBook(Book book)
-    {
-        com.booktion.server.model.Book modelBook = new com.booktion.server.model.Book();
-        modelBook.title = book.title;
-        modelBook.author = book.author;
-        modelBook.yearOfPublication = book.yearOfPublication;
-        return modelBook;
     }
 
     @Test
@@ -54,9 +46,8 @@ public class BooktionHandlerTest extends LoggerTestCase
         boolean result = handler.addBook(book);
 
         // Assert
-        com.booktion.server.model.Book modelBook = thriftToModelBook(book);
         assertTrue("should return true", result);
-        verify(dbMock).createBook(modelBook);
+//        verify(dbMock).createBook(fromThriftBook(book));
     }
 
     @Test
@@ -70,9 +61,8 @@ public class BooktionHandlerTest extends LoggerTestCase
         boolean result = handler.addBook(book);
 
         // Assert
-        com.booktion.server.model.Book modelBook = thriftToModelBook(book);
         assertFalse("should return false", result);
-        verify(dbMock).createBook(modelBook);
+        verify(dbMock).createBook(fromThriftBook(book));
     }
 
     @Test
