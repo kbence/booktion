@@ -3,9 +3,26 @@ dependencies {
     compile project(':shared')
 }
 
-mainClassName = 'com.booktion.client.BooktionClient'
+def mainClassName = 'com.booktion.client.BooktionClient'
 
 jar {
-    manifest.attributes 'Main-Class': 'com.booktion.server.BooktionClient'
+    manifest.attributes 'Main-Class': mainClassName
     baseName = 'booktion-client'
+}
+
+task uberjar(type: Jar) {
+    dependsOn assemble
+
+    from files(sourceSets.main.output.classesDir)
+    from files(sourceSets.main.output.resourcesDir)
+    from {configurations.compile.collect {zipTree(it)}}
+
+    println sourceSets.main.output.classesDir
+    println sourceSets.main.output.resourcesDir
+
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+
+    baseName = "$project.name-with-dependencies"
 }
