@@ -1,7 +1,7 @@
 language: java
 install:
-  - apt-get update
-  - apt-get install -y curl build-essential openjdk-6-jdk
-  - RUN cd /tmp && curl -L http://xenia.sote.hu/ftp/mirrors/www.apache.org/thrift/0.9.1/thrift-0.9.1.tar.gz | gzip -d | tar x && cd /tmp/thrift-0.9.1 && ./configure && make install
+  - sudo apt-get update
+  - sudo apt-get install -y curl build-essential openjdk-6-jdk
+  - cd /tmp && curl -L http://xenia.sote.hu/ftp/mirrors/www.apache.org/thrift/0.9.1/thrift-0.9.1.tar.gz | gzip -d | tar x && cd /tmp/thrift-0.9.1 && ./configure && make install
 script: ./scripts/ci/build.sh
 
