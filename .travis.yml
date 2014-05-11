@@ -3,5 +3,5 @@ before_script:
  - sudo add-apt-repository https://code.launchpad.net/~wnoronha/+archive/thrift
  - sudo apt-get update -y
  - sudo apt-get install -y thrift
-script: TERM=dumb ./gradlew check -is
+script: ./scripts/ci/build.sh
 
