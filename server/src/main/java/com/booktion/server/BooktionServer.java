@@ -10,14 +10,23 @@ import org.apache.thrift.transport.TNonblockingServerTransport;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 
+import java.sql.SQLException;
+
 public class BooktionServer
 {
     private BooktionService.Processor processor;
 
     public BooktionServer()
     {
-        BooktionHandler booktionHandler = new BooktionHandler(new AdvertDatabase());
-        processor = new BooktionService.Processor<BooktionHandler>(booktionHandler);
+        try {
+            AdvertDatabase database = new AdvertDatabase(".booktion.derby");
+            BooktionHandler booktionHandler = new BooktionHandler(database);
+            processor = new BooktionService.Processor<BooktionHandler>(booktionHandler);
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new RuntimeException();
+        }
     }
 
     public void run()

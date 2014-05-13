@@ -2,17 +2,31 @@ package com.booktion.server.db;
 
 import com.booktion.server.model.Book;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 public class AdvertDatabase
 {
+    private Connection connection;
+
     private Map<Integer, Book> bookMap;
 
     public AdvertDatabase()
     {
         bookMap = new HashMap<Integer, Book>();
+    }
+
+    public AdvertDatabase(String filename) throws SQLException
+    {
+        this();
+
+        connection = DriverManager.getConnection(String.format("jdbc:derby:%1$s;create=true", filename));
+        new SchemaCreator(connection).createSchema();
     }
 
     public boolean createBook(Book book)
