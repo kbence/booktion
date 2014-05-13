@@ -10,3 +10,9 @@ jar {
     manifest.attributes 'Main-Class': 'com.booktion.server.BooktionServer'
     baseName = 'booktion-server'
 }
+
+task cleanDatabase {
+    doFirst {
+        file(".booktion.derby").deleteDir()
+    }
+}
