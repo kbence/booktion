@@ -4,6 +4,8 @@ include "Advert.thrift"
 include "Book.thrift"
 
 service BooktionService {
+    bool login(1:string username, 2:string password),
+
     Book.Book getBook(1:i32 bookId),
 
     bool addBook(1:Book.Book book),

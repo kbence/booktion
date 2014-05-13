@@ -16,10 +16,18 @@ import static com.booktion.server.model.Book.fromThriftBook;
 public class BooktionHandler implements BooktionService.Iface
 {
     private AdvertDatabase db;
+    private UserSessionManager sessionManager;
 
-    public BooktionHandler(AdvertDatabase db)
+    public BooktionHandler(AdvertDatabase db, UserSessionManager sessionManager)
     {
         this.db = db;
+        this.sessionManager = sessionManager;
+    }
+
+    @Override
+    public boolean login(String username, String password) throws TException
+    {
+        return false;
     }
 
     @Override

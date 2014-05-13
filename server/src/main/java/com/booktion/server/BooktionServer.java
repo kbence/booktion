@@ -2,6 +2,7 @@ package com.booktion.server;
 
 import com.booktion.server.db.AdvertDatabase;
 import com.booktion.thrift.BooktionService;
+import org.apache.thrift.TProcessor;
 import org.apache.thrift.server.TNonblockingServer;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 public class BooktionServer
 {
     private BooktionService.Processor processor;
+    private UserSessionManager sessionManager;
 
     public BooktionServer()
     {
@@ -22,6 +24,7 @@ public class BooktionServer
             AdvertDatabase database = new AdvertDatabase(".booktion.derby");
             BooktionHandler booktionHandler = new BooktionHandler(database);
             processor = new BooktionService.Processor<BooktionHandler>(booktionHandler);
+            sessionManager = new UserSessionManager(processor);
         } catch (SQLException e) {
             e.printStackTrace();
 
@@ -35,7 +38,9 @@ public class BooktionServer
 
         try {
             TNonblockingServerTransport serverTransport = new TNonblockingServerSocket(1234);
-            TNonblockingServer server = new TNonblockingServer(new TNonblockingServer.Args(serverTransport).processor(processor));
+            TProcessor sessionProcessor = sessionManager.getProcessor();
+            TNonblockingServer.Args serverArgs = new TNonblockingServer.Args(serverTransport).processor(sessionProcessor);
+            TNonblockingServer server = new TNonblockingServer(serverArgs);
 
             server.serve();
         } catch (Exception e) {
