@@ -2,60 +2,68 @@ package com.booktion.server.db;
 
 import com.booktion.server.model.Book;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 public class AdvertDatabase
 {
+    private final String INSERT_BOOK = "INSERT INTO BOOKS (title, owner, author, publisher, yearOfPublication, " +
+            "condition, sold_to) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    private final String SELECT_BOOK_BY_ID = "SELECT * FROM BOOKS WHERE id = ?";
+
     private Connection connection;
-
-    private Map<Integer, Book> bookMap;
-
-    public AdvertDatabase()
-    {
-        bookMap = new HashMap<Integer, Book>();
-    }
 
     public AdvertDatabase(String filename) throws SQLException
     {
-        this();
-
         connection = DriverManager.getConnection(String.format("jdbc:derby:%1$s;create=true", filename));
         new SchemaCreator(connection).createSchema();
     }
 
     public boolean createBook(Book book)
     {
-        Integer nextId = getNextId();
-
         try {
-            Book copy = (Book) book.clone();
-            copy.id = nextId;
-            bookMap.put(nextId, copy);
-        } catch (CloneNotSupportedException e) {
-            return false;
+            PreparedStatement stmt = connection.prepareStatement(INSERT_BOOK);
+            stmt.setString(1, book.title);
+            stmt.setInt(2, book.owner);
+            stmt.setString(3, book.author);
+            stmt.setString(4, book.publisher);
+            stmt.setInt(5, book.yearOfPublication);
+            stmt.setInt(6, book.condition);
+            stmt.setObject(7, book.soldTo == -1 ? null : (Integer) book.soldTo);
+
+            return stmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        return true;
+        return false;
     }
 
     public Book getBook(int id)
     {
-        return bookMap.get(id);
-    }
+        try {
+            PreparedStatement stmt = connection.prepareStatement(SELECT_BOOK_BY_ID);
+            stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
 
-    private Integer getNextId()
-    {
-        Set<Integer> ids = bookMap.keySet();
-        Integer i;
+            if (result.next()) {
+                Book book = new Book();
+                book.id = result.getInt("id");
+                book.owner = result.getInt("owner");
+                book.title = result.getString("author");
+                book.author = result.getString("author");
+                book.publisher = result.getString("publisher");
+                book.yearOfPublication = result.getShort("yearOfPublication");
+                book.condition = result.getShort("condition");
+                book.soldTo = result.getInt("soldTo");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        for (i = 1; ids.contains(i);) i++;
-
-        return i;
+        return null;
     }
 }

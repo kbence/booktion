@@ -4,10 +4,12 @@ public class Book implements Cloneable
 {
     public int id;
     public String title;
+    public int owner;
     public String author;
     public String publisher;
     public short yearOfPublication;
     public short condition;
+    public int soldTo;
 
     public com.booktion.thrift.Book toThriftBook()
     {
