@@ -17,4 +17,9 @@ public class JCenteredDialog extends JGridBagDialog
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    public void close()
+    {
+        setVisible(false);
+        dispose();
+    }
 }

@@ -44,10 +44,4 @@ public class JGridBagDialog extends JDialog
 
         return c;
     }
-
-    public void close()
-    {
-        setVisible(false);
-        dispose();
-    }
 }
