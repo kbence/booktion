@@ -32,13 +32,13 @@ public class MainController
     {
         window = mainWindow;
 
-        setUpControllers();
+        setUpControls();
         addListeners();
         connect();
         loadAdvertList();
     }
 
-    private void setUpControllers()
+    private void setUpControls()
     {
         advertListModel = new AdvertTableModel();
         window.getAdvertList().getAdvertTable().setModel(advertListModel);
