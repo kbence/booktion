@@ -66,4 +66,14 @@ public class JLoginDialog extends JCenteredDialog
     {
         return passwordField;
     }
+
+    public JButton getOkButton()
+    {
+        return okButton;
+    }
+
+    public JButton getCancelButton()
+    {
+        return cancelButton;
+    }
 }

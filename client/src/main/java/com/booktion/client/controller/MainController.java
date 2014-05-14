@@ -48,9 +48,7 @@ public class MainController
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                JLoginDialog loginWindow = new JLoginDialog();
-                new LoginController(loginWindow);
-                loginWindow.setVisible(true);
+                showLoginWindows();
             }
         });
 
@@ -94,6 +92,13 @@ public class MainController
                 }
             }
         });
+    }
+
+    private void showLoginWindows()
+    {
+        JLoginDialog loginWindow = new JLoginDialog();
+        new LoginController(this, loginWindow);
+        loginWindow.setVisible(true);
     }
 
     private void startBidding(Advert advert)

@@ -32,10 +32,14 @@ public class BooktionHandler implements BooktionService.Iface
     @Override
     public boolean login(String username, String password) throws TException
     {
+        Logger.get().log(String.format("User %s tries to log in", username));
         User user = db.user.findByUsername(username);
 
-        if (user.checkPassword(password)) {
+        Logger.get().log(String.format("%s", user));
+
+        if (user != null && user.checkPassword(password)) {
             sessionManager.getCurrentSession().user = user;
+            Logger.get().log(String.format("User %s logged in", username));
             return true;
         }
 

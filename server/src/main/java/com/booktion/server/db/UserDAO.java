@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class UserDAO extends DAO
 {
-    private static final String SELECT_BY_USERNAME = "SELECT * FROM USERS WHERE username = ?";
+    private static final String SELECT_BY_USERNAME = "SELECT * FROM users WHERE username = ?";
 
     public UserDAO(Connection connection)
     {
@@ -31,6 +31,7 @@ public class UserDAO extends DAO
                 user.forename = result.getString("forename");
                 user.surname = result.getString("surname");
                 user.address = result.getString("address");
+                return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();

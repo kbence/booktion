@@ -27,6 +27,11 @@ public class BooktionConnector
         client = protocolFactory.createClient(host, port);
     }
 
+    public boolean login(String username, String password) throws TException
+    {
+        return client.login(username, password);
+    }
+
     public List<Advert> listAdverts(int first, int last) throws TException
     {
         return client.listAdverts(first, last);

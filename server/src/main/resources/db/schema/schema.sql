@@ -1,11 +1,11 @@
 
 CREATE TABLE USERS (
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    username CLOB NOT NULL,
-    password CLOB NOT NULL,
-    forename CLOB NOT NULL,
-    surname CLOB NOT NULL,
-    address CLOB NOT NULL,
+    username VARCHAR(32) NOT NULL,
+    password VARCHAR(32) NOT NULL,
+    forename VARCHAR(32) NOT NULL,
+    surname VARCHAR(32) NOT NULL,
+    address VARCHAR(128) NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -16,9 +16,9 @@ INSERT INTO USERS (username, password, forename, surname, address) VALUES
 CREATE TABLE BOOKS (
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     owner INTEGER NOT NULL,
-    title CLOB NOT NULL,
-    author CLOB NOT NULL,
-    publisher CLOB NOT NULL,
+    title VARCHAR(64) NOT NULL,
+    author VARCHAR(64) NOT NULL,
+    publisher VARCHAR(32) NOT NULL,
     yearOfPublication INTEGER NOT NULL,
     condition INTEGER NOT NULL,
     soldTo INTEGER,
@@ -33,7 +33,7 @@ CREATE TABLE ADVERTS (
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     issuer INTEGER NOT NULL,
     book_id INTEGER NOT NULL,
-    type CLOB NOT NULL,
+    type VARCHAR(32) NOT NULL,
     price DOUBLE NOT NULL,
     PRIMARY KEY(id)
 );
