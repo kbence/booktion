@@ -33,7 +33,7 @@ public class JLoginDialog extends JCenteredDialog
         buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
 
         okButton = new JButton("OK");
-        cancelButton = new JButton("Mégse");
+        cancelButton = new JButton("Mégsem");
 
         buttonPanel.add(okButton);
         buttonPanel.add(cancelButton);
