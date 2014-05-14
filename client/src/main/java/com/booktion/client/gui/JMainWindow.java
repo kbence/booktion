@@ -11,12 +11,14 @@ public class JMainWindow extends JDialog
     private JPanel buttonPanel;
     private JButton loginButton;
 
-    private JTabbedPane tabbedPane;
+    private JButton registerButton;
 
+    private JTabbedPane tabbedPane;
     private JAdvertList advertList;
     private JAdvertList searchResults;
     private JLabel statusLabel;
     private JButton createAdvertButton;
+
     public JMainWindow()
     {
         super();
@@ -51,9 +53,11 @@ public class JMainWindow extends JDialog
     {
         buttonPanel = new JPanel();
         loginButton = new JButton("Bejelentkezés");
+        registerButton = new JButton("Regisztráció");
 
         buttonPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         buttonPanel.add(loginButton);
+        buttonPanel.add(registerButton);
     }
 
     private void createAdvertPanel()
@@ -83,6 +87,11 @@ public class JMainWindow extends JDialog
     public JButton getLoginButton()
     {
         return loginButton;
+    }
+
+    public JButton getRegisterButton()
+    {
+        return registerButton;
     }
 
     public JTabbedPane getTabbedPane()

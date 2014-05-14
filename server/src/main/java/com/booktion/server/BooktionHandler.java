@@ -47,6 +47,20 @@ public class BooktionHandler implements BooktionService.Iface
     }
 
     @Override
+    public boolean addUser(com.booktion.thrift.User user) throws TException
+    {
+        Logger.get().log(String.format("Trying to create user %s", user.username));
+        User modelUser = new User();
+        modelUser.username = user.username;
+        modelUser.password = user.password;
+        modelUser.forename = user.forename;
+        modelUser.surname = user.surname;
+        modelUser.address = user.address;
+
+        return db.user.createUser(modelUser);
+    }
+
+    @Override
     public Book getBook(int bookId) throws TException
     {
         com.booktion.server.model.Book book = db.book.getById(bookId);

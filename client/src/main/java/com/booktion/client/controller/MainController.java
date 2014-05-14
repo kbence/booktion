@@ -52,6 +52,15 @@ public class MainController
             }
         });
 
+        window.getRegisterButton().addActionListener(new AbstractAction()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                showRegisterWindow();
+            }
+        });
+
         window.getCreateAdvertButton().addActionListener(new ActionListener()
         {
             @Override
@@ -92,6 +101,13 @@ public class MainController
                 }
             }
         });
+    }
+
+    private void showRegisterWindow()
+    {
+        JRegisterDialog registerDialog = new JRegisterDialog();
+        new RegisterController(this, registerDialog);
+        registerDialog.setVisible(true);
     }
 
     private void showLoginWindows()

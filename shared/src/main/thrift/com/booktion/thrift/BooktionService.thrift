@@ -2,9 +2,12 @@ namespace java com.booktion.thrift
 
 include "Advert.thrift"
 include "Book.thrift"
+include "User.thrift"
 
 service BooktionService {
     bool login(1:string username, 2:string password),
+
+    bool addUser(1:User.User user),
 
     Book.Book getBook(1:i32 bookId),
 
