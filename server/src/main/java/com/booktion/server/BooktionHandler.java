@@ -2,6 +2,7 @@ package com.booktion.server;
 
 import com.booktion.log.Logger;
 import com.booktion.server.db.AdvertDatabase;
+import com.booktion.server.model.User;
 import com.booktion.thrift.Advert;
 import com.booktion.thrift.AdvertType;
 import com.booktion.thrift.Book;
@@ -18,22 +19,33 @@ public class BooktionHandler implements BooktionService.Iface
     private AdvertDatabase db;
     private UserSessionManager sessionManager;
 
-    public BooktionHandler(AdvertDatabase db, UserSessionManager sessionManager)
+    public BooktionHandler(AdvertDatabase db)
     {
         this.db = db;
+    }
+
+    public void setSessionManager(UserSessionManager sessionManager)
+    {
         this.sessionManager = sessionManager;
     }
 
     @Override
     public boolean login(String username, String password) throws TException
     {
+        User user = db.user.findByUsername(username);
+
+        if (user.checkPassword(password)) {
+            sessionManager.getCurrentSession().user = user;
+            return true;
+        }
+
         return false;
     }
 
     @Override
     public Book getBook(int bookId) throws TException
     {
-        com.booktion.server.model.Book book = db.getBook(bookId);
+        com.booktion.server.model.Book book = db.book.getById(bookId);
 
         if (book == null)
             return null;
@@ -44,7 +56,7 @@ public class BooktionHandler implements BooktionService.Iface
     @Override
     public boolean addBook(Book book) throws TException
     {
-        return db.createBook(fromThriftBook(book));
+        return db.book.create(fromThriftBook(book));
     }
 
     @Override

@@ -25,6 +25,7 @@ public class BooktionServer
             BooktionHandler booktionHandler = new BooktionHandler(database);
             processor = new BooktionService.Processor<BooktionHandler>(booktionHandler);
             sessionManager = new UserSessionManager(processor);
+            booktionHandler.setSessionManager(sessionManager);
         } catch (SQLException e) {
             e.printStackTrace();
 
