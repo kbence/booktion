@@ -53,6 +53,9 @@ public class RegisterController
             boolean success = mainController.getConnector().addUser(user);
 
             if (success) {
+                JOptionPane.showMessageDialog(window, "A felhasználó regisztrációja " +
+                        "sikeresen befejeződött!", "Regisztráció",
+                        JOptionPane.INFORMATION_MESSAGE);
                 window.close();
             } else {
                 JOptionPane.showMessageDialog(window, "Hiba a felhasználó létrehozása közben!",
