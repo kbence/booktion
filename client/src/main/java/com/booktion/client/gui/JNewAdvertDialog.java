@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class JNewAdvertDialog extends JGridBagDialog
+public class JNewAdvertDialog extends JCenteredDialog
 {
     private JTextField authorTextField;
 

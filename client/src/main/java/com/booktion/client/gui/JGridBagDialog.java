@@ -7,10 +7,6 @@ public class JGridBagDialog extends JDialog
 {
     public JGridBagDialog()
     {
-        setModal(true);
-        setResizable(false);
-        setLocationRelativeTo(getParent());
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     protected GridBagConstraints cell(int x, int y)

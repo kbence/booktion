@@ -6,13 +6,17 @@ import java.awt.*;
 
 public class JMainWindow extends JDialog
 {
+    private final int GAP = 5;
+
+    private JPanel buttonPanel;
+    private JButton loginButton;
+
     private JTabbedPane tabbedPane;
 
     private JAdvertList advertList;
     private JAdvertList searchResults;
     private JLabel statusLabel;
     private JButton createAdvertButton;
-
     public JMainWindow()
     {
         super();
@@ -29,15 +33,36 @@ public class JMainWindow extends JDialog
 
     private void initContent()
     {
-        JPanel contentPane = (JPanel)getContentPane();
+        createButtonPanel();
+        createAdvertPanel();
 
         statusLabel = new JLabel();
+
+        JPanel contentPane = (JPanel)getContentPane();
+        contentPane.setLayout(new BorderLayout(GAP, GAP));
+        contentPane.setBorder(new EmptyBorder(GAP, GAP, GAP, GAP));
+        contentPane.add(buttonPanel, BorderLayout.NORTH);
+        contentPane.add(tabbedPane, BorderLayout.CENTER);
+        contentPane.add(statusLabel, BorderLayout.SOUTH);
+        pack();
+    }
+
+    private void createButtonPanel()
+    {
+        buttonPanel = new JPanel();
+        loginButton = new JButton("Bejelentkezés");
+
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+        buttonPanel.add(loginButton);
+    }
+
+    private void createAdvertPanel()
+    {
         advertList = new JAdvertList();
         searchResults = new JAdvertList();
         createAdvertButton = new JButton("Hirdetés feladása");
 
         JPanel advertListPanel = new JPanel();
-        int GAP = 5;
         advertListPanel.setLayout(new BorderLayout(GAP, GAP));
         advertListPanel.add(advertList, BorderLayout.CENTER);
 
@@ -53,13 +78,11 @@ public class JMainWindow extends JDialog
         tabbedPane.add("Hirdetések", advertListPanel);
         tabbedPane.add("Keresés", searchPanel);
         tabbedPane.add("Saját oldal", ownPanel);
+    }
 
-        contentPane.setLayout(new BorderLayout(GAP, GAP));
-        contentPane.setBorder(new EmptyBorder(GAP, GAP, GAP, GAP));
-        contentPane.add(tabbedPane, BorderLayout.CENTER);
-        contentPane.add(statusLabel, BorderLayout.SOUTH);
-
-        pack();
+    public JButton getLoginButton()
+    {
+        return loginButton;
     }
 
     public JTabbedPane getTabbedPane()

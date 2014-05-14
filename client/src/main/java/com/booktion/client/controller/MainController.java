@@ -2,10 +2,7 @@ package com.booktion.client.controller;
 
 import com.booktion.client.connector.BooktionConnector;
 import com.booktion.client.connector.BooktionConnectorFactory;
-import com.booktion.client.gui.JBidDialog;
-import com.booktion.client.gui.JMainWindow;
-import com.booktion.client.gui.JNewAdvertDialog;
-import com.booktion.client.gui.JPurchaseDialog;
+import com.booktion.client.gui.*;
 import com.booktion.client.model.AdvertTableModel;
 import com.booktion.thrift.Advert;
 import com.booktion.thrift.AdvertType;
@@ -46,6 +43,17 @@ public class MainController
 
     private void addListeners()
     {
+        window.getLoginButton().addActionListener(new AbstractAction()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                JLoginDialog loginWindow = new JLoginDialog();
+                new LoginController(loginWindow);
+                loginWindow.setVisible(true);
+            }
+        });
+
         window.getCreateAdvertButton().addActionListener(new ActionListener()
         {
             @Override

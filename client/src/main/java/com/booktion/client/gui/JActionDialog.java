@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class JActionDialog extends JGridBagDialog
+public class JActionDialog extends JCenteredDialog
 {
     protected final int GAP = 5;
 
