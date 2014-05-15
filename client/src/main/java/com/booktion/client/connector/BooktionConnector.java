@@ -38,6 +38,11 @@ public class BooktionConnector
         client.logout();
     }
 
+    public Book getBook(int bookId) throws TException
+    {
+        return client.getBook(bookId);
+    }
+
     public boolean addUser(User user) throws TException
     {
         return client.addUser(user);

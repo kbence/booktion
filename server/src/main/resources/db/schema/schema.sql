@@ -33,15 +33,15 @@ CREATE TABLE ADVERTS (
     issuer INTEGER NOT NULL,
     bookId INTEGER NOT NULL,
     type VARCHAR(16) NOT NULL,
-    expires TIME NOT NULL,
+    expires TIMESTAMP NOT NULL,
     price DOUBLE NOT NULL,
-    winner INTEGER NOT NULL,
+    winner INTEGER,
     PRIMARY KEY(id)
 );
 
-INSERT INTO ADVERTS (issuer, bookId, type, price) VALUES
-    (2, 1, "FIX_PRICE", 4300),
-    (2, 2, "AUCTION", 2590);
+INSERT INTO ADVERTS (issuer, bookId, type, expires, price) VALUES
+    (2, 1, 'FIX_PRICE', {fn TIMESTAMPADD(SQL_TSI_HOUR, 1, CURRENT_TIMESTAMP)}, 4300),
+    (2, 2, 'AUCTION', {fn TIMESTAMPADD(SQL_TSI_DAY, 7, CURRENT_TIMESTAMP)}, 2590);
 
 CREATE TABLE BIDS (
     id INTEGER NOT NULL,

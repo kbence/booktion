@@ -8,6 +8,7 @@ import com.booktion.thrift.Book;
 import com.booktion.thrift.BooktionService;
 import org.apache.thrift.TException;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -95,7 +96,13 @@ public class BooktionHandler implements BooktionService.Iface
     @Override
     public List<Advert> listAdverts(int first, int last) throws TException
     {
-        return new LinkedList<Advert>();
+        List<Advert> adverts = new ArrayList<Advert>();
+
+        for (com.booktion.server.model.Advert advert : db.advert.listAdverts()) {
+            adverts.add(advert.toThrift());
+        }
+
+        return adverts;
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.booktion.client.gui.*;
 import com.booktion.client.model.AdvertTableModel;
 import com.booktion.thrift.Advert;
 import com.booktion.thrift.AdvertType;
+import com.booktion.thrift.Book;
 import org.apache.thrift.TException;
 
 import javax.swing.*;
@@ -37,7 +38,20 @@ public class MainController
 
     private void setUpControls()
     {
-        advertListModel = new AdvertTableModel();
+        advertListModel = new AdvertTableModel(new AdvertTableModel.DataSource()
+        {
+            @Override
+            public Book getBook(int bookId)
+            {
+                try {
+                    return connector.getBook(bookId);
+                } catch (TException e) {
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+        });
         window.getAdvertList().getAdvertTable().setModel(advertListModel);
     }
 

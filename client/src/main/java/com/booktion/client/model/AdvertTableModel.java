@@ -3,6 +3,7 @@ package com.booktion.client.model;
 import com.booktion.thrift.Advert;
 import com.booktion.thrift.AdvertType;
 import com.booktion.thrift.Book;
+import com.sun.xml.internal.bind.v2.util.DataSourceSource;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -10,19 +11,20 @@ import java.util.Map;
 
 public class AdvertTableModel extends AbstractTableModel
 {
-
-    public class DataSource
+    public interface DataSource
     {
-        public Book getBook
+        public Book getBook(int bookId);
     }
 
+    private DataSource dataSource;
     private String[] columns;
     private List<Advert> adverts;
     private Map<Integer, Book> books;
 
-    public AdvertTableModel()
+    public AdvertTableModel(DataSource dataSource)
     {
-        columns = new String[] {"Cím", "Szerző", "Kiadó", "Típus", "Ár"};
+        this.dataSource = dataSource;
+        this.columns = new String[] {"Cím", "Szerző", "Kiadó", "Típus", "Ár"};
     }
 
     public void setAdvertList(List<Advert> advertList)

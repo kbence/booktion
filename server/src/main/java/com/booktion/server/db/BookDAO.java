@@ -9,9 +9,9 @@ import java.sql.SQLException;
 
 public class BookDAO extends DAO
 {
-    private final String INSERT_BOOK = "INSERT INTO BOOKS (title, owner, author, publisher, yearOfPublication, " +
-            "condition, sold_to) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private final String SELECT_BOOK_BY_ID = "SELECT * FROM BOOKS WHERE id = ?";
+    private final String INSERT_BOOK = "INSERT INTO books (title, owner, author, publisher, " +
+            "yearOfPublication, condition) VALUES (?, ?, ?, ?, ?, ?)";
+    private final String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE id = ?";
 
         public BookDAO(Connection connection)
     {
@@ -53,6 +53,7 @@ public class BookDAO extends DAO
                 book.publisher = result.getString("publisher");
                 book.yearOfPublication = result.getShort("yearOfPublication");
                 book.condition = result.getShort("condition");
+                return book;
             }
         } catch (SQLException e) {
             e.printStackTrace();
