@@ -54,7 +54,6 @@ public class BookDAO extends DAO
                 book.publisher = result.getString("publisher");
                 book.yearOfPublication = result.getShort("yearOfPublication");
                 book.condition = result.getShort("condition");
-                book.soldTo = result.getInt("soldTo");
             }
         } catch (SQLException e) {
             e.printStackTrace();

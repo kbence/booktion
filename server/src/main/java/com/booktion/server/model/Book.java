@@ -9,7 +9,6 @@ public class Book implements Cloneable
     public String publisher;
     public short yearOfPublication;
     public short condition;
-    public int soldTo;
 
     public com.booktion.thrift.Book toThriftBook()
     {
