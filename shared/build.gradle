@@ -7,7 +7,7 @@ jar {
     baseName = 'booktion-shared'
 }
 
-task thrift {
+task thrift << {
     def thriftFiles = fileTree(dir: 'src/main/thrift')
 
     thriftFiles.each { File file ->
