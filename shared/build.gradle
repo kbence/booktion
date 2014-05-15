@@ -7,17 +7,21 @@ jar {
     baseName = 'booktion-shared'
 }
 
-task thrift << {
+task thrift {
     def thriftFiles = fileTree(dir: 'src/main/thrift')
 
-    thriftFiles.each { File file ->
-        exec {
-            commandLine = ['thrift', '--gen', 'java', '-out', '../../../src/main/java/', file]
-            workingDir 'src/main/thrift'
-        }
-    }
     inputs.files thriftFiles
     outputs.files thriftFiles.collect { File f ->
         new File(f.path.replace(".thrift", ".java").replace("src/main/thrift", "src/main/java"))
+    }
+
+    doFirst {
+
+        thriftFiles.each { File file ->
+            exec {
+                commandLine = ['thrift', '--gen', 'java', '-out', '../../../src/main/java/', file]
+                workingDir 'src/main/thrift'
+            }
+        }
     }
 }
