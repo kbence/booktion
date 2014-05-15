@@ -1,6 +1,7 @@
 package com.booktion.server;
 
 import com.booktion.server.db.AdvertDatabase;
+import com.booktion.server.model.Bookshop;
 import com.booktion.thrift.BooktionService;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.server.TNonblockingServer;
@@ -22,10 +23,13 @@ public class BooktionServer
     {
         try {
             AdvertDatabase database = new AdvertDatabase(".booktion.derby");
-            BooktionHandler booktionHandler = new BooktionHandler(database);
+            Bookshop bookshop = new Bookshop(database);
+            BooktionHandler booktionHandler = new BooktionHandler(bookshop);
+
             processor = new BooktionService.Processor<BooktionHandler>(booktionHandler);
             sessionManager = new UserSessionManager(processor);
-            booktionHandler.setSessionManager(sessionManager);
+            bookshop.setSessionManager(sessionManager);
+            booktionHandler.setBookshop(bookshop);
         } catch (SQLException e) {
             e.printStackTrace();
 
