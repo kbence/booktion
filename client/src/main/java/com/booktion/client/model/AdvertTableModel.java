@@ -3,7 +3,6 @@ package com.booktion.client.model;
 import com.booktion.thrift.Advert;
 import com.booktion.thrift.AdvertType;
 import com.booktion.thrift.Book;
-import com.sun.xml.internal.bind.v2.util.DataSourceSource;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
