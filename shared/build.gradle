@@ -21,5 +21,3 @@ task thrift {
         new File(f.path.replace(".thrift", ".java").replace("src/main/thrift", "src/main/java"))
     }
 }
-
-compileJava.dependsOn(thrift)
