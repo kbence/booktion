@@ -39,7 +39,7 @@ CREATE TABLE ADVERTS (
     PRIMARY KEY(id)
 );
 
-INSERT INTO ADVERTS (issuer, book_id, type, price) VALUES
+INSERT INTO ADVERTS (issuer, bookId, type, price) VALUES
     (2, 1, "FIX_PRICE", 4300),
     (2, 2, "AUCTION", 2590);
 
