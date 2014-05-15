@@ -80,60 +80,29 @@ public class BooktionHandler implements BooktionService.Iface
     @Override
     public List<Advert> searchForAdverts(String name) throws TException
     {
-        return getHardCodedAdverts();
+        return new LinkedList<Advert>();
     }
 
     @Override
     public List<Advert> listAdverts(int first, int last) throws TException
     {
-        return getHardCodedAdverts();
+        return new LinkedList<Advert>();
     }
 
     @Override
     public boolean purchase(int bookId) throws TException
     {
-        Logger.get().log("USER purchased book " + bookId);
+        User user = sessionManager.getCurrentSession().user;
+        Logger.get().log(String.format("User '%s' purchased book %d", user.username, bookId));
         return true;
     }
 
     @Override
-    public boolean bid(int bookId) throws TException
+    public boolean bid(int advertId, double price) throws TException
     {
-        Logger.get().log("USER put a bid on book " + bookId);
+        User user = sessionManager.getCurrentSession().user;
+        db.advert.getAdvert(advertId);
+        Logger.get().log(String.format("User %s put a bid on book %d", user.username, advertId));
         return true;
-    }
-
-    private LinkedList<Advert> getHardCodedAdverts()
-    {
-        LinkedList<Advert> adverts = new LinkedList<Advert>();
-
-        adverts.add(
-            new Advert(
-                1, 1, new Book(
-                    1,
-                    "A C++ Programozási nyelv",
-                    "Bjarne Stroustrup",
-                    "Kiskapu",
-                    (short)1982,
-                    (short)84
-                ),
-                AdvertType.AUCTION, 4300
-            )
-        );
-
-        adverts.add(
-            new Advert(
-                1, 1, new Book(
-                    1,
-                    "Számítógép-hálózatok",
-                    "Andrew S. Tanenbaum",
-                    "Addison-Weasley",
-                    (short)1992,
-                    (short)45
-                ),
-                AdvertType.FIX_PRICE, 2590
-            )
-        );
-        return adverts;
     }
 }

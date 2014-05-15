@@ -8,5 +8,7 @@ struct Advert {
     2: i32 issuer,
     3: Book.Book book,
     4: AdvertType.AdvertType advertType,
-    5: double price
+    5: i64 expires,
+    6: double price,
+    7: i32 winner
 }

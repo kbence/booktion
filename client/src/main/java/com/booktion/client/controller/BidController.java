@@ -21,7 +21,7 @@ public class BidController
 
     private void addListeners(JBidDialog window)
     {
-        window.getOkButton().addActionListener(new AbstractAction()
+        window.getPurchaseButton().addActionListener(new AbstractAction()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -31,7 +31,7 @@ public class BidController
             }
         });
 
-        window.getCancelButton().addActionListener(new AbstractAction()
+        window.getCloseButton().addActionListener(new AbstractAction()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -44,7 +44,10 @@ public class BidController
     private void onOk()
     {
         try {
-            mainController.getConnector().bid(bidDialog.getAdvert().book);
+            mainController.getConnector().bid(
+                    bidDialog.getAdvert().id,
+                    Double.valueOf(bidDialog.getPriceField().getText())
+            );
         } catch (TException e) {}
 
         bidDialog.close();

@@ -2,14 +2,17 @@ package com.booktion.client.model;
 
 import com.booktion.thrift.Advert;
 import com.booktion.thrift.AdvertType;
+import com.booktion.thrift.Book;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
+import java.util.Map;
 
 public class AdvertTableModel extends AbstractTableModel
 {
     private String[] columns;
     private List<Advert> adverts;
+    private Map<Integer, Book> books;
 
     public AdvertTableModel()
     {

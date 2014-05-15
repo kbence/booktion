@@ -11,6 +11,7 @@ public class AdvertDatabase
 {
     public BookDAO book;
     public UserDAO user;
+    public AdvertDAO advert;
 
     public AdvertDatabase(String filename) throws SQLException
     {
@@ -19,6 +20,7 @@ public class AdvertDatabase
 
         book = new BookDAO(connection);
         user = new UserDAO(connection);
+        advert = new AdvertDAO(connection, book);
     }
 
 }

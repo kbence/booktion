@@ -19,5 +19,5 @@ service BooktionService {
 
     bool purchase(1:i32 bookId),
 
-    bool bid(1:i32 bookId),
+    bool bid(1:i32 advertId, 2:double price),
 }

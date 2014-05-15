@@ -39,7 +39,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
   private static final org.apache.thrift.protocol.TField ISSUER_FIELD_DESC = new org.apache.thrift.protocol.TField("issuer", org.apache.thrift.protocol.TType.I32, (short)2);
   private static final org.apache.thrift.protocol.TField BOOK_FIELD_DESC = new org.apache.thrift.protocol.TField("book", org.apache.thrift.protocol.TType.STRUCT, (short)3);
   private static final org.apache.thrift.protocol.TField ADVERT_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("advertType", org.apache.thrift.protocol.TType.I32, (short)4);
-  private static final org.apache.thrift.protocol.TField PRICE_FIELD_DESC = new org.apache.thrift.protocol.TField("price", org.apache.thrift.protocol.TType.DOUBLE, (short)5);
+  private static final org.apache.thrift.protocol.TField EXPIRES_FIELD_DESC = new org.apache.thrift.protocol.TField("expires", org.apache.thrift.protocol.TType.I64, (short)5);
+  private static final org.apache.thrift.protocol.TField PRICE_FIELD_DESC = new org.apache.thrift.protocol.TField("price", org.apache.thrift.protocol.TType.DOUBLE, (short)6);
+  private static final org.apache.thrift.protocol.TField WINNER_FIELD_DESC = new org.apache.thrift.protocol.TField("winner", org.apache.thrift.protocol.TType.I32, (short)7);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -55,7 +57,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
    * @see com.booktion.thrift.AdvertType
    */
   public com.booktion.thrift.AdvertType advertType; // required
+  public long expires; // required
   public double price; // required
+  public int winner; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -67,7 +71,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
      * @see com.booktion.thrift.AdvertType
      */
     ADVERT_TYPE((short)4, "advertType"),
-    PRICE((short)5, "price");
+    EXPIRES((short)5, "expires"),
+    PRICE((short)6, "price"),
+    WINNER((short)7, "winner");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -90,8 +96,12 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
           return BOOK;
         case 4: // ADVERT_TYPE
           return ADVERT_TYPE;
-        case 5: // PRICE
+        case 5: // EXPIRES
+          return EXPIRES;
+        case 6: // PRICE
           return PRICE;
+        case 7: // WINNER
+          return WINNER;
         default:
           return null;
       }
@@ -134,7 +144,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
   // isset id assignments
   private static final int __ID_ISSET_ID = 0;
   private static final int __ISSUER_ISSET_ID = 1;
-  private static final int __PRICE_ISSET_ID = 2;
+  private static final int __EXPIRES_ISSET_ID = 2;
+  private static final int __PRICE_ISSET_ID = 3;
+  private static final int __WINNER_ISSET_ID = 4;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -147,8 +159,12 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.booktion.thrift.Book.class)));
     tmpMap.put(_Fields.ADVERT_TYPE, new org.apache.thrift.meta_data.FieldMetaData("advertType", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, com.booktion.thrift.AdvertType.class)));
+    tmpMap.put(_Fields.EXPIRES, new org.apache.thrift.meta_data.FieldMetaData("expires", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     tmpMap.put(_Fields.PRICE, new org.apache.thrift.meta_data.FieldMetaData("price", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
+    tmpMap.put(_Fields.WINNER, new org.apache.thrift.meta_data.FieldMetaData("winner", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Advert.class, metaDataMap);
   }
@@ -161,7 +177,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     int issuer,
     com.booktion.thrift.Book book,
     com.booktion.thrift.AdvertType advertType,
-    double price)
+    long expires,
+    double price,
+    int winner)
   {
     this();
     this.id = id;
@@ -170,8 +188,12 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     setIssuerIsSet(true);
     this.book = book;
     this.advertType = advertType;
+    this.expires = expires;
+    setExpiresIsSet(true);
     this.price = price;
     setPriceIsSet(true);
+    this.winner = winner;
+    setWinnerIsSet(true);
   }
 
   /**
@@ -187,7 +209,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     if (other.isSetAdvertType()) {
       this.advertType = other.advertType;
     }
+    this.expires = other.expires;
     this.price = other.price;
+    this.winner = other.winner;
   }
 
   public Advert deepCopy() {
@@ -202,8 +226,12 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     this.issuer = 0;
     this.book = null;
     this.advertType = null;
+    setExpiresIsSet(false);
+    this.expires = 0;
     setPriceIsSet(false);
     this.price = 0.0;
+    setWinnerIsSet(false);
+    this.winner = 0;
   }
 
   public int getId() {
@@ -308,6 +336,29 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     }
   }
 
+  public long getExpires() {
+    return this.expires;
+  }
+
+  public Advert setExpires(long expires) {
+    this.expires = expires;
+    setExpiresIsSet(true);
+    return this;
+  }
+
+  public void unsetExpires() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __EXPIRES_ISSET_ID);
+  }
+
+  /** Returns true if field expires is set (has been assigned a value) and false otherwise */
+  public boolean isSetExpires() {
+    return EncodingUtils.testBit(__isset_bitfield, __EXPIRES_ISSET_ID);
+  }
+
+  public void setExpiresIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __EXPIRES_ISSET_ID, value);
+  }
+
   public double getPrice() {
     return this.price;
   }
@@ -329,6 +380,29 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
 
   public void setPriceIsSet(boolean value) {
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __PRICE_ISSET_ID, value);
+  }
+
+  public int getWinner() {
+    return this.winner;
+  }
+
+  public Advert setWinner(int winner) {
+    this.winner = winner;
+    setWinnerIsSet(true);
+    return this;
+  }
+
+  public void unsetWinner() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __WINNER_ISSET_ID);
+  }
+
+  /** Returns true if field winner is set (has been assigned a value) and false otherwise */
+  public boolean isSetWinner() {
+    return EncodingUtils.testBit(__isset_bitfield, __WINNER_ISSET_ID);
+  }
+
+  public void setWinnerIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __WINNER_ISSET_ID, value);
   }
 
   public void setFieldValue(_Fields field, Object value) {
@@ -365,11 +439,27 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       }
       break;
 
+    case EXPIRES:
+      if (value == null) {
+        unsetExpires();
+      } else {
+        setExpires((Long)value);
+      }
+      break;
+
     case PRICE:
       if (value == null) {
         unsetPrice();
       } else {
         setPrice((Double)value);
+      }
+      break;
+
+    case WINNER:
+      if (value == null) {
+        unsetWinner();
+      } else {
+        setWinner((Integer)value);
       }
       break;
 
@@ -390,8 +480,14 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     case ADVERT_TYPE:
       return getAdvertType();
 
+    case EXPIRES:
+      return Long.valueOf(getExpires());
+
     case PRICE:
       return Double.valueOf(getPrice());
+
+    case WINNER:
+      return Integer.valueOf(getWinner());
 
     }
     throw new IllegalStateException();
@@ -412,8 +508,12 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       return isSetBook();
     case ADVERT_TYPE:
       return isSetAdvertType();
+    case EXPIRES:
+      return isSetExpires();
     case PRICE:
       return isSetPrice();
+    case WINNER:
+      return isSetWinner();
     }
     throw new IllegalStateException();
   }
@@ -467,12 +567,30 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         return false;
     }
 
+    boolean this_present_expires = true;
+    boolean that_present_expires = true;
+    if (this_present_expires || that_present_expires) {
+      if (!(this_present_expires && that_present_expires))
+        return false;
+      if (this.expires != that.expires)
+        return false;
+    }
+
     boolean this_present_price = true;
     boolean that_present_price = true;
     if (this_present_price || that_present_price) {
       if (!(this_present_price && that_present_price))
         return false;
       if (this.price != that.price)
+        return false;
+    }
+
+    boolean this_present_winner = true;
+    boolean that_present_winner = true;
+    if (this_present_winner || that_present_winner) {
+      if (!(this_present_winner && that_present_winner))
+        return false;
+      if (this.winner != that.winner)
         return false;
     }
 
@@ -532,12 +650,32 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetExpires()).compareTo(other.isSetExpires());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetExpires()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.expires, other.expires);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = Boolean.valueOf(isSetPrice()).compareTo(other.isSetPrice());
     if (lastComparison != 0) {
       return lastComparison;
     }
     if (isSetPrice()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.price, other.price);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetWinner()).compareTo(other.isSetWinner());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetWinner()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.winner, other.winner);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -586,8 +724,16 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     }
     first = false;
     if (!first) sb.append(", ");
+    sb.append("expires:");
+    sb.append(this.expires);
+    first = false;
+    if (!first) sb.append(", ");
     sb.append("price:");
     sb.append(this.price);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("winner:");
+    sb.append(this.winner);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -670,10 +816,26 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 5: // PRICE
+          case 5: // EXPIRES
+            if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+              struct.expires = iprot.readI64();
+              struct.setExpiresIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 6: // PRICE
             if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
               struct.price = iprot.readDouble();
               struct.setPriceIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 7: // WINNER
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.winner = iprot.readI32();
+              struct.setWinnerIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -709,8 +871,14 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         oprot.writeI32(struct.advertType.getValue());
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(EXPIRES_FIELD_DESC);
+      oprot.writeI64(struct.expires);
+      oprot.writeFieldEnd();
       oprot.writeFieldBegin(PRICE_FIELD_DESC);
       oprot.writeDouble(struct.price);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(WINNER_FIELD_DESC);
+      oprot.writeI32(struct.winner);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -742,10 +910,16 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       if (struct.isSetAdvertType()) {
         optionals.set(3);
       }
-      if (struct.isSetPrice()) {
+      if (struct.isSetExpires()) {
         optionals.set(4);
       }
-      oprot.writeBitSet(optionals, 5);
+      if (struct.isSetPrice()) {
+        optionals.set(5);
+      }
+      if (struct.isSetWinner()) {
+        optionals.set(6);
+      }
+      oprot.writeBitSet(optionals, 7);
       if (struct.isSetId()) {
         oprot.writeI32(struct.id);
       }
@@ -758,15 +932,21 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       if (struct.isSetAdvertType()) {
         oprot.writeI32(struct.advertType.getValue());
       }
+      if (struct.isSetExpires()) {
+        oprot.writeI64(struct.expires);
+      }
       if (struct.isSetPrice()) {
         oprot.writeDouble(struct.price);
+      }
+      if (struct.isSetWinner()) {
+        oprot.writeI32(struct.winner);
       }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, Advert struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(5);
+      BitSet incoming = iprot.readBitSet(7);
       if (incoming.get(0)) {
         struct.id = iprot.readI32();
         struct.setIdIsSet(true);
@@ -785,8 +965,16 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         struct.setAdvertTypeIsSet(true);
       }
       if (incoming.get(4)) {
+        struct.expires = iprot.readI64();
+        struct.setExpiresIsSet(true);
+      }
+      if (incoming.get(5)) {
         struct.price = iprot.readDouble();
         struct.setPriceIsSet(true);
+      }
+      if (incoming.get(6)) {
+        struct.winner = iprot.readI32();
+        struct.setWinnerIsSet(true);
       }
     }
   }

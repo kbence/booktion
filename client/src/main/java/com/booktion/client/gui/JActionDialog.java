@@ -13,8 +13,8 @@ public class JActionDialog extends JCenteredDialog
 
     private Advert advert;
 
-    private JButton okButton;
-    private JButton cancelButton;
+    private JButton purchaseButton;
+    private JButton closeButton;
     protected int componentRow;
 
     public JActionDialog(Advert advert)
@@ -23,11 +23,7 @@ public class JActionDialog extends JCenteredDialog
         this.advert = advert;
 
         initComponents(advert);
-
-        setModal(true);
-        setResizable(false);
-        setLocationRelativeTo(getParent());
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        centerDialog();
     }
 
     public Advert getAdvert()
@@ -49,15 +45,15 @@ public class JActionDialog extends JCenteredDialog
 
         initCustomComponents();
 
-        okButton = new JButton("OK");
-        cancelButton = new JButton("Mégsem");
+        purchaseButton = new JButton(getTranslation("action.purchase"));
+        closeButton = new JButton(getTranslation("action.close"));
 
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT, GAP, GAP));
-        buttonPane.add(okButton);
-        buttonPane.add(cancelButton);
-        contentPane.add(buttonPane, cell(0, componentRow++, 2, 1));
+        buttonPane.add(purchaseButton);
+        buttonPane.add(closeButton);
 
+        contentPane.add(buttonPane, cell(0, componentRow++, 2, 1));
         contentPane.setBorder(new EmptyBorder(GAP, GAP, GAP, GAP));
         pack();
     }
@@ -77,23 +73,23 @@ public class JActionDialog extends JCenteredDialog
         return "-- UNKNOWN ID --";
     }
 
-    private void addField(String field, String value, int row)
+    protected void addField(String field, String value, int row)
     {
         JPanel contentPane = (JPanel) getContentPane();
         JLabel valueLabel = new JLabel(value);
 
         valueLabel.setFont(valueLabel.getFont().deriveFont(Font.BOLD));
-        contentPane.add(new JLabel(field), cell(0, row));
+        contentPane.add(new JLabel(field + ":"), cell(0, row));
         contentPane.add(valueLabel, cell(1, row));
     }
 
-    public JButton getOkButton()
+    public JButton getPurchaseButton()
     {
-        return okButton;
+        return purchaseButton;
     }
 
-    public JButton getCancelButton()
+    public JButton getCloseButton()
     {
-        return cancelButton;
+        return closeButton;
     }
 }

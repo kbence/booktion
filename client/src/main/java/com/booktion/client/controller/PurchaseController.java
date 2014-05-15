@@ -16,36 +16,49 @@ public class PurchaseController
         this.mainController = mainController;
         this.purchaseDialog = window;
 
-        window.getOkButton().addActionListener(new AbstractAction()
+        window.getPurchaseButton().addActionListener(new AbstractAction()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                onOk();
+                onPurchase();
 
             }
         });
 
-        window.getCancelButton().addActionListener(new AbstractAction()
+        window.getCloseButton().addActionListener(new AbstractAction()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                onCancel();
+                onClose();
             }
         });
     }
 
-    private void onOk()
+    private void onPurchase()
     {
         try {
-            mainController.getConnector().purchase(purchaseDialog.getAdvert().book);
-        } catch (TException e) {}
+            int answer = JOptionPane.showConfirmDialog(purchaseDialog,
+                    "Biztosan szeretné megvásárolni ezt a könyvet?",
+                    "Vásárlás", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-        purchaseDialog.close();
+            if (answer == JOptionPane.OK_OPTION) {
+                boolean success = mainController.getConnector().purchase(purchaseDialog.getAdvert().book);
+
+                if (success) {
+                    JOptionPane.showMessageDialog(purchaseDialog, "A vásárlás sikeres volt!",
+                            "Vásárlás", JOptionPane.INFORMATION_MESSAGE);
+                    purchaseDialog.close();
+                } else {
+                    JOptionPane.showMessageDialog(purchaseDialog, "Hiba történt a vásárlás közben!",
+                            "Vásárlás", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (TException e) {}
     }
 
-    private void onCancel()
+    private void onClose()
     {
         purchaseDialog.close();
     }

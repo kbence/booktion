@@ -16,8 +16,6 @@ public class JPurchaseDialog extends JActionDialog
     {
         super.initComponents(advert);
 
-        JPanel contentPane = (JPanel) getContentPane();
-
         pack();
     }
 
@@ -25,6 +23,7 @@ public class JPurchaseDialog extends JActionDialog
     protected String getTranslation(String id)
     {
         if (id.equals("advert.price")) return "Ár";
+        if (id.equals("action.purchase")) return "VÁSÁRLÁS";
 
         return super.getTranslation(id);
     }

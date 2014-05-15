@@ -21,7 +21,6 @@ CREATE TABLE BOOKS (
     publisher VARCHAR(32) NOT NULL,
     yearOfPublication INTEGER NOT NULL,
     condition INTEGER NOT NULL,
-    soldTo INTEGER,
     PRIMARY KEY(id)
 );
 
@@ -32,8 +31,22 @@ INSERT INTO BOOKS (owner, title, author, publisher, yearOfPublication, condition
 CREATE TABLE ADVERTS (
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     issuer INTEGER NOT NULL,
-    book_id INTEGER NOT NULL,
-    type VARCHAR(32) NOT NULL,
+    bookId INTEGER NOT NULL,
+    type VARCHAR(16) NOT NULL,
+    expires TIME NOT NULL,
+    price DOUBLE NOT NULL,
+    winner INTEGER NOT NULL,
+    PRIMARY KEY(id)
+);
+
+INSERT INTO ADVERTS (issuer, book_id, type, price) VALUES
+    (2, 1, "FIX_PRICE", 4300),
+    (2, 2, "AUCTION", 2590);
+
+CREATE TABLE BIDS (
+    id INTEGER NOT NULL,
+    bidder INTEGER NOT NULL,
+    advert INTEGER NOT NULL,
     price DOUBLE NOT NULL,
     PRIMARY KEY(id)
 );
