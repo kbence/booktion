@@ -25,10 +25,12 @@ public class MainController
 
     private AdvertTableModel advertListModel;
     private List<Advert> adverts;
+    boolean logStatus;
 
     public MainController(JMainWindow mainWindow)
     {
         window = mainWindow;
+        logStatus = false;
 
         setUpControls();
         addListeners();
@@ -100,17 +102,7 @@ public class MainController
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                if (e.getClickCount() == 2) {
-                    JTable table = (JTable)e.getSource();
-
-                    Advert advert = adverts.get(table.getSelectedRow());
-
-                    if (advert.advertType == AdvertType.AUCTION) {
-                        startBidding(advert);
-                    } else {
-                        startPurchase(advert);
-                    }
-                }
+                onMouseClicked(e);
             }
         });
 
@@ -124,6 +116,23 @@ public class MainController
                 }
             }
         });
+    }
+
+    private void onMouseClicked(MouseEvent e)
+    {
+        if (!logStatus) return;
+
+        if (e.getClickCount() == 2) {
+            JTable table = (JTable)e.getSource();
+
+            Advert advert = adverts.get(table.getSelectedRow());
+
+            if (advert.advertType == AdvertType.AUCTION) {
+                startBidding(advert);
+            } else {
+                startPurchase(advert);
+            }
+        }
     }
 
     private void showRegisterWindow()
@@ -194,6 +203,7 @@ public class MainController
 
     public void setLogStatus(boolean loggedIn)
     {
+        logStatus = loggedIn;
         window.setLogStatus(loggedIn);
     }
 
