@@ -50,7 +50,7 @@ public class BooktionService {
 
     public List<com.booktion.thrift.Advert> listAdverts(int first, int last) throws org.apache.thrift.TException;
 
-    public boolean purchase(int bookId) throws org.apache.thrift.TException;
+    public boolean purchase(int advertId) throws org.apache.thrift.TException;
 
     public boolean bid(int advertId, double price) throws org.apache.thrift.TException;
 
@@ -72,7 +72,7 @@ public class BooktionService {
 
     public void listAdverts(int first, int last, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void purchase(int bookId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void purchase(int advertId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void bid(int advertId, double price, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -257,16 +257,16 @@ public class BooktionService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "listAdverts failed: unknown result");
     }
 
-    public boolean purchase(int bookId) throws org.apache.thrift.TException
+    public boolean purchase(int advertId) throws org.apache.thrift.TException
     {
-      send_purchase(bookId);
+      send_purchase(advertId);
       return recv_purchase();
     }
 
-    public void send_purchase(int bookId) throws org.apache.thrift.TException
+    public void send_purchase(int advertId) throws org.apache.thrift.TException
     {
       purchase_args args = new purchase_args();
-      args.setBookId(bookId);
+      args.setAdvertId(advertId);
       sendBase("purchase", args);
     }
 
@@ -549,24 +549,24 @@ public class BooktionService {
       }
     }
 
-    public void purchase(int bookId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void purchase(int advertId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      purchase_call method_call = new purchase_call(bookId, resultHandler, this, ___protocolFactory, ___transport);
+      purchase_call method_call = new purchase_call(advertId, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class purchase_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private int bookId;
-      public purchase_call(int bookId, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private int advertId;
+      public purchase_call(int advertId, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.bookId = bookId;
+        this.advertId = advertId;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("purchase", org.apache.thrift.protocol.TMessageType.CALL, 0));
         purchase_args args = new purchase_args();
-        args.setBookId(bookId);
+        args.setAdvertId(advertId);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -799,7 +799,7 @@ public class BooktionService {
 
       public purchase_result getResult(I iface, purchase_args args) throws org.apache.thrift.TException {
         purchase_result result = new purchase_result();
-        result.success = iface.purchase(args.bookId);
+        result.success = iface.purchase(args.advertId);
         result.setSuccessIsSet(true);
         return result;
       }
@@ -1258,7 +1258,7 @@ public class BooktionService {
       }
 
       public void start(I iface, purchase_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
-        iface.purchase(args.bookId,resultHandler);
+        iface.purchase(args.advertId,resultHandler);
       }
     }
 
@@ -6372,7 +6372,7 @@ public class BooktionService {
   public static class purchase_args implements org.apache.thrift.TBase<purchase_args, purchase_args._Fields>, java.io.Serializable, Cloneable, Comparable<purchase_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("purchase_args");
 
-    private static final org.apache.thrift.protocol.TField BOOK_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("bookId", org.apache.thrift.protocol.TType.I32, (short)1);
+    private static final org.apache.thrift.protocol.TField ADVERT_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("advertId", org.apache.thrift.protocol.TType.I32, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -6380,11 +6380,11 @@ public class BooktionService {
       schemes.put(TupleScheme.class, new purchase_argsTupleSchemeFactory());
     }
 
-    public int bookId; // required
+    public int advertId; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      BOOK_ID((short)1, "bookId");
+      ADVERT_ID((short)1, "advertId");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -6399,8 +6399,8 @@ public class BooktionService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // BOOK_ID
-            return BOOK_ID;
+          case 1: // ADVERT_ID
+            return ADVERT_ID;
           default:
             return null;
         }
@@ -6441,12 +6441,12 @@ public class BooktionService {
     }
 
     // isset id assignments
-    private static final int __BOOKID_ISSET_ID = 0;
+    private static final int __ADVERTID_ISSET_ID = 0;
     private byte __isset_bitfield = 0;
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.BOOK_ID, new org.apache.thrift.meta_data.FieldMetaData("bookId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+      tmpMap.put(_Fields.ADVERT_ID, new org.apache.thrift.meta_data.FieldMetaData("advertId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(purchase_args.class, metaDataMap);
@@ -6456,11 +6456,11 @@ public class BooktionService {
     }
 
     public purchase_args(
-      int bookId)
+      int advertId)
     {
       this();
-      this.bookId = bookId;
-      setBookIdIsSet(true);
+      this.advertId = advertId;
+      setAdvertIdIsSet(true);
     }
 
     /**
@@ -6468,7 +6468,7 @@ public class BooktionService {
      */
     public purchase_args(purchase_args other) {
       __isset_bitfield = other.__isset_bitfield;
-      this.bookId = other.bookId;
+      this.advertId = other.advertId;
     }
 
     public purchase_args deepCopy() {
@@ -6477,40 +6477,40 @@ public class BooktionService {
 
     @Override
     public void clear() {
-      setBookIdIsSet(false);
-      this.bookId = 0;
+      setAdvertIdIsSet(false);
+      this.advertId = 0;
     }
 
-    public int getBookId() {
-      return this.bookId;
+    public int getAdvertId() {
+      return this.advertId;
     }
 
-    public purchase_args setBookId(int bookId) {
-      this.bookId = bookId;
-      setBookIdIsSet(true);
+    public purchase_args setAdvertId(int advertId) {
+      this.advertId = advertId;
+      setAdvertIdIsSet(true);
       return this;
     }
 
-    public void unsetBookId() {
-      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __BOOKID_ISSET_ID);
+    public void unsetAdvertId() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ADVERTID_ISSET_ID);
     }
 
-    /** Returns true if field bookId is set (has been assigned a value) and false otherwise */
-    public boolean isSetBookId() {
-      return EncodingUtils.testBit(__isset_bitfield, __BOOKID_ISSET_ID);
+    /** Returns true if field advertId is set (has been assigned a value) and false otherwise */
+    public boolean isSetAdvertId() {
+      return EncodingUtils.testBit(__isset_bitfield, __ADVERTID_ISSET_ID);
     }
 
-    public void setBookIdIsSet(boolean value) {
-      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __BOOKID_ISSET_ID, value);
+    public void setAdvertIdIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ADVERTID_ISSET_ID, value);
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case BOOK_ID:
+      case ADVERT_ID:
         if (value == null) {
-          unsetBookId();
+          unsetAdvertId();
         } else {
-          setBookId((Integer)value);
+          setAdvertId((Integer)value);
         }
         break;
 
@@ -6519,8 +6519,8 @@ public class BooktionService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case BOOK_ID:
-        return Integer.valueOf(getBookId());
+      case ADVERT_ID:
+        return Integer.valueOf(getAdvertId());
 
       }
       throw new IllegalStateException();
@@ -6533,8 +6533,8 @@ public class BooktionService {
       }
 
       switch (field) {
-      case BOOK_ID:
-        return isSetBookId();
+      case ADVERT_ID:
+        return isSetAdvertId();
       }
       throw new IllegalStateException();
     }
@@ -6552,12 +6552,12 @@ public class BooktionService {
       if (that == null)
         return false;
 
-      boolean this_present_bookId = true;
-      boolean that_present_bookId = true;
-      if (this_present_bookId || that_present_bookId) {
-        if (!(this_present_bookId && that_present_bookId))
+      boolean this_present_advertId = true;
+      boolean that_present_advertId = true;
+      if (this_present_advertId || that_present_advertId) {
+        if (!(this_present_advertId && that_present_advertId))
           return false;
-        if (this.bookId != that.bookId)
+        if (this.advertId != that.advertId)
           return false;
       }
 
@@ -6577,12 +6577,12 @@ public class BooktionService {
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetBookId()).compareTo(other.isSetBookId());
+      lastComparison = Boolean.valueOf(isSetAdvertId()).compareTo(other.isSetAdvertId());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetBookId()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.bookId, other.bookId);
+      if (isSetAdvertId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.advertId, other.advertId);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -6607,8 +6607,8 @@ public class BooktionService {
       StringBuilder sb = new StringBuilder("purchase_args(");
       boolean first = true;
 
-      sb.append("bookId:");
-      sb.append(this.bookId);
+      sb.append("advertId:");
+      sb.append(this.advertId);
       first = false;
       sb.append(")");
       return sb.toString();
@@ -6655,10 +6655,10 @@ public class BooktionService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // BOOK_ID
+            case 1: // ADVERT_ID
               if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-                struct.bookId = iprot.readI32();
-                struct.setBookIdIsSet(true);
+                struct.advertId = iprot.readI32();
+                struct.setAdvertIdIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -6678,8 +6678,8 @@ public class BooktionService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        oprot.writeFieldBegin(BOOK_ID_FIELD_DESC);
-        oprot.writeI32(struct.bookId);
+        oprot.writeFieldBegin(ADVERT_ID_FIELD_DESC);
+        oprot.writeI32(struct.advertId);
         oprot.writeFieldEnd();
         oprot.writeFieldStop();
         oprot.writeStructEnd();
@@ -6699,12 +6699,12 @@ public class BooktionService {
       public void write(org.apache.thrift.protocol.TProtocol prot, purchase_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetBookId()) {
+        if (struct.isSetAdvertId()) {
           optionals.set(0);
         }
         oprot.writeBitSet(optionals, 1);
-        if (struct.isSetBookId()) {
-          oprot.writeI32(struct.bookId);
+        if (struct.isSetAdvertId()) {
+          oprot.writeI32(struct.advertId);
         }
       }
 
@@ -6713,8 +6713,8 @@ public class BooktionService {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.bookId = iprot.readI32();
-          struct.setBookIdIsSet(true);
+          struct.advertId = iprot.readI32();
+          struct.setAdvertIdIsSet(true);
         }
       }
     }

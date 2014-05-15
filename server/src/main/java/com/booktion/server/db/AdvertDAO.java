@@ -12,7 +12,8 @@ import java.util.List;
 public class AdvertDAO extends DAO
 {
     private static final String SELECT_BY_ID = "SELECT * FROM adverts WHERE id = ?";
-    private static final String SELECT_ALL = "SELECT * FROM adverts";
+    private static final String SELECT_ALL = "SELECT * FROM adverts WHERE winner IS NULL";
+    private static final String FINALIZE_ADVERT = "UPDATE adverts SET winner = ? WHERE id = ?";
 
     private BookDAO book;
 
@@ -58,9 +59,23 @@ public class AdvertDAO extends DAO
         return adverts;
     }
 
+    public boolean finalizeAdvert(int advertId, int userId)
+    {
+        try {
+            PreparedStatement stmt = connection.prepareStatement(FINALIZE_ADVERT);
+            stmt.setInt(1, userId);
+            stmt.setInt(2, advertId);
+
+            return stmt.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     private Advert createAdvertFromResult(ResultSet result) throws SQLException
     {
-
         return new Advert(
             result.getInt("id"),
             result.getInt("issuer"),

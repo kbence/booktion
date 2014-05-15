@@ -95,11 +95,11 @@ public class Bookshop
         return adverts;
     }
 
-    public boolean purchase(int bookId)
+    public boolean purchase(int advertId)
     {
         User user = sessionManager.getCurrentSession().user;
-        Logger.get().log(String.format("User '%s' purchased book %d", user.username, bookId));
-        return true;
+        Logger.get().log(String.format("User '%s' purchased book %d", user.username, advertId));
+        return db.advert.finalizeAdvert(advertId, user.id);
     }
 
     public boolean bid(int advertId, double price)

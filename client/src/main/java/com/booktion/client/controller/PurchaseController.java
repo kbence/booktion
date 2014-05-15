@@ -44,7 +44,7 @@ public class PurchaseController
                     "Vásárlás", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
             if (answer == JOptionPane.OK_OPTION) {
-                boolean success = mainController.getConnector().purchase(purchaseDialog.getAdvert().book);
+                boolean success = mainController.getConnector().purchase(purchaseDialog.getAdvert().id);
 
                 if (success) {
                     JOptionPane.showMessageDialog(purchaseDialog, "A vásárlás sikeres volt!",

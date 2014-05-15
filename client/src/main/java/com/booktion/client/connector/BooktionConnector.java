@@ -58,9 +58,9 @@ public class BooktionConnector
         return client.searchForAdverts(name);
     }
 
-    public boolean purchase(Book book) throws TException
+    public boolean purchase(int advertId) throws TException
     {
-        return client.purchase(book.id);
+        return client.purchase(advertId);
     }
 
     public boolean bid(int advertId, double price) throws TException
