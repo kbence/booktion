@@ -159,6 +159,11 @@ public class MainController
         }
     }
 
+    public void setLogStatus(boolean loggedIn)
+    {
+        window.setLogStatus(loggedIn);
+    }
+
     public BooktionConnector getConnector()
     {
         return connector;

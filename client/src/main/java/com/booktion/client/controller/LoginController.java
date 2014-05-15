@@ -49,6 +49,7 @@ public class LoginController
             );
 
             if (loginSucceeded) {
+                mainController.setLogStatus(true);
                 window.close();
             } else {
                 JOptionPane.showMessageDialog(window, "Sikertelen bejelentkezés",

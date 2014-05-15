@@ -3,6 +3,7 @@ package com.booktion.client.gui;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class JMainWindow extends JDialog
 {
@@ -10,6 +11,10 @@ public class JMainWindow extends JDialog
 
     private JPanel buttonPanel;
     private JButton loginButton;
+
+    private JButton logoutButton;
+    private ArrayList<Component> loggedInControls;
+    private ArrayList<Component> loggedOutControls;
 
     private JButton registerButton;
 
@@ -35,6 +40,9 @@ public class JMainWindow extends JDialog
 
     private void initContent()
     {
+        loggedInControls = new ArrayList<Component>();
+        loggedOutControls = new ArrayList<Component>();
+
         createButtonPanel();
         createAdvertPanel();
 
@@ -46,6 +54,7 @@ public class JMainWindow extends JDialog
         contentPane.add(buttonPanel, BorderLayout.NORTH);
         contentPane.add(tabbedPane, BorderLayout.CENTER);
         contentPane.add(statusLabel, BorderLayout.SOUTH);
+        setLogStatus(false);
         pack();
     }
 
@@ -53,10 +62,16 @@ public class JMainWindow extends JDialog
     {
         buttonPanel = new JPanel();
         loginButton = new JButton("Bejelentkezés");
+        logoutButton = new JButton("Kijelentkezés");
         registerButton = new JButton("Regisztráció");
+
+        loggedOutControls.add(loginButton);
+        loggedInControls.add(logoutButton);
+        loggedOutControls.add(registerButton);
 
         buttonPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         buttonPanel.add(loginButton);
+        buttonPanel.add(logoutButton);
         buttonPanel.add(registerButton);
     }
 
@@ -84,6 +99,17 @@ public class JMainWindow extends JDialog
         tabbedPane.add("Saját oldal", ownPanel);
     }
 
+    public void setLogStatus(boolean loggedIn)
+    {
+        for (Component control : loggedInControls) {
+            control.setVisible(loggedIn);
+        }
+
+        for (Component control : loggedOutControls) {
+            control.setVisible(!loggedIn);
+        }
+    }
+
     public JButton getLoginButton()
     {
         return loginButton;
@@ -92,6 +118,11 @@ public class JMainWindow extends JDialog
     public JButton getRegisterButton()
     {
         return registerButton;
+    }
+
+    public JButton getLogoutButton()
+    {
+        return logoutButton;
     }
 
     public JTabbedPane getTabbedPane()
