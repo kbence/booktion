@@ -33,6 +33,11 @@ public class BooktionConnector
         return client.login(username, password);
     }
 
+    public void logout() throws TException
+    {
+        client.logout();
+    }
+
     public boolean addUser(User user) throws TException
     {
         return client.addUser(user);

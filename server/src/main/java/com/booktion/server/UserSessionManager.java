@@ -42,4 +42,17 @@ public class UserSessionManager
     {
         return currentSession;
     }
+
+    public void deleteSession(int userId)
+    {
+        for (TTransport key : sessions.keySet()) {
+            UserSession session = sessions.get(key);
+
+            if (session.user.id == userId) {
+                try {
+                    sessions.remove(key);
+                } catch (Exception e) { e.printStackTrace(); }
+            }
+        }
+    }
 }

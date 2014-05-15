@@ -4,7 +4,6 @@ import com.booktion.log.Logger;
 import com.booktion.server.db.AdvertDatabase;
 import com.booktion.server.model.User;
 import com.booktion.thrift.Advert;
-import com.booktion.thrift.AdvertType;
 import com.booktion.thrift.Book;
 import com.booktion.thrift.BooktionService;
 import org.apache.thrift.TException;
@@ -44,6 +43,16 @@ public class BooktionHandler implements BooktionService.Iface
         }
 
         return false;
+    }
+
+    @Override
+    public void logout() throws TException
+    {
+        UserSession currentSession = sessionManager.getCurrentSession();
+
+        if (currentSession != null) {
+            sessionManager.deleteSession(currentSession.user.id);
+        }
     }
 
     @Override

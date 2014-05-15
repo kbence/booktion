@@ -52,6 +52,15 @@ public class MainController
             }
         });
 
+        window.getLogoutButton().addActionListener(new AbstractAction()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                logout();
+            }
+        });
+
         window.getRegisterButton().addActionListener(new AbstractAction()
         {
             @Override
@@ -115,6 +124,16 @@ public class MainController
         JLoginDialog loginWindow = new JLoginDialog();
         new LoginController(this, loginWindow);
         loginWindow.setVisible(true);
+    }
+
+    private void logout()
+    {
+        try {
+            connector.logout();
+            setLogStatus(false);
+        } catch (TException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void startBidding(Advert advert)
