@@ -28,7 +28,6 @@ public class BookDAO extends DAO
             stmt.setString(4, book.publisher);
             stmt.setInt(5, book.yearOfPublication);
             stmt.setInt(6, book.condition);
-            stmt.setObject(7, book.soldTo == -1 ? null : (Integer) book.soldTo);
 
             return stmt.execute();
         } catch (SQLException e) {
