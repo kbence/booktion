@@ -10,6 +10,12 @@ import java.util.Map;
 
 public class AdvertTableModel extends AbstractTableModel
 {
+
+    public class DataSource
+    {
+        public Book getBook
+    }
+
     private String[] columns;
     private List<Advert> adverts;
     private Map<Integer, Book> books;
