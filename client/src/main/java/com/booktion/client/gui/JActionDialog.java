@@ -69,6 +69,8 @@ public class JActionDialog extends JCenteredDialog
         if (id.equals("book.publisher")) return "Kiadó";
         if (id.equals("advert.type")) return "Típus";
         if (id.equals("advert.price")) return "Minimálár";
+        if (id.equals("action.purchase")) return "LICITÁLÁS";
+        if (id.equals("action.close")) return "Bezárás";
 
         return "-- UNKNOWN ID --";
     }
