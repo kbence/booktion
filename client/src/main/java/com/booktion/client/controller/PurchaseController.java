@@ -49,7 +49,7 @@ public class PurchaseController
                 if (success) {
                     JOptionPane.showMessageDialog(purchaseDialog, "A vásárlás sikeres volt!",
                             "Vásárlás", JOptionPane.INFORMATION_MESSAGE);
-                    purchaseDialog.close();
+                    closeWindow();
                 } else {
                     JOptionPane.showMessageDialog(purchaseDialog, "Hiba történt a vásárlás közben!",
                             "Vásárlás", JOptionPane.ERROR_MESSAGE);
@@ -60,6 +60,12 @@ public class PurchaseController
 
     private void onClose()
     {
+        closeWindow();
+    }
+
+    private void closeWindow()
+    {
+        mainController.refresh();
         purchaseDialog.close();
     }
 }

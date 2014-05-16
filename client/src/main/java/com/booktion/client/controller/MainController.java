@@ -178,6 +178,11 @@ public class MainController
         purchaseWindow.setVisible(true);
     }
 
+    public void refresh()
+    {
+        loadAdvertList();
+    }
+
     private void loadAdvertList()
     {
         try {

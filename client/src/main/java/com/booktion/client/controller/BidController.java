@@ -53,16 +53,24 @@ public class BidController
                 JOptionPane.showMessageDialog(bidDialog, "Sikeres licitálás!", "Licitálás",
                         JOptionPane.INFORMATION_MESSAGE);
 
-                bidDialog.close();
+                closeWindow();
             } else {
                 JOptionPane.showMessageDialog(bidDialog, "Sikertelen licitálás!", "Licitálás",
                         JOptionPane.ERROR_MESSAGE);
             }
-        } catch (TException e) {}
+        } catch (TException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onCancel()
     {
+        closeWindow();
+    }
+
+    private void closeWindow()
+    {
+        mainController.refresh();
         bidDialog.close();
     }
 
