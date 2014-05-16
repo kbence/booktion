@@ -15,12 +15,14 @@ public class AdvertDAO extends DAO
             "expires, price) VALUES (?, ?, ?, ?, ?)";
 
     private BookDAO book;
+    private BidDAO bid;
 
-    public AdvertDAO(Connection connection, BookDAO bookDAO)
+    public AdvertDAO(Connection connection, BookDAO bookDAO, BidDAO bidDAO)
     {
         super(connection);
 
         book = bookDAO;
+        bid = bidDAO;
     }
 
     public Advert getById(int advertId)
@@ -99,13 +101,16 @@ public class AdvertDAO extends DAO
 
     private Advert createAdvertFromResult(ResultSet result) throws SQLException
     {
+        int advertId = result.getInt("id");
+        double highestBid = bid.getHighestPrice(advertId);
+
         return new Advert(
-            result.getInt("id"),
+            advertId,
             result.getInt("issuer"),
             book.getById(result.getInt("bookId")),
             Advert.AdvertType.valueOf(result.getString("type")),
             result.getDate("expires"),
-            result.getDouble("price"),
+            Math.max(result.getDouble("price"), highestBid),
             result.getInt("winner")
         );
     }

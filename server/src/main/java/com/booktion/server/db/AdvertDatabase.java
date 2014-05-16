@@ -21,8 +21,8 @@ public class AdvertDatabase
 
         book = new BookDAO(connection);
         user = new UserDAO(connection);
-        advert = new AdvertDAO(connection, book);
         bid = new BidDAO(connection);
+        advert = new AdvertDAO(connection, book, bid);
     }
 
 }
