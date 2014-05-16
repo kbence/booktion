@@ -24,7 +24,7 @@ public class AdvertDAO extends DAO
         book = bookDAO;
     }
 
-    public Advert getAdvert(int advertId)
+    public Advert getById(int advertId)
     {
         try {
             PreparedStatement stmt = connection.prepareStatement(SELECT_BY_ID);
@@ -41,7 +41,7 @@ public class AdvertDAO extends DAO
         return null;
     }
 
-    public List<Advert> listAdverts()
+    public List<Advert> list()
     {
         ArrayList<Advert> adverts = new ArrayList<Advert>();
 
@@ -59,7 +59,7 @@ public class AdvertDAO extends DAO
         return adverts;
     }
 
-    public boolean finalizeAdvert(int advertId, int userId)
+    public boolean finalize(int advertId, int userId)
     {
         try {
             PreparedStatement stmt = connection.prepareStatement(FINALIZE_ADVERT);

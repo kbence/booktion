@@ -88,7 +88,7 @@ public class Bookshop
     {
         List<com.booktion.thrift.Advert> adverts = new ArrayList<com.booktion.thrift.Advert>();
 
-        for (com.booktion.server.model.Advert advert : db.advert.listAdverts()) {
+        for (com.booktion.server.model.Advert advert : db.advert.list()) {
             adverts.add(advert.toThrift());
         }
 
@@ -99,13 +99,13 @@ public class Bookshop
     {
         User user = sessionManager.getCurrentSession().user;
         Logger.get().log(String.format("User '%s' purchased book %d", user.username, advertId));
-        return db.advert.finalizeAdvert(advertId, user.id);
+        return db.advert.finalize(advertId, user.id);
     }
 
     public boolean bid(int advertId, double price)
     {
         User user = sessionManager.getCurrentSession().user;
-        db.advert.getAdvert(advertId);
+        db.advert.getById(advertId);
         Logger.get().log(String.format("User %s put a bid on book %d", user.username, advertId));
         return true;
     }
