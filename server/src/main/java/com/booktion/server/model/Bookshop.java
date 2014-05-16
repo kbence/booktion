@@ -120,8 +120,20 @@ public class Bookshop
     public boolean bid(int advertId, double price)
     {
         User user = sessionManager.getCurrentSession().user;
-        db.advert.getById(advertId);
+        Advert advert = db.advert.getById(advertId);
+
+        System.out.println(String.format("advertId: %d, advert: %s", advertId, advert));
+
         Logger.get().log(String.format("User %s put a bid on book %d", user.username, advertId));
-        return true;
+
+        Bid bid = new Bid();
+        bid.advertId = advertId;
+        bid.userId = user.id;
+        bid.price = price;
+
+        if (price <= db.bid.getHighestPrice(advertId) || price < advert.price)
+            return false;
+
+        return db.bid.put(bid);
     }
 }

@@ -44,13 +44,21 @@ public class BidController
     private void onOk()
     {
         try {
-            mainController.getConnector().bid(
+            boolean success = mainController.getConnector().bid(
                     bidDialog.getAdvert().id,
                     Double.valueOf(bidDialog.getPriceField().getText())
             );
-        } catch (TException e) {}
 
-        bidDialog.close();
+            if (success) {
+                JOptionPane.showMessageDialog(bidDialog, "Sikeres licitálás!", "Licitálás",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                bidDialog.close();
+            } else {
+                JOptionPane.showMessageDialog(bidDialog, "Sikertelen licitálás!", "Licitálás",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (TException e) {}
     }
 
     private void onCancel()

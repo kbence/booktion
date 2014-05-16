@@ -31,7 +31,7 @@ public class AdvertDAO extends DAO
             ResultSet result = stmt.executeQuery();
 
             if (result.next()) {
-                Advert advert = createAdvertFromResult(result);
+                return createAdvertFromResult(result);
             }
         } catch (SQLException e) {
             e.printStackTrace();

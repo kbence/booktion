@@ -24,7 +24,7 @@ CREATE TABLE BOOKS (
     PRIMARY KEY(id)
 );
 
-INSERT INTO BOOKS (owner, title, author, publisher, yearOfPublication, condition) VALUES
+INSERT INTO BOOKS ( owner, title, author, publisher, yearOfPublication, condition) VALUES
     (2, 'A C++ Programozási nyelv', 'Bjarne Stroustrup', 'Kiskapu', 1994, 87),
     (2, 'Számítógép-hálózatok', 'Andrew S. Tanenbaum', 'Addison-Weasley', 1994, 87);
 
@@ -44,9 +44,9 @@ INSERT INTO ADVERTS (issuer, bookId, type, expires, price) VALUES
     (2, 2, 'AUCTION', {fn TIMESTAMPADD(SQL_TSI_DAY, 7, CURRENT_TIMESTAMP)}, 2590);
 
 CREATE TABLE BIDS (
-    id INTEGER NOT NULL,
-    bidder INTEGER NOT NULL,
-    advert INTEGER NOT NULL,
+    id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    userId INTEGER NOT NULL,
+    advertId INTEGER NOT NULL,
     price DOUBLE NOT NULL,
     PRIMARY KEY(id)
 );

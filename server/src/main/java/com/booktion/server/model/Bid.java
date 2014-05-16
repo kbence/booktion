@@ -4,22 +4,12 @@ import java.util.Date;
 
 public class Bid
 {
-    private double price;
-    private Date time;
+    public int advertId;
+    public int userId;
+    public double price;
+    public Date time;
 
-    public Bid(double price, Date time)
+    public Bid()
     {
-        this.price = price;
-        this.time = time;
-    }
-
-    public double getPrice()
-    {
-        return price;
-    }
-
-    public Date getTime()
-    {
-        return time;
     }
 }
