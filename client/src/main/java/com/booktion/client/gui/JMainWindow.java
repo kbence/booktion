@@ -81,6 +81,8 @@ public class JMainWindow extends JDialog
         searchResults = new JAdvertList();
         createAdvertButton = new JButton("Hirdetés feladása");
 
+        loggedInControls.add(createAdvertButton);
+
         JPanel advertListPanel = new JPanel();
         advertListPanel.setLayout(new BorderLayout(GAP, GAP));
         advertListPanel.add(advertList, BorderLayout.CENTER);
