@@ -4,8 +4,11 @@ import com.booktion.log.Logger;
 import com.booktion.server.UserSession;
 import com.booktion.server.UserSessionManager;
 import com.booktion.server.db.AdvertDatabase;
+import com.booktion.thrift.AdvertType;
+import org.apache.thrift.TException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -74,9 +77,21 @@ public class Bookshop
         return book.toThriftBook();
     }
 
-    public boolean addBook(com.booktion.thrift.Book book)
+    public int addBook(com.booktion.thrift.Book book)
     {
         return db.book.create(fromThriftBook(book));
+    }
+
+    public boolean createAdvert(com.booktion.thrift.Book book, AdvertType advert, long expires, double price) throws TException
+    {
+        sessionManager.getCurrentSession();
+        User user = sessionManager.getCurrentSession().user;
+        int id = sessionManager.getCurrentSession().user.id;
+        Advert adv = new Advert(0, sessionManager.getCurrentSession().user.id,
+                Book.fromThriftBook(book), Advert.AdvertType.fromThrift(advert),
+                new Date(expires), price, 0);
+
+        return db.advert.create(adv);
     }
 
     public List<com.booktion.thrift.Advert> searchForAdverts(String title)

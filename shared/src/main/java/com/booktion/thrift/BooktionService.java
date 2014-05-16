@@ -44,7 +44,9 @@ public class BooktionService {
 
     public com.booktion.thrift.Book getBook(int bookId) throws org.apache.thrift.TException;
 
-    public boolean addBook(com.booktion.thrift.Book book) throws org.apache.thrift.TException;
+    public int addBook(com.booktion.thrift.Book book) throws org.apache.thrift.TException;
+
+    public boolean createAdvert(com.booktion.thrift.Book book, com.booktion.thrift.AdvertType advert, long expires, double price) throws org.apache.thrift.TException;
 
     public List<com.booktion.thrift.Advert> searchForAdverts(String name) throws org.apache.thrift.TException;
 
@@ -67,6 +69,8 @@ public class BooktionService {
     public void getBook(int bookId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void addBook(com.booktion.thrift.Book book, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void createAdvert(com.booktion.thrift.Book book, com.booktion.thrift.AdvertType advert, long expires, double price, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void searchForAdverts(String name, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -187,7 +191,7 @@ public class BooktionService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getBook failed: unknown result");
     }
 
-    public boolean addBook(com.booktion.thrift.Book book) throws org.apache.thrift.TException
+    public int addBook(com.booktion.thrift.Book book) throws org.apache.thrift.TException
     {
       send_addBook(book);
       return recv_addBook();
@@ -200,7 +204,7 @@ public class BooktionService {
       sendBase("addBook", args);
     }
 
-    public boolean recv_addBook() throws org.apache.thrift.TException
+    public int recv_addBook() throws org.apache.thrift.TException
     {
       addBook_result result = new addBook_result();
       receiveBase(result, "addBook");
@@ -208,6 +212,32 @@ public class BooktionService {
         return result.success;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "addBook failed: unknown result");
+    }
+
+    public boolean createAdvert(com.booktion.thrift.Book book, com.booktion.thrift.AdvertType advert, long expires, double price) throws org.apache.thrift.TException
+    {
+      send_createAdvert(book, advert, expires, price);
+      return recv_createAdvert();
+    }
+
+    public void send_createAdvert(com.booktion.thrift.Book book, com.booktion.thrift.AdvertType advert, long expires, double price) throws org.apache.thrift.TException
+    {
+      createAdvert_args args = new createAdvert_args();
+      args.setBook(book);
+      args.setAdvert(advert);
+      args.setExpires(expires);
+      args.setPrice(price);
+      sendBase("createAdvert", args);
+    }
+
+    public boolean recv_createAdvert() throws org.apache.thrift.TException
+    {
+      createAdvert_result result = new createAdvert_result();
+      receiveBase(result, "createAdvert");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "createAdvert failed: unknown result");
     }
 
     public List<com.booktion.thrift.Advert> searchForAdverts(String name) throws org.apache.thrift.TException
@@ -472,13 +502,54 @@ public class BooktionService {
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
+      public int getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
         return (new Client(prot)).recv_addBook();
+      }
+    }
+
+    public void createAdvert(com.booktion.thrift.Book book, com.booktion.thrift.AdvertType advert, long expires, double price, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      createAdvert_call method_call = new createAdvert_call(book, advert, expires, price, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class createAdvert_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.booktion.thrift.Book book;
+      private com.booktion.thrift.AdvertType advert;
+      private long expires;
+      private double price;
+      public createAdvert_call(com.booktion.thrift.Book book, com.booktion.thrift.AdvertType advert, long expires, double price, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.book = book;
+        this.advert = advert;
+        this.expires = expires;
+        this.price = price;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("createAdvert", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        createAdvert_args args = new createAdvert_args();
+        args.setBook(book);
+        args.setAdvert(advert);
+        args.setExpires(expires);
+        args.setPrice(price);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public boolean getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_createAdvert();
       }
     }
 
@@ -634,6 +705,7 @@ public class BooktionService {
       processMap.put("addUser", new addUser());
       processMap.put("getBook", new getBook());
       processMap.put("addBook", new addBook());
+      processMap.put("createAdvert", new createAdvert());
       processMap.put("searchForAdverts", new searchForAdverts());
       processMap.put("listAdverts", new listAdverts());
       processMap.put("purchase", new purchase());
@@ -744,6 +816,27 @@ public class BooktionService {
       }
     }
 
+    public static class createAdvert<I extends Iface> extends org.apache.thrift.ProcessFunction<I, createAdvert_args> {
+      public createAdvert() {
+        super("createAdvert");
+      }
+
+      public createAdvert_args getEmptyArgsInstance() {
+        return new createAdvert_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public createAdvert_result getResult(I iface, createAdvert_args args) throws org.apache.thrift.TException {
+        createAdvert_result result = new createAdvert_result();
+        result.success = iface.createAdvert(args.book, args.advert, args.expires, args.price);
+        result.setSuccessIsSet(true);
+        return result;
+      }
+    }
+
     public static class searchForAdverts<I extends Iface> extends org.apache.thrift.ProcessFunction<I, searchForAdverts_args> {
       public searchForAdverts() {
         super("searchForAdverts");
@@ -844,6 +937,7 @@ public class BooktionService {
       processMap.put("addUser", new addUser());
       processMap.put("getBook", new getBook());
       processMap.put("addBook", new addBook());
+      processMap.put("createAdvert", new createAdvert());
       processMap.put("searchForAdverts", new searchForAdverts());
       processMap.put("listAdverts", new listAdverts());
       processMap.put("purchase", new purchase());
@@ -1056,7 +1150,7 @@ public class BooktionService {
       }
     }
 
-    public static class addBook<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, addBook_args, Boolean> {
+    public static class addBook<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, addBook_args, Integer> {
       public addBook() {
         super("addBook");
       }
@@ -1065,10 +1159,10 @@ public class BooktionService {
         return new addBook_args();
       }
 
-      public AsyncMethodCallback<Boolean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<Integer> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<Boolean>() { 
-          public void onComplete(Boolean o) {
+        return new AsyncMethodCallback<Integer>() { 
+          public void onComplete(Integer o) {
             addBook_result result = new addBook_result();
             result.success = o;
             result.setSuccessIsSet(true);
@@ -1103,8 +1197,60 @@ public class BooktionService {
         return false;
       }
 
-      public void start(I iface, addBook_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+      public void start(I iface, addBook_args args, org.apache.thrift.async.AsyncMethodCallback<Integer> resultHandler) throws TException {
         iface.addBook(args.book,resultHandler);
+      }
+    }
+
+    public static class createAdvert<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, createAdvert_args, Boolean> {
+      public createAdvert() {
+        super("createAdvert");
+      }
+
+      public createAdvert_args getEmptyArgsInstance() {
+        return new createAdvert_args();
+      }
+
+      public AsyncMethodCallback<Boolean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<Boolean>() { 
+          public void onComplete(Boolean o) {
+            createAdvert_result result = new createAdvert_result();
+            result.success = o;
+            result.setSuccessIsSet(true);
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            createAdvert_result result = new createAdvert_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, createAdvert_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+        iface.createAdvert(args.book, args.advert, args.expires, args.price,resultHandler);
       }
     }
 
@@ -4402,7 +4548,7 @@ public class BooktionService {
   public static class addBook_result implements org.apache.thrift.TBase<addBook_result, addBook_result._Fields>, java.io.Serializable, Cloneable, Comparable<addBook_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addBook_result");
 
-    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.I32, (short)0);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -4410,7 +4556,7 @@ public class BooktionService {
       schemes.put(TupleScheme.class, new addBook_resultTupleSchemeFactory());
     }
 
-    public boolean success; // required
+    public int success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -4477,7 +4623,7 @@ public class BooktionService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(addBook_result.class, metaDataMap);
     }
@@ -4486,7 +4632,7 @@ public class BooktionService {
     }
 
     public addBook_result(
-      boolean success)
+      int success)
     {
       this();
       this.success = success;
@@ -4508,14 +4654,14 @@ public class BooktionService {
     @Override
     public void clear() {
       setSuccessIsSet(false);
-      this.success = false;
+      this.success = 0;
     }
 
-    public boolean isSuccess() {
+    public int getSuccess() {
       return this.success;
     }
 
-    public addBook_result setSuccess(boolean success) {
+    public addBook_result setSuccess(int success) {
       this.success = success;
       setSuccessIsSet(true);
       return this;
@@ -4540,7 +4686,7 @@ public class BooktionService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((Boolean)value);
+          setSuccess((Integer)value);
         }
         break;
 
@@ -4550,7 +4696,7 @@ public class BooktionService {
     public Object getFieldValue(_Fields field) {
       switch (field) {
       case SUCCESS:
-        return Boolean.valueOf(isSuccess());
+        return Integer.valueOf(getSuccess());
 
       }
       throw new IllegalStateException();
@@ -4686,8 +4832,8 @@ public class BooktionService {
           }
           switch (schemeField.id) {
             case 0: // SUCCESS
-              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
-                struct.success = iprot.readBool();
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.success = iprot.readI32();
                 struct.setSuccessIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -4710,7 +4856,7 @@ public class BooktionService {
         oprot.writeStructBegin(STRUCT_DESC);
         if (struct.isSetSuccess()) {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
-          oprot.writeBool(struct.success);
+          oprot.writeI32(struct.success);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -4736,12 +4882,1033 @@ public class BooktionService {
         }
         oprot.writeBitSet(optionals, 1);
         if (struct.isSetSuccess()) {
-          oprot.writeBool(struct.success);
+          oprot.writeI32(struct.success);
         }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, addBook_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = iprot.readI32();
+          struct.setSuccessIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class createAdvert_args implements org.apache.thrift.TBase<createAdvert_args, createAdvert_args._Fields>, java.io.Serializable, Cloneable, Comparable<createAdvert_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("createAdvert_args");
+
+    private static final org.apache.thrift.protocol.TField BOOK_FIELD_DESC = new org.apache.thrift.protocol.TField("book", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField ADVERT_FIELD_DESC = new org.apache.thrift.protocol.TField("advert", org.apache.thrift.protocol.TType.I32, (short)2);
+    private static final org.apache.thrift.protocol.TField EXPIRES_FIELD_DESC = new org.apache.thrift.protocol.TField("expires", org.apache.thrift.protocol.TType.I64, (short)3);
+    private static final org.apache.thrift.protocol.TField PRICE_FIELD_DESC = new org.apache.thrift.protocol.TField("price", org.apache.thrift.protocol.TType.DOUBLE, (short)4);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new createAdvert_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new createAdvert_argsTupleSchemeFactory());
+    }
+
+    public com.booktion.thrift.Book book; // required
+    /**
+     * 
+     * @see com.booktion.thrift.AdvertType
+     */
+    public com.booktion.thrift.AdvertType advert; // required
+    public long expires; // required
+    public double price; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      BOOK((short)1, "book"),
+      /**
+       * 
+       * @see com.booktion.thrift.AdvertType
+       */
+      ADVERT((short)2, "advert"),
+      EXPIRES((short)3, "expires"),
+      PRICE((short)4, "price");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // BOOK
+            return BOOK;
+          case 2: // ADVERT
+            return ADVERT;
+          case 3: // EXPIRES
+            return EXPIRES;
+          case 4: // PRICE
+            return PRICE;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __EXPIRES_ISSET_ID = 0;
+    private static final int __PRICE_ISSET_ID = 1;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.BOOK, new org.apache.thrift.meta_data.FieldMetaData("book", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.booktion.thrift.Book.class)));
+      tmpMap.put(_Fields.ADVERT, new org.apache.thrift.meta_data.FieldMetaData("advert", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, com.booktion.thrift.AdvertType.class)));
+      tmpMap.put(_Fields.EXPIRES, new org.apache.thrift.meta_data.FieldMetaData("expires", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+      tmpMap.put(_Fields.PRICE, new org.apache.thrift.meta_data.FieldMetaData("price", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(createAdvert_args.class, metaDataMap);
+    }
+
+    public createAdvert_args() {
+    }
+
+    public createAdvert_args(
+      com.booktion.thrift.Book book,
+      com.booktion.thrift.AdvertType advert,
+      long expires,
+      double price)
+    {
+      this();
+      this.book = book;
+      this.advert = advert;
+      this.expires = expires;
+      setExpiresIsSet(true);
+      this.price = price;
+      setPriceIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public createAdvert_args(createAdvert_args other) {
+      __isset_bitfield = other.__isset_bitfield;
+      if (other.isSetBook()) {
+        this.book = new com.booktion.thrift.Book(other.book);
+      }
+      if (other.isSetAdvert()) {
+        this.advert = other.advert;
+      }
+      this.expires = other.expires;
+      this.price = other.price;
+    }
+
+    public createAdvert_args deepCopy() {
+      return new createAdvert_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.book = null;
+      this.advert = null;
+      setExpiresIsSet(false);
+      this.expires = 0;
+      setPriceIsSet(false);
+      this.price = 0.0;
+    }
+
+    public com.booktion.thrift.Book getBook() {
+      return this.book;
+    }
+
+    public createAdvert_args setBook(com.booktion.thrift.Book book) {
+      this.book = book;
+      return this;
+    }
+
+    public void unsetBook() {
+      this.book = null;
+    }
+
+    /** Returns true if field book is set (has been assigned a value) and false otherwise */
+    public boolean isSetBook() {
+      return this.book != null;
+    }
+
+    public void setBookIsSet(boolean value) {
+      if (!value) {
+        this.book = null;
+      }
+    }
+
+    /**
+     * 
+     * @see com.booktion.thrift.AdvertType
+     */
+    public com.booktion.thrift.AdvertType getAdvert() {
+      return this.advert;
+    }
+
+    /**
+     * 
+     * @see com.booktion.thrift.AdvertType
+     */
+    public createAdvert_args setAdvert(com.booktion.thrift.AdvertType advert) {
+      this.advert = advert;
+      return this;
+    }
+
+    public void unsetAdvert() {
+      this.advert = null;
+    }
+
+    /** Returns true if field advert is set (has been assigned a value) and false otherwise */
+    public boolean isSetAdvert() {
+      return this.advert != null;
+    }
+
+    public void setAdvertIsSet(boolean value) {
+      if (!value) {
+        this.advert = null;
+      }
+    }
+
+    public long getExpires() {
+      return this.expires;
+    }
+
+    public createAdvert_args setExpires(long expires) {
+      this.expires = expires;
+      setExpiresIsSet(true);
+      return this;
+    }
+
+    public void unsetExpires() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __EXPIRES_ISSET_ID);
+    }
+
+    /** Returns true if field expires is set (has been assigned a value) and false otherwise */
+    public boolean isSetExpires() {
+      return EncodingUtils.testBit(__isset_bitfield, __EXPIRES_ISSET_ID);
+    }
+
+    public void setExpiresIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __EXPIRES_ISSET_ID, value);
+    }
+
+    public double getPrice() {
+      return this.price;
+    }
+
+    public createAdvert_args setPrice(double price) {
+      this.price = price;
+      setPriceIsSet(true);
+      return this;
+    }
+
+    public void unsetPrice() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __PRICE_ISSET_ID);
+    }
+
+    /** Returns true if field price is set (has been assigned a value) and false otherwise */
+    public boolean isSetPrice() {
+      return EncodingUtils.testBit(__isset_bitfield, __PRICE_ISSET_ID);
+    }
+
+    public void setPriceIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __PRICE_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case BOOK:
+        if (value == null) {
+          unsetBook();
+        } else {
+          setBook((com.booktion.thrift.Book)value);
+        }
+        break;
+
+      case ADVERT:
+        if (value == null) {
+          unsetAdvert();
+        } else {
+          setAdvert((com.booktion.thrift.AdvertType)value);
+        }
+        break;
+
+      case EXPIRES:
+        if (value == null) {
+          unsetExpires();
+        } else {
+          setExpires((Long)value);
+        }
+        break;
+
+      case PRICE:
+        if (value == null) {
+          unsetPrice();
+        } else {
+          setPrice((Double)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case BOOK:
+        return getBook();
+
+      case ADVERT:
+        return getAdvert();
+
+      case EXPIRES:
+        return Long.valueOf(getExpires());
+
+      case PRICE:
+        return Double.valueOf(getPrice());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case BOOK:
+        return isSetBook();
+      case ADVERT:
+        return isSetAdvert();
+      case EXPIRES:
+        return isSetExpires();
+      case PRICE:
+        return isSetPrice();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof createAdvert_args)
+        return this.equals((createAdvert_args)that);
+      return false;
+    }
+
+    public boolean equals(createAdvert_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_book = true && this.isSetBook();
+      boolean that_present_book = true && that.isSetBook();
+      if (this_present_book || that_present_book) {
+        if (!(this_present_book && that_present_book))
+          return false;
+        if (!this.book.equals(that.book))
+          return false;
+      }
+
+      boolean this_present_advert = true && this.isSetAdvert();
+      boolean that_present_advert = true && that.isSetAdvert();
+      if (this_present_advert || that_present_advert) {
+        if (!(this_present_advert && that_present_advert))
+          return false;
+        if (!this.advert.equals(that.advert))
+          return false;
+      }
+
+      boolean this_present_expires = true;
+      boolean that_present_expires = true;
+      if (this_present_expires || that_present_expires) {
+        if (!(this_present_expires && that_present_expires))
+          return false;
+        if (this.expires != that.expires)
+          return false;
+      }
+
+      boolean this_present_price = true;
+      boolean that_present_price = true;
+      if (this_present_price || that_present_price) {
+        if (!(this_present_price && that_present_price))
+          return false;
+        if (this.price != that.price)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(createAdvert_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetBook()).compareTo(other.isSetBook());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetBook()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.book, other.book);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetAdvert()).compareTo(other.isSetAdvert());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetAdvert()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.advert, other.advert);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetExpires()).compareTo(other.isSetExpires());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetExpires()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.expires, other.expires);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetPrice()).compareTo(other.isSetPrice());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetPrice()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.price, other.price);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("createAdvert_args(");
+      boolean first = true;
+
+      sb.append("book:");
+      if (this.book == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.book);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("advert:");
+      if (this.advert == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.advert);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("expires:");
+      sb.append(this.expires);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("price:");
+      sb.append(this.price);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (book != null) {
+        book.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class createAdvert_argsStandardSchemeFactory implements SchemeFactory {
+      public createAdvert_argsStandardScheme getScheme() {
+        return new createAdvert_argsStandardScheme();
+      }
+    }
+
+    private static class createAdvert_argsStandardScheme extends StandardScheme<createAdvert_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, createAdvert_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // BOOK
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.book = new com.booktion.thrift.Book();
+                struct.book.read(iprot);
+                struct.setBookIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // ADVERT
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.advert = com.booktion.thrift.AdvertType.findByValue(iprot.readI32());
+                struct.setAdvertIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // EXPIRES
+              if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+                struct.expires = iprot.readI64();
+                struct.setExpiresIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // PRICE
+              if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+                struct.price = iprot.readDouble();
+                struct.setPriceIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, createAdvert_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.book != null) {
+          oprot.writeFieldBegin(BOOK_FIELD_DESC);
+          struct.book.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.advert != null) {
+          oprot.writeFieldBegin(ADVERT_FIELD_DESC);
+          oprot.writeI32(struct.advert.getValue());
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldBegin(EXPIRES_FIELD_DESC);
+        oprot.writeI64(struct.expires);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(PRICE_FIELD_DESC);
+        oprot.writeDouble(struct.price);
+        oprot.writeFieldEnd();
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class createAdvert_argsTupleSchemeFactory implements SchemeFactory {
+      public createAdvert_argsTupleScheme getScheme() {
+        return new createAdvert_argsTupleScheme();
+      }
+    }
+
+    private static class createAdvert_argsTupleScheme extends TupleScheme<createAdvert_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, createAdvert_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetBook()) {
+          optionals.set(0);
+        }
+        if (struct.isSetAdvert()) {
+          optionals.set(1);
+        }
+        if (struct.isSetExpires()) {
+          optionals.set(2);
+        }
+        if (struct.isSetPrice()) {
+          optionals.set(3);
+        }
+        oprot.writeBitSet(optionals, 4);
+        if (struct.isSetBook()) {
+          struct.book.write(oprot);
+        }
+        if (struct.isSetAdvert()) {
+          oprot.writeI32(struct.advert.getValue());
+        }
+        if (struct.isSetExpires()) {
+          oprot.writeI64(struct.expires);
+        }
+        if (struct.isSetPrice()) {
+          oprot.writeDouble(struct.price);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, createAdvert_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(4);
+        if (incoming.get(0)) {
+          struct.book = new com.booktion.thrift.Book();
+          struct.book.read(iprot);
+          struct.setBookIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.advert = com.booktion.thrift.AdvertType.findByValue(iprot.readI32());
+          struct.setAdvertIsSet(true);
+        }
+        if (incoming.get(2)) {
+          struct.expires = iprot.readI64();
+          struct.setExpiresIsSet(true);
+        }
+        if (incoming.get(3)) {
+          struct.price = iprot.readDouble();
+          struct.setPriceIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class createAdvert_result implements org.apache.thrift.TBase<createAdvert_result, createAdvert_result._Fields>, java.io.Serializable, Cloneable, Comparable<createAdvert_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("createAdvert_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new createAdvert_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new createAdvert_resultTupleSchemeFactory());
+    }
+
+    public boolean success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(createAdvert_result.class, metaDataMap);
+    }
+
+    public createAdvert_result() {
+    }
+
+    public createAdvert_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public createAdvert_result(createAdvert_result other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.success = other.success;
+    }
+
+    public createAdvert_result deepCopy() {
+      return new createAdvert_result(this);
+    }
+
+    @Override
+    public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public createAdvert_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SUCCESS_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return Boolean.valueOf(isSuccess());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof createAdvert_result)
+        return this.equals((createAdvert_result)that);
+      return false;
+    }
+
+    public boolean equals(createAdvert_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(createAdvert_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("createAdvert_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class createAdvert_resultStandardSchemeFactory implements SchemeFactory {
+      public createAdvert_resultStandardScheme getScheme() {
+        return new createAdvert_resultStandardScheme();
+      }
+    }
+
+    private static class createAdvert_resultStandardScheme extends StandardScheme<createAdvert_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, createAdvert_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.success = iprot.readBool();
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, createAdvert_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.isSetSuccess()) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          oprot.writeBool(struct.success);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class createAdvert_resultTupleSchemeFactory implements SchemeFactory {
+      public createAdvert_resultTupleScheme getScheme() {
+        return new createAdvert_resultTupleScheme();
+      }
+    }
+
+    private static class createAdvert_resultTupleScheme extends TupleScheme<createAdvert_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, createAdvert_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          oprot.writeBool(struct.success);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, createAdvert_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {

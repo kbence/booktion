@@ -29,13 +29,13 @@ public class Advert
         }
     }
 
-    int id;
-    int issuer;
-    Book book;
-    AdvertType type;
-    Date expires;
-    double price;
-    int winner;
+    public int id;
+    public int issuer;
+    public Book book;
+    public AdvertType type;
+    public Date expires;
+    public double price;
+    public int winner;
 
     public Advert(int id, int issuer, Book book, AdvertType type, Date expires, double price, int winner)
     {

@@ -2,10 +2,7 @@ package com.booktion.server.db;
 
 import com.booktion.server.model.Book;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class BookDAO extends DAO
 {
@@ -18,10 +15,10 @@ public class BookDAO extends DAO
         super(connection);
     }
 
-    public boolean create(Book book)
+    public int create(Book book)
     {
         try {
-            PreparedStatement stmt = connection.prepareStatement(INSERT_BOOK);
+            PreparedStatement stmt = connection.prepareStatement(INSERT_BOOK, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setString(1, book.title);
             stmt.setInt(2, book.owner);
             stmt.setString(3, book.author);
@@ -29,12 +26,18 @@ public class BookDAO extends DAO
             stmt.setInt(5, book.yearOfPublication);
             stmt.setInt(6, book.condition);
 
-            return stmt.execute();
+            if (stmt.executeUpdate() == 0)
+                return -1;
+
+            ResultSet result = stmt.getGeneratedKeys();
+
+            if (result.next())
+                return result.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return -1;
     }
 
     public Book getById(int id)

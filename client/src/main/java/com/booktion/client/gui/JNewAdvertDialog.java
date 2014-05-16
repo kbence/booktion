@@ -92,6 +92,11 @@ public class JNewAdvertDialog extends JCenteredDialog
         return priceTextField;
     }
 
+    public JComboBox<String> getTypeComboBox()
+    {
+        return typeComboBox;
+    }
+
     public Button getOkButton()
     {
         return okButton;

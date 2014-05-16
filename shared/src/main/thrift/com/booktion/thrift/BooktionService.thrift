@@ -1,6 +1,7 @@
 namespace java com.booktion.thrift
 
 include "Advert.thrift"
+include "AdvertType.thrift"
 include "Book.thrift"
 include "User.thrift"
 
@@ -13,7 +14,9 @@ service BooktionService {
 
     Book.Book getBook(1:i32 bookId),
 
-    bool addBook(1:Book.Book book),
+    i32 addBook(1:Book.Book book),
+
+    bool createAdvert(1:Book.Book book, 2:AdvertType.AdvertType advert, 3:i64 expires, 4:double price);
 
     list<Advert.Advert> searchForAdverts(1:string name),
 

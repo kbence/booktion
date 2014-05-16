@@ -2,10 +2,7 @@ package com.booktion.server.db;
 
 import com.booktion.server.model.Advert;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +11,8 @@ public class AdvertDAO extends DAO
     private static final String SELECT_BY_ID = "SELECT * FROM adverts WHERE id = ?";
     private static final String SELECT_ALL = "SELECT * FROM adverts WHERE winner IS NULL";
     private static final String FINALIZE_ADVERT = "UPDATE adverts SET winner = ? WHERE id = ?";
+    private static final String INSERT_ADVERT = "INSERT INTO adverts (issuer, bookId, type, " +
+            "expires, price) VALUES (?, ?, ?, ?, ?)";
 
     private BookDAO book;
 
@@ -67,6 +66,30 @@ public class AdvertDAO extends DAO
             stmt.setInt(2, advertId);
 
             return stmt.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean create(Advert advert)
+    {
+        try {
+            int bookId = book.create(advert.book);
+
+            if (bookId < 0)
+                return false;
+
+            PreparedStatement stmt = connection.prepareStatement(INSERT_ADVERT);
+            stmt.setInt(1, advert.issuer);
+            stmt.setInt(2, bookId);
+            stmt.setString(3, advert.type.toString());
+            stmt.setDate(4, new Date(advert.expires.getTime()));
+            stmt.setInt(5, advert.winner);
+
+            int result = stmt.executeUpdate();
+            return result == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }

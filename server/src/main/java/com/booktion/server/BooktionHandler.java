@@ -5,6 +5,7 @@ import com.booktion.server.db.AdvertDatabase;
 import com.booktion.server.model.Bookshop;
 import com.booktion.server.model.User;
 import com.booktion.thrift.Advert;
+import com.booktion.thrift.AdvertType;
 import com.booktion.thrift.Book;
 import com.booktion.thrift.BooktionService;
 import org.apache.thrift.TException;
@@ -54,9 +55,15 @@ public class BooktionHandler implements BooktionService.Iface
     }
 
     @Override
-    public boolean addBook(Book book) throws TException
+    public int addBook(Book book) throws TException
     {
         return bookshop.addBook(book);
+    }
+
+    @Override
+    public boolean createAdvert(Book book, AdvertType advert, long expires, double price) throws TException
+    {
+        return bookshop.createAdvert(book, advert, expires, price);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.booktion.client.connector;
 
-import com.booktion.thrift.Advert;
-import com.booktion.thrift.Book;
-import com.booktion.thrift.BooktionService;
-import com.booktion.thrift.User;
+import com.booktion.thrift.*;
 import org.apache.thrift.TException;
 
 import java.util.List;
@@ -46,6 +43,10 @@ public class BooktionConnector
     public boolean addUser(User user) throws TException
     {
         return client.addUser(user);
+    }
+    public boolean createAdvert(Book book, AdvertType type, long expires, double price) throws TException
+    {
+        return client.createAdvert(book, type, expires, price);
     }
 
     public List<Advert> listAdverts(int first, int last) throws TException

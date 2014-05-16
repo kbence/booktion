@@ -91,9 +91,7 @@ public class MainController
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                JNewAdvertDialog newAdvertWindow = new JNewAdvertDialog();
-                new NewAdvertController(newAdvertWindow);
-                newAdvertWindow.setVisible(true);
+                showNewAdvertDialog();
             }
         });
 
@@ -157,6 +155,13 @@ public class MainController
         } catch (TException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void showNewAdvertDialog()
+    {
+        JNewAdvertDialog newAdvertWindow = new JNewAdvertDialog();
+        new NewAdvertController(this, newAdvertWindow);
+        newAdvertWindow.setVisible(true);
     }
 
     private void startBidding(Advert advert)
