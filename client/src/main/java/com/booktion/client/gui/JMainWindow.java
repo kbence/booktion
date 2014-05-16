@@ -88,8 +88,13 @@ public class JMainWindow extends JDialog
         advertListPanel.add(advertList, BorderLayout.CENTER);
 
         JPanel searchPanel = new JPanel();
+        JPanel searchFieldPanel = new JPanel();
+        searchFieldPanel.setLayout(new BorderLayout());
+        searchFieldPanel.add(new JTextField(), BorderLayout.CENTER);
+        searchFieldPanel.add(new JButton("Keresés"), BorderLayout.EAST);
         searchPanel.setLayout(new BorderLayout(GAP, GAP));
-        searchPanel.add(searchResults);
+        searchPanel.add(searchFieldPanel, BorderLayout.NORTH);
+        searchPanel.add(searchResults, BorderLayout.CENTER);
 
         JPanel ownPanel = new JPanel();
         ownPanel.setLayout(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
