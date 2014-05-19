@@ -24,7 +24,9 @@ public class MainController
     private BooktionConnector connector;
 
     private AdvertTableModel advertListModel;
+    private AdvertTableModel searchResultsModel;
     private List<Advert> adverts;
+    private List<Advert> searchResults;
     boolean logStatus;
 
     public MainController(JMainWindow mainWindow)
@@ -54,7 +56,24 @@ public class MainController
                 return null;
             }
         });
+
+        searchResultsModel = new AdvertTableModel(new AdvertTableModel.DataSource()
+        {
+            @Override
+            public Book getBook(int bookId)
+            {
+                try {
+                    return connector.getBook(bookId);
+                } catch (TException e) {
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+        });
+
         window.getAdvertList().getAdvertTable().setModel(advertListModel);
+        window.getSearchResults().getAdvertTable().setModel(searchResultsModel);
     }
 
     private void addListeners()
@@ -83,6 +102,15 @@ public class MainController
             public void actionPerformed(ActionEvent e)
             {
                 showRegisterWindow();
+            }
+        });
+
+        window.getSearchButton().addActionListener(new AbstractAction()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                searchForAdvert();
             }
         });
 
@@ -191,6 +219,15 @@ public class MainController
             window.getAdvertList().invalidate();
         } catch (TException e) {
             window.getStatusLabel().setText("A kapcsolat megszakadt: " + e.getMessage());
+        }
+    }
+
+    private void searchForAdvert()
+    {
+        try {
+            searchResults = connector.searchForAdverts(window.getSearchTextField().getText());
+        } catch (TException e) {
+            e.printStackTrace();
         }
     }
 

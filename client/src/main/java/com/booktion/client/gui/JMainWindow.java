@@ -23,6 +23,9 @@ public class JMainWindow extends JDialog
     private JAdvertList searchResults;
     private JLabel statusLabel;
     private JButton createAdvertButton;
+    private JTextField searchTextField;
+
+    private JButton searchButton;
 
     public JMainWindow()
     {
@@ -79,6 +82,8 @@ public class JMainWindow extends JDialog
     {
         advertList = new JAdvertList();
         searchResults = new JAdvertList();
+        searchTextField = new JTextField();
+        searchButton = new JButton("Keresés");
         createAdvertButton = new JButton("Hirdetés feladása");
 
         loggedInControls.add(createAdvertButton);
@@ -90,8 +95,8 @@ public class JMainWindow extends JDialog
         JPanel searchPanel = new JPanel();
         JPanel searchFieldPanel = new JPanel();
         searchFieldPanel.setLayout(new BorderLayout());
-        searchFieldPanel.add(new JTextField(), BorderLayout.CENTER);
-        searchFieldPanel.add(new JButton("Keresés"), BorderLayout.EAST);
+        searchFieldPanel.add(searchTextField, BorderLayout.CENTER);
+        searchFieldPanel.add(searchButton, BorderLayout.EAST);
         searchPanel.setLayout(new BorderLayout(GAP, GAP));
         searchPanel.add(searchFieldPanel, BorderLayout.NORTH);
         searchPanel.add(searchResults, BorderLayout.CENTER);
@@ -140,6 +145,16 @@ public class JMainWindow extends JDialog
     public JAdvertList getAdvertList()
     {
         return advertList;
+    }
+
+    public JButton getSearchButton()
+    {
+        return searchButton;
+    }
+
+    public JTextField getSearchTextField()
+    {
+        return searchTextField;
     }
 
     public JAdvertList getSearchResults()

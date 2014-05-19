@@ -94,9 +94,16 @@ public class Bookshop
         return db.advert.create(adv);
     }
 
-    public List<com.booktion.thrift.Advert> searchForAdverts(String title)
+    public List<com.booktion.thrift.Advert> searchForAdverts(String keyword)
     {
-        return new LinkedList<com.booktion.thrift.Advert>();
+        List<com.booktion.thrift.Advert> advertList = new ArrayList<com.booktion.thrift.Advert>();
+        Logger.get().log("Searching for advert");
+
+        for (Advert advert : db.advert.searchForAdverts(keyword)) {
+            advertList.add(advert.toThrift());
+        }
+
+        return advertList;
     }
 
     public List<com.booktion.thrift.Advert> listAdverts()
