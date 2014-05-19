@@ -6,6 +6,7 @@ import com.booktion.thrift.AdvertType;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.Date;
 
 public class JActionDialog extends JCenteredDialog
 {
@@ -42,6 +43,7 @@ public class JActionDialog extends JCenteredDialog
         addField(getTranslation("book.publisher"), advert.book.publisher, componentRow++);
         addField(getTranslation("advert.type"), advert.advertType == AdvertType.FIX_PRICE ? "Fix áras" : "Aukció", componentRow++);
         addField(getTranslation("advert.price"), String.format("%.0f", advert.price), componentRow++);
+        addField(getTranslation("advert.expires"), String.format("%s múlva", getHumanDate(new Date(advert.expires))), componentRow++);
 
         initCustomComponents();
 
@@ -68,6 +70,7 @@ public class JActionDialog extends JCenteredDialog
         if (id.equals("book.author")) return "Szerző";
         if (id.equals("book.publisher")) return "Kiadó";
         if (id.equals("advert.type")) return "Típus";
+        if (id.equals("advert.expires")) return "Lejárat";
         if (id.equals("advert.price")) return "Minimálár";
         if (id.equals("action.purchase")) return "LICITÁLÁS";
         if (id.equals("action.close")) return "Bezárás";
@@ -83,6 +86,18 @@ public class JActionDialog extends JCenteredDialog
         valueLabel.setFont(valueLabel.getFont().deriveFont(Font.BOLD));
         contentPane.add(new JLabel(field + ":"), cell(0, row));
         contentPane.add(valueLabel, cell(1, row));
+    }
+
+    protected String getHumanDate(Date date)
+    {
+        long secondsToExpire = date.getTime() / 1000 - (new Date()).getTime() / 1000;
+
+        if (secondsToExpire < 60) return String.format("%d másodperc", secondsToExpire);
+        if (secondsToExpire < 3600) return String.format("%d perc", secondsToExpire / 60);
+        if (secondsToExpire < 86400) return String.format("%d óra", secondsToExpire / 3600);
+        if (secondsToExpire < 7 * 86400) return String.format("%d nap", secondsToExpire / 86400);
+
+        return String.format("%d hét", secondsToExpire / (7 * 86400));
     }
 
     public JButton getPurchaseButton()
