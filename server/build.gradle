@@ -15,6 +15,6 @@ jar {
 
 task cleanDatabase {
     doFirst {
-        file(".booktion.derby").deleteDir()
+        file(".booktion.db").delete()
     }
 }
