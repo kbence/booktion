@@ -232,7 +232,7 @@ public class MainController
         }
     }
 
-    private void ˚searchForAdvert()
+    private void searchForAdvert()
     {
         try {
             searchResults = connector.searchForAdverts(window.getSearchTextField().getText());
