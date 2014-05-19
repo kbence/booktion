@@ -128,7 +128,16 @@ public class MainController
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                onMouseClicked(e);
+                onMouseClicked(e, adverts);
+            }
+        });
+
+        window.getSearchResults().getAdvertTable().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                onMouseClicked(e, searchResults);
             }
         });
 
@@ -137,14 +146,15 @@ public class MainController
             @Override
             public void stateChanged(ChangeEvent e)
             {
-                if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
-                    loadAdvertList();
+                switch (((JTabbedPane) e.getSource()).getSelectedIndex()) {
+                    case 0: loadAdvertList(); break;
+                    case 1: searchForAdvert(); break;
                 }
             }
         });
     }
 
-    private void onMouseClicked(MouseEvent e)
+    private void onMouseClicked(MouseEvent e, List<Advert> adverts)
     {
         if (!logStatus) return;
 
