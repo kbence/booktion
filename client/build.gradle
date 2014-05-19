@@ -2,7 +2,6 @@ apply plugin: 'application'
 
 dependencies {
     compile project(':shared')
-    compile 'com.github.insubstantial:substance:+'
 }
 
 mainClassName = 'com.booktion.client.BooktionClient'
