@@ -16,7 +16,7 @@ public class AdvertDatabase
 
     public AdvertDatabase(String filename) throws SQLException
     {
-        Connection connection = DriverManager.getConnection(String.format("jdbc:derby:%1$s;create=true", filename));
+        Connection connection = DriverManager.getConnection(String.format("jdbc:sqlite:%1$s", filename));
         new SchemaCreator(connection).createSchema();
 
         book = new BookDAO(connection);

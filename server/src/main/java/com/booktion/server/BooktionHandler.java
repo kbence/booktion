@@ -1,20 +1,13 @@
 package com.booktion.server;
 
-import com.booktion.log.Logger;
-import com.booktion.server.db.AdvertDatabase;
 import com.booktion.server.model.Bookshop;
-import com.booktion.server.model.User;
 import com.booktion.thrift.Advert;
 import com.booktion.thrift.AdvertType;
 import com.booktion.thrift.Book;
 import com.booktion.thrift.BooktionService;
 import org.apache.thrift.TException;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
-import static com.booktion.server.model.Book.fromThriftBook;
 
 public class BooktionHandler implements BooktionService.Iface
 {

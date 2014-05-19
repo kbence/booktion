@@ -5,12 +5,8 @@ import com.booktion.server.model.Bookshop;
 import com.booktion.thrift.BooktionService;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.server.TNonblockingServer;
-import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TNonblockingServerTransport;
-import org.apache.thrift.transport.TServerSocket;
-import org.apache.thrift.transport.TServerTransport;
 
 import java.sql.SQLException;
 
@@ -22,7 +18,7 @@ public class BooktionServer
     public BooktionServer()
     {
         try {
-            AdvertDatabase database = new AdvertDatabase(".booktion.derby");
+            AdvertDatabase database = new AdvertDatabase(".booktion.db");
             Bookshop bookshop = new Bookshop(database);
             BooktionHandler booktionHandler = new BooktionHandler(bookshop);
 

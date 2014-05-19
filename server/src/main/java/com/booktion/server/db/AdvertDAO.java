@@ -3,8 +3,8 @@ package com.booktion.server.db;
 import com.booktion.server.model.Advert;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.Date;
 
 public class AdvertDAO extends DAO
 {
@@ -87,7 +87,7 @@ public class AdvertDAO extends DAO
             stmt.setInt(1, advert.issuer);
             stmt.setInt(2, bookId);
             stmt.setString(3, advert.type.toString());
-            stmt.setDate(4, new Date(advert.expires.getTime()));
+            stmt.setLong(4, advert.expires.getTime());
             stmt.setInt(5, advert.winner);
 
             int result = stmt.executeUpdate();
@@ -109,7 +109,7 @@ public class AdvertDAO extends DAO
             result.getInt("issuer"),
             book.getById(result.getInt("bookId")),
             Advert.AdvertType.valueOf(result.getString("type")),
-            result.getDate("expires"),
+            new Date(result.getInt("expires")),
             Math.max(result.getDouble("price"), highestBid),
             result.getInt("winner")
         );

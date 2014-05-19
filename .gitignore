@@ -1,7 +1,6 @@
 .gradle/
 .idea/
-*.derby/
-derby.log
+.booktion.db
 *.iml
 build/
 out/
