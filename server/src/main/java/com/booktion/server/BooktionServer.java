@@ -18,7 +18,7 @@ public class BooktionServer
     public BooktionServer()
     {
         try {
-            AdvertDatabase database = new AdvertDatabase(".booktion.db");
+            AdvertDatabase database = new AdvertDatabase(".booktion.db", true);
             Bookshop bookshop = new Bookshop(database);
             BooktionHandler booktionHandler = new BooktionHandler(bookshop);
 

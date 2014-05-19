@@ -1,19 +1,22 @@
 package com.booktion.server.db;
 
 import com.booktion.server.model.Advert;
-import com.booktion.server.model.Book;
-import net.sf.log4jdbc.ConnectionSpy;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AdvertDAO extends DAO
 {
     private static final String SELECT_BY_ID = "SELECT * FROM adverts WHERE id = ?";
     private static final String SELECT_ALL = "SELECT * FROM adverts WHERE winner IS NULL";
-    private static final String SEARCH_FOR_BOOK = "SELECT * FROM adverts JOIN books " +
-            "ON adverts.bookId = books.id WHERE books.title LIKE ? OR " +
+    private static final String SEARCH_FOR_BOOK = "SELECT adverts.* FROM adverts JOIN books " +
+            "ON adverts.bookId = books.id " +
+            "WHERE books.title LIKE ? OR " +
             "books.author LIKE ? OR books.publisher LIKE ?";
     private static final String FINALIZE_ADVERT = "UPDATE adverts SET winner = ? WHERE id = ?";
     private static final String INSERT_ADVERT = "INSERT INTO adverts (issuer, bookId, type, " +

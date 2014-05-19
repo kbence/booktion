@@ -226,6 +226,8 @@ public class MainController
     {
         try {
             searchResults = connector.searchForAdverts(window.getSearchTextField().getText());
+            searchResultsModel.setAdvertList(searchResults);
+            window.getSearchResults().invalidate();
         } catch (TException e) {
             e.printStackTrace();
         }
