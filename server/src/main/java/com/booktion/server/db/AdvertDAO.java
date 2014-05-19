@@ -90,8 +90,7 @@ public class AdvertDAO extends DAO
             stmt.setLong(4, advert.expires.getTime());
             stmt.setInt(5, advert.winner);
 
-            int result = stmt.executeUpdate();
-            return result == 1;
+            return stmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
