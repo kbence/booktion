@@ -80,9 +80,6 @@ public class JMainWindow extends JDialog
 
     private void createAdvertPanel()
     {
-        createAdvertButton = new JButton("Hirdetés feladása");
-        loggedInControls.add(createAdvertButton);
-
         tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.add("Hirdetések", createAdvertListPanel());
         tabbedPane.add("Keresés", createSearchPanel());
@@ -91,6 +88,9 @@ public class JMainWindow extends JDialog
 
     private JPanel createOwnPanel()
     {
+        createAdvertButton = new JButton("Hirdetés feladása");
+        loggedInControls.add(createAdvertButton);
+
         JPanel ownPanel = new JPanel();
         ownPanel.setLayout(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
         ownPanel.add(createAdvertButton);
