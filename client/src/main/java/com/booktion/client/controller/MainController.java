@@ -72,8 +72,8 @@ public class MainController
             }
         });
 
-        window.getAdvertList().getAdvertTable().setModel(advertListModel);
-        window.getSearchResults().getAdvertTable().setModel(searchResultsModel);
+        window.getAdvertList().getTable().setModel(advertListModel);
+        window.getSearchResults().getTable().setModel(searchResultsModel);
     }
 
     private void addListeners()
@@ -123,7 +123,7 @@ public class MainController
             }
         });
 
-        window.getAdvertList().getAdvertTable().addMouseListener(new MouseAdapter()
+        window.getAdvertList().getTable().addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseClicked(MouseEvent e)
@@ -132,7 +132,7 @@ public class MainController
             }
         });
 
-        window.getSearchResults().getAdvertTable().addMouseListener(new MouseAdapter()
+        window.getSearchResults().getTable().addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseClicked(MouseEvent e)

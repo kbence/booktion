@@ -19,8 +19,8 @@ public class JMainWindow extends JDialog
     private JButton registerButton;
 
     private JTabbedPane tabbedPane;
-    private JAdvertList advertList;
-    private JAdvertList searchResults;
+    private JTablePanel advertList;
+    private JTablePanel searchResults;
     private JLabel statusLabel;
     private JButton createAdvertButton;
     private JTextField searchTextField;
@@ -103,7 +103,7 @@ public class JMainWindow extends JDialog
 
     private JPanel createSearchPanel()
     {
-        searchResults = new JAdvertList();
+        searchResults = new JTablePanel();
         searchTextField = new JTextField();
         searchButton = new JButton("Keresés");
 
@@ -122,7 +122,7 @@ public class JMainWindow extends JDialog
 
     private JPanel createAdvertListPanel()
     {
-        advertList = new JAdvertList();
+        advertList = new JTablePanel();
 
         JPanel advertListPanel = new JPanel();
         advertListPanel.setLayout(new BorderLayout(GAP, GAP));
@@ -162,7 +162,7 @@ public class JMainWindow extends JDialog
         return tabbedPane;
     }
 
-    public JAdvertList getAdvertList()
+    public JTablePanel getAdvertList()
     {
         return advertList;
     }
@@ -177,7 +177,7 @@ public class JMainWindow extends JDialog
         return searchTextField;
     }
 
-    public JAdvertList getSearchResults()
+    public JTablePanel getSearchResults()
     {
         return searchResults;
     }
