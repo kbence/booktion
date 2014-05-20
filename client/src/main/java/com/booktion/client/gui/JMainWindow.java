@@ -91,9 +91,12 @@ public class JMainWindow extends JDialog
         createAdvertButton = new JButton("Hirdetés feladása");
         loggedInControls.add(createAdvertButton);
 
-        JPanel ownPanel = new JPanel();
-        ownPanel.setLayout(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
-        ownPanel.add(createAdvertButton);
+        JPanel ownPanel = new JPanel(new BorderLayout(5, 5));
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
+        buttonPanel.add(createAdvertButton);
+
+        ownPanel.add(buttonPanel, BorderLayout.NORTH);
 
         return ownPanel;
     }
