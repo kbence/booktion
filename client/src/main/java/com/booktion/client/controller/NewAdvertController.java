@@ -50,6 +50,13 @@ public class NewAdvertController
         book.title = newAdvertDialog.getTitleTextField().getText();
         book.author = newAdvertDialog.getAuthorTextField().getText();
         book.publisher = newAdvertDialog.getPublisherTextField().getText();
+
+        try {
+            book.yearOfPublication = Short.valueOf(newAdvertDialog.getYearOfPublicationTextField().getText());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
         book.condition = (short)newAdvertDialog.getConditionSlider().getValue();
 
         try {

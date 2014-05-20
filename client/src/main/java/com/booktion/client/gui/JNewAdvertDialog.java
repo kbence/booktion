@@ -8,9 +8,9 @@ import java.util.Date;
 public class JNewAdvertDialog extends JCenteredDialog
 {
     private JTextField authorTextField;
-
     private JTextField titleTextField;
     private JTextField publisherTextField;
+    private JTextField yearOfPublicationTextField;
     private JTextArea descriptionTextArea;
     private JSlider conditionSlider;
     private JTextField priceTextField;
@@ -34,6 +34,7 @@ public class JNewAdvertDialog extends JCenteredDialog
         authorTextField = new JTextField(25);
         titleTextField = new JTextField(25);
         publisherTextField = new JTextField(25);
+        yearOfPublicationTextField = new JTextField(4);
         descriptionTextArea = new JTextArea(4, 25);
         typeComboBox = new JComboBox<String>(new String[]{"Fix áras", "Aukció"});
         dateTimePicker = new JDateTimePicker(new Date());
@@ -44,6 +45,7 @@ public class JNewAdvertDialog extends JCenteredDialog
         addField("Szerző:", authorTextField, row++);
         addField("Cím:", titleTextField, row++);
         addField("Kiadó:", publisherTextField, row++);
+        addField("Kiadás éve:", yearOfPublicationTextField, row++);
         addField("Leírás:", new JScrollPane(descriptionTextArea), row++);
         addField("Állapot:", conditionSlider, row++);
         addField("Típus:", typeComboBox, row++);
@@ -89,6 +91,12 @@ public class JNewAdvertDialog extends JCenteredDialog
     {
         return publisherTextField;
     }
+
+    public JTextField getYearOfPublicationTextField()
+    {
+        return yearOfPublicationTextField;
+    }
+
 
     public JTextArea getDescriptionTextArea()
     {
