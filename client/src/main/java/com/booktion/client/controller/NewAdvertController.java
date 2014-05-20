@@ -54,7 +54,8 @@ public class NewAdvertController
         try {
             book.yearOfPublication = Short.valueOf(newAdvertDialog.getYearOfPublicationTextField().getText());
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(newAdvertDialog, "Kiadás éve érvénytelen!", "Hiba", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         book.condition = (short)newAdvertDialog.getConditionSlider().getValue();
@@ -72,6 +73,8 @@ public class NewAdvertController
                     newAdvertDialog.close();
         } catch (TException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(newAdvertDialog, "Az ár érvénytelen!", "Hiba", JOptionPane.ERROR_MESSAGE);
         }
     }
 
