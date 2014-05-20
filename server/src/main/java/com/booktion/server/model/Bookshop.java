@@ -85,8 +85,6 @@ public class Bookshop
     public boolean createAdvert(com.booktion.thrift.Book book, AdvertType advert, long expires, double price) throws TException
     {
         sessionManager.getCurrentSession();
-        User user = sessionManager.getCurrentSession().user;
-        int id = sessionManager.getCurrentSession().user.id;
         Advert adv = new Advert(0, sessionManager.getCurrentSession().user.id,
                 Book.fromThriftBook(book), Advert.AdvertType.fromThrift(advert),
                 new Date(expires), price, 0);
