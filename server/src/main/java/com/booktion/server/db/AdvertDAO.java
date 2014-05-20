@@ -18,8 +18,8 @@ public class AdvertDAO extends DAO
     private static final String SELECT_BY_ID = "SELECT * FROM adverts WHERE id = ?";
     private static final String SELECT_ALL = "SELECT * FROM adverts WHERE winner IS NULL";
     private static final String SEARCH_FOR_BOOK = "SELECT adverts.* FROM adverts JOIN books " +
-            "ON adverts.bookId = books.id WHERE books.title LIKE ? OR " +
-            "books.author LIKE ? OR books.publisher LIKE ?";
+            "ON adverts.bookId = books.id WHERE (books.title LIKE ? OR " +
+            "books.author LIKE ? OR books.publisher LIKE ?) AND winner IS NULL";
     private static final String FINALIZE_ADVERT = "UPDATE adverts SET winner = ? WHERE id = ?";
     private static final String INSERT_ADVERT = "INSERT INTO adverts (issuer, bookId, type, " +
             "expires, price) VALUES (?, ?, ?, ?, ?)";
