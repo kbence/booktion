@@ -12,13 +12,14 @@ public class JNewAdvertDialog extends JCenteredDialog
     private JTextField titleTextField;
     private JTextField publisherTextField;
     private JTextArea descriptionTextArea;
+    private JSlider conditionSlider;
     private JTextField priceTextField;
     private JComboBox<String> typeComboBox;
+    private JDateTimePicker dateTimePicker;
 
     private Button okButton;
     private Button cancelButton;
 
-    private JDateTimePicker dateTimePicker;
 
     public JNewAdvertDialog()
     {
@@ -37,12 +38,14 @@ public class JNewAdvertDialog extends JCenteredDialog
         typeComboBox = new JComboBox<String>(new String[]{"Fix áras", "Aukció"});
         dateTimePicker = new JDateTimePicker(new Date());
         priceTextField = new JTextField(25);
+        conditionSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
 
         int row = 0;
         addField("Szerző:", authorTextField, row++);
         addField("Cím:", titleTextField, row++);
         addField("Kiadó:", publisherTextField, row++);
         addField("Leírás:", new JScrollPane(descriptionTextArea), row++);
+        addField("Állapot:", conditionSlider, row++);
         addField("Típus:", typeComboBox, row++);
         addField("Lejárat:", dateTimePicker, row++);
         addField("Ár:", priceTextField, row++);
@@ -90,6 +93,11 @@ public class JNewAdvertDialog extends JCenteredDialog
     public JTextArea getDescriptionTextArea()
     {
         return descriptionTextArea;
+    }
+
+    public JSlider getConditionSlider()
+    {
+        return conditionSlider;
     }
 
     public JDateTimePicker getDateTimePicker()

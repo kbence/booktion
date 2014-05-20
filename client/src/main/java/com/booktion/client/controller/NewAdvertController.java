@@ -50,6 +50,7 @@ public class NewAdvertController
         book.title = newAdvertDialog.getTitleTextField().getText();
         book.author = newAdvertDialog.getAuthorTextField().getText();
         book.publisher = newAdvertDialog.getPublisherTextField().getText();
+        book.condition = (short)newAdvertDialog.getConditionSlider().getValue();
 
         try {
             AdvertType type = newAdvertDialog.getTypeComboBox().getSelectedIndex() == 0
