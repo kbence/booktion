@@ -25,13 +25,15 @@ public class AdvertDAO extends DAO
             "expires, price) VALUES (?, ?, ?, ?, ?)";
 
     private BookDAO book;
+    private UserDAO user;
     private BidDAO bid;
 
-    public AdvertDAO(Connection connection, BookDAO bookDAO, BidDAO bidDAO)
+    public AdvertDAO(Connection connection, UserDAO userDAO, BookDAO bookDAO, BidDAO bidDAO)
     {
         super(connection);
 
         book = bookDAO;
+        user = userDAO;
         bid = bidDAO;
     }
 
@@ -117,7 +119,7 @@ public class AdvertDAO extends DAO
                 return false;
 
             PreparedStatement stmt = connection.prepareStatement(INSERT_ADVERT);
-            stmt.setInt(1, advert.issuer);
+            stmt.setInt(1, advert.issuer.id);
             stmt.setInt(2, bookId);
             stmt.setString(3, advert.type.toString());
             stmt.setDate(4, new java.sql.Date(advert.expires.getTime()));
@@ -139,7 +141,7 @@ public class AdvertDAO extends DAO
 
         return new Advert(
             advertId,
-            result.getInt("issuer"),
+            user.getById(result.getInt("issuer")),
             book.getById(result.getInt("bookId")),
             Advert.AdvertType.valueOf(result.getString("type")),
             new Date(result.getLong("expires")),

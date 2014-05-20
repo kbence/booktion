@@ -30,14 +30,14 @@ public class Advert
     }
 
     public int id;
-    public int issuer;
+    public User issuer;
     public Book book;
     public AdvertType type;
     public Date expires;
     public double price;
     public int winner;
 
-    public Advert(int id, int issuer, Book book, AdvertType type, Date expires, double price, int winner)
+    public Advert(int id, User issuer, Book book, AdvertType type, Date expires, double price, int winner)
     {
         this.id = id;
         this.issuer = issuer;
@@ -48,19 +48,13 @@ public class Advert
         this.winner = winner;
     }
 
-    public boolean bid(Bid bid)
-    {
-        // TODO: implement bidding logic
-        return true;
-    }
-
     public com.booktion.thrift.Advert toThrift()
     {
-        return new com.booktion.thrift.Advert(id, issuer, book.toThriftBook(), type.toThrift(), expires.getTime(), price, winner);
+        return new com.booktion.thrift.Advert(id, issuer.toThrift(), book.toThriftBook(), type.toThrift(), expires.getTime(), price, winner);
     }
 
     public static Advert fromThrift(com.booktion.thrift.Advert advert)
     {
-        return new Advert(advert.id, advert.issuer, Book.fromThriftBook(advert.book), AdvertType.fromThrift(advert.advertType), new Date(advert.expires), advert.price, advert.winner);
+        return new Advert(advert.id, User.fromThrift(advert.issuer), Book.fromThriftBook(advert.book), AdvertType.fromThrift(advert.advertType), new Date(advert.expires), advert.price, advert.winner);
     }
 }
