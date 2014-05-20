@@ -35,7 +35,7 @@ public class JMainWindow extends JDialog
 
         setTitle("Booktion kliens");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setMinimumSize(new Dimension(600, 400));
+        setMinimumSize(new Dimension(800, 400));
         setLocationRelativeTo(null);
 
         System.gc();
