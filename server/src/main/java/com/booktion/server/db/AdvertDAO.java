@@ -121,7 +121,7 @@ public class AdvertDAO extends DAO
             stmt.setInt(2, bookId);
             stmt.setString(3, advert.type.toString());
             stmt.setDate(4, new java.sql.Date(advert.expires.getTime()));
-            stmt.setInt(5, advert.winner);
+            stmt.setDouble(5, advert.price);
 
             return stmt.executeUpdate() == 1;
         } catch (SQLException e) {
