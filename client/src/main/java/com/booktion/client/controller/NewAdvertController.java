@@ -55,7 +55,9 @@ public class NewAdvertController
             AdvertType type = newAdvertDialog.getTypeComboBox().getSelectedIndex() == 0
                     ? AdvertType.FIX_PRICE : AdvertType.AUCTION;
 
-            boolean success = mainController.getConnector().createAdvert(book, type, new Date().getTime(),
+            Date expires = newAdvertDialog.getDateTimePicker().getDateTime();
+
+            boolean success = mainController.getConnector().createAdvert(book, type, expires.getTime(),
                     Double.valueOf(newAdvertDialog.getPriceTextField().getText()));
 
             if (success)

@@ -137,20 +137,12 @@ public class AdvertDAO extends DAO
         int advertId = result.getInt("id");
         double highestBid = bid.getHighestPrice(advertId);
 
-        Date expires;
-
-        try {
-            expires = df.parse(result.getString("expires"));
-        } catch (ParseException e) {
-            expires = new Date(0);
-        }
-
         return new Advert(
             advertId,
             result.getInt("issuer"),
             book.getById(result.getInt("bookId")),
             Advert.AdvertType.valueOf(result.getString("type")),
-            expires,
+            new Date(result.getLong("expires")),
             Math.max(result.getDouble("price"), highestBid),
             result.getInt("winner")
         );

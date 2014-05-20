@@ -2,6 +2,7 @@ apply plugin: 'application'
 
 dependencies {
     compile project(':shared')
+    compile files('../lib/microba-0.4.4.jar')
 }
 
 mainClassName = 'com.booktion.client.BooktionClient'

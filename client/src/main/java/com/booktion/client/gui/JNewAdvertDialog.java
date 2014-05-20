@@ -3,6 +3,7 @@ package com.booktion.client.gui;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.Date;
 
 public class JNewAdvertDialog extends JCenteredDialog
 {
@@ -16,6 +17,8 @@ public class JNewAdvertDialog extends JCenteredDialog
 
     private Button okButton;
     private Button cancelButton;
+
+    private JDateTimePicker dateTimePicker;
 
     public JNewAdvertDialog()
     {
@@ -31,8 +34,9 @@ public class JNewAdvertDialog extends JCenteredDialog
         titleTextField = new JTextField(25);
         publisherTextField = new JTextField(25);
         descriptionTextArea = new JTextArea(4, 25);
-        priceTextField = new JTextField(25);
         typeComboBox = new JComboBox<String>(new String[]{"Fix áras", "Aukció"});
+        dateTimePicker = new JDateTimePicker(new Date());
+        priceTextField = new JTextField(25);
 
         int row = 0;
         addField("Szerző:", authorTextField, row++);
@@ -40,6 +44,7 @@ public class JNewAdvertDialog extends JCenteredDialog
         addField("Kiadó:", publisherTextField, row++);
         addField("Leírás:", new JScrollPane(descriptionTextArea), row++);
         addField("Típus:", typeComboBox, row++);
+        addField("Lejárat:", dateTimePicker, row++);
         addField("Ár:", priceTextField, row++);
 
         okButton = new Button("OK");
@@ -85,6 +90,11 @@ public class JNewAdvertDialog extends JCenteredDialog
     public JTextArea getDescriptionTextArea()
     {
         return descriptionTextArea;
+    }
+
+    public JDateTimePicker getDateTimePicker()
+    {
+        return dateTimePicker;
     }
 
     public JTextField getPriceTextField()
