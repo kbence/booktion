@@ -148,7 +148,6 @@ public class MainController
             {
                 switch (((JTabbedPane) e.getSource()).getSelectedIndex()) {
                     case 0: loadAdvertList(); break;
-                    case 1: searchForAdvert(); break;
                 }
             }
         });
