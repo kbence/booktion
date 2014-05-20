@@ -36,7 +36,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("Advert");
 
   private static final org.apache.thrift.protocol.TField ID_FIELD_DESC = new org.apache.thrift.protocol.TField("id", org.apache.thrift.protocol.TType.I32, (short)1);
-  private static final org.apache.thrift.protocol.TField ISSUER_FIELD_DESC = new org.apache.thrift.protocol.TField("issuer", org.apache.thrift.protocol.TType.I32, (short)2);
+  private static final org.apache.thrift.protocol.TField ISSUER_FIELD_DESC = new org.apache.thrift.protocol.TField("issuer", org.apache.thrift.protocol.TType.STRUCT, (short)2);
   private static final org.apache.thrift.protocol.TField BOOK_FIELD_DESC = new org.apache.thrift.protocol.TField("book", org.apache.thrift.protocol.TType.STRUCT, (short)3);
   private static final org.apache.thrift.protocol.TField ADVERT_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("advertType", org.apache.thrift.protocol.TType.I32, (short)4);
   private static final org.apache.thrift.protocol.TField EXPIRES_FIELD_DESC = new org.apache.thrift.protocol.TField("expires", org.apache.thrift.protocol.TType.I64, (short)5);
@@ -50,7 +50,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
   }
 
   public int id; // required
-  public int issuer; // required
+  public com.booktion.thrift.User issuer; // required
   public com.booktion.thrift.Book book; // required
   /**
    * 
@@ -143,10 +143,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
 
   // isset id assignments
   private static final int __ID_ISSET_ID = 0;
-  private static final int __ISSUER_ISSET_ID = 1;
-  private static final int __EXPIRES_ISSET_ID = 2;
-  private static final int __PRICE_ISSET_ID = 3;
-  private static final int __WINNER_ISSET_ID = 4;
+  private static final int __EXPIRES_ISSET_ID = 1;
+  private static final int __PRICE_ISSET_ID = 2;
+  private static final int __WINNER_ISSET_ID = 3;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -154,7 +153,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     tmpMap.put(_Fields.ID, new org.apache.thrift.meta_data.FieldMetaData("id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.ISSUER, new org.apache.thrift.meta_data.FieldMetaData("issuer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.booktion.thrift.User.class)));
     tmpMap.put(_Fields.BOOK, new org.apache.thrift.meta_data.FieldMetaData("book", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.booktion.thrift.Book.class)));
     tmpMap.put(_Fields.ADVERT_TYPE, new org.apache.thrift.meta_data.FieldMetaData("advertType", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -174,7 +173,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
 
   public Advert(
     int id,
-    int issuer,
+    com.booktion.thrift.User issuer,
     com.booktion.thrift.Book book,
     com.booktion.thrift.AdvertType advertType,
     long expires,
@@ -185,7 +184,6 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     this.id = id;
     setIdIsSet(true);
     this.issuer = issuer;
-    setIssuerIsSet(true);
     this.book = book;
     this.advertType = advertType;
     this.expires = expires;
@@ -202,7 +200,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
   public Advert(Advert other) {
     __isset_bitfield = other.__isset_bitfield;
     this.id = other.id;
-    this.issuer = other.issuer;
+    if (other.isSetIssuer()) {
+      this.issuer = new com.booktion.thrift.User(other.issuer);
+    }
     if (other.isSetBook()) {
       this.book = new com.booktion.thrift.Book(other.book);
     }
@@ -222,8 +222,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
   public void clear() {
     setIdIsSet(false);
     this.id = 0;
-    setIssuerIsSet(false);
-    this.issuer = 0;
+    this.issuer = null;
     this.book = null;
     this.advertType = null;
     setExpiresIsSet(false);
@@ -257,27 +256,28 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ID_ISSET_ID, value);
   }
 
-  public int getIssuer() {
+  public com.booktion.thrift.User getIssuer() {
     return this.issuer;
   }
 
-  public Advert setIssuer(int issuer) {
+  public Advert setIssuer(com.booktion.thrift.User issuer) {
     this.issuer = issuer;
-    setIssuerIsSet(true);
     return this;
   }
 
   public void unsetIssuer() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ISSUER_ISSET_ID);
+    this.issuer = null;
   }
 
   /** Returns true if field issuer is set (has been assigned a value) and false otherwise */
   public boolean isSetIssuer() {
-    return EncodingUtils.testBit(__isset_bitfield, __ISSUER_ISSET_ID);
+    return this.issuer != null;
   }
 
   public void setIssuerIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ISSUER_ISSET_ID, value);
+    if (!value) {
+      this.issuer = null;
+    }
   }
 
   public com.booktion.thrift.Book getBook() {
@@ -419,7 +419,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       if (value == null) {
         unsetIssuer();
       } else {
-        setIssuer((Integer)value);
+        setIssuer((com.booktion.thrift.User)value);
       }
       break;
 
@@ -472,7 +472,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       return Integer.valueOf(getId());
 
     case ISSUER:
-      return Integer.valueOf(getIssuer());
+      return getIssuer();
 
     case BOOK:
       return getBook();
@@ -540,12 +540,12 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         return false;
     }
 
-    boolean this_present_issuer = true;
-    boolean that_present_issuer = true;
+    boolean this_present_issuer = true && this.isSetIssuer();
+    boolean that_present_issuer = true && that.isSetIssuer();
     if (this_present_issuer || that_present_issuer) {
       if (!(this_present_issuer && that_present_issuer))
         return false;
-      if (this.issuer != that.issuer)
+      if (!this.issuer.equals(that.issuer))
         return false;
     }
 
@@ -705,7 +705,11 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
     first = false;
     if (!first) sb.append(", ");
     sb.append("issuer:");
-    sb.append(this.issuer);
+    if (this.issuer == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.issuer);
+    }
     first = false;
     if (!first) sb.append(", ");
     sb.append("book:");
@@ -742,6 +746,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
+    if (issuer != null) {
+      issuer.validate();
+    }
     if (book != null) {
       book.validate();
     }
@@ -792,8 +799,9 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
             }
             break;
           case 2: // ISSUER
-            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.issuer = iprot.readI32();
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.issuer = new com.booktion.thrift.User();
+              struct.issuer.read(iprot);
               struct.setIssuerIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -858,9 +866,11 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
       oprot.writeFieldBegin(ID_FIELD_DESC);
       oprot.writeI32(struct.id);
       oprot.writeFieldEnd();
-      oprot.writeFieldBegin(ISSUER_FIELD_DESC);
-      oprot.writeI32(struct.issuer);
-      oprot.writeFieldEnd();
+      if (struct.issuer != null) {
+        oprot.writeFieldBegin(ISSUER_FIELD_DESC);
+        struct.issuer.write(oprot);
+        oprot.writeFieldEnd();
+      }
       if (struct.book != null) {
         oprot.writeFieldBegin(BOOK_FIELD_DESC);
         struct.book.write(oprot);
@@ -924,7 +934,7 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         oprot.writeI32(struct.id);
       }
       if (struct.isSetIssuer()) {
-        oprot.writeI32(struct.issuer);
+        struct.issuer.write(oprot);
       }
       if (struct.isSetBook()) {
         struct.book.write(oprot);
@@ -952,7 +962,8 @@ public class Advert implements org.apache.thrift.TBase<Advert, Advert._Fields>, 
         struct.setIdIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.issuer = iprot.readI32();
+        struct.issuer = new com.booktion.thrift.User();
+        struct.issuer.read(iprot);
         struct.setIssuerIsSet(true);
       }
       if (incoming.get(2)) {

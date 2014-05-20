@@ -65,7 +65,7 @@ public class AdvertTableModel extends AbstractTableModel
             case 4: return item.advertType == AdvertType.FIX_PRICE ? "Fix áras" : "Aukció";
             case 5: return item.book.condition;
             case 6: return item.price;
-            case 7: return item.issuer;
+            case 7: return item.issuer.username;
         }
 
         return null;

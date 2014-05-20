@@ -19,8 +19,8 @@ public class JMainWindow extends JDialog
     private JButton registerButton;
 
     private JTabbedPane tabbedPane;
-    private JAdvertList advertList;
-    private JAdvertList searchResults;
+    private JTablePanel advertList;
+    private JTablePanel searchResults;
     private JLabel statusLabel;
     private JButton createAdvertButton;
     private JTextField searchTextField;
@@ -80,20 +80,36 @@ public class JMainWindow extends JDialog
 
     private void createAdvertPanel()
     {
-        advertList = new JAdvertList();
-        searchResults = new JAdvertList();
-        searchTextField = new JTextField();
-        searchButton = new JButton("Keresés");
-        createAdvertButton = new JButton("Hirdetés feladása");
+        tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        tabbedPane.add("Hirdetések", createAdvertListPanel());
+        tabbedPane.add("Keresés", createSearchPanel());
+        tabbedPane.add("Saját oldal", createOwnPanel());
+    }
 
+    private JPanel createOwnPanel()
+    {
+        createAdvertButton = new JButton("Hirdetés feladása");
         loggedInControls.add(createAdvertButton);
 
-        JPanel advertListPanel = new JPanel();
-        advertListPanel.setLayout(new BorderLayout(GAP, GAP));
-        advertListPanel.add(advertList, BorderLayout.CENTER);
+        JPanel ownPanel = new JPanel(new BorderLayout(5, 5));
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
+        buttonPanel.add(createAdvertButton);
+
+        ownPanel.add(buttonPanel, BorderLayout.NORTH);
+
+        return ownPanel;
+    }
+
+    private JPanel createSearchPanel()
+    {
+        searchResults = new JTablePanel();
+        searchTextField = new JTextField();
+        searchButton = new JButton("Keresés");
 
         JPanel searchPanel = new JPanel();
         JPanel searchFieldPanel = new JPanel();
+
         searchFieldPanel.setLayout(new BorderLayout());
         searchFieldPanel.add(searchTextField, BorderLayout.CENTER);
         searchFieldPanel.add(searchButton, BorderLayout.EAST);
@@ -101,14 +117,18 @@ public class JMainWindow extends JDialog
         searchPanel.add(searchFieldPanel, BorderLayout.NORTH);
         searchPanel.add(searchResults, BorderLayout.CENTER);
 
-        JPanel ownPanel = new JPanel();
-        ownPanel.setLayout(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
-        ownPanel.add(createAdvertButton);
+        return searchPanel;
+    }
 
-        tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        tabbedPane.add("Hirdetések", advertListPanel);
-        tabbedPane.add("Keresés", searchPanel);
-        tabbedPane.add("Saját oldal", ownPanel);
+    private JPanel createAdvertListPanel()
+    {
+        advertList = new JTablePanel();
+
+        JPanel advertListPanel = new JPanel();
+        advertListPanel.setLayout(new BorderLayout(GAP, GAP));
+        advertListPanel.add(advertList, BorderLayout.CENTER);
+
+        return advertListPanel;
     }
 
     public void setLogStatus(boolean loggedIn)
@@ -142,7 +162,7 @@ public class JMainWindow extends JDialog
         return tabbedPane;
     }
 
-    public JAdvertList getAdvertList()
+    public JTablePanel getAdvertList()
     {
         return advertList;
     }
@@ -157,7 +177,7 @@ public class JMainWindow extends JDialog
         return searchTextField;
     }
 
-    public JAdvertList getSearchResults()
+    public JTablePanel getSearchResults()
     {
         return searchResults;
     }

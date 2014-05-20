@@ -17,4 +17,26 @@ public class User
     {
         return this.password.equals(password);
     }
+
+    public com.booktion.thrift.User toThrift()
+    {
+        com.booktion.thrift.User user = new com.booktion.thrift.User();
+        user.username = username;
+        user.forename = forename;
+        user.surname = surname;
+        user.address = address;
+
+        return user;
+    }
+
+    public static User fromThrift(com.booktion.thrift.User thriftUser)
+    {
+        User user = new User();
+        user.username = thriftUser.username;
+        user.forename = thriftUser.forename;
+        user.surname = thriftUser.surname;
+        user.address = thriftUser.address;
+
+        return user;
+    }
 }

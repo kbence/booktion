@@ -11,6 +11,7 @@ import java.sql.SQLException;
 public class UserDAO extends DAO
 {
     private static final String SELECT_BY_USERNAME = "SELECT * FROM users WHERE username = ?";
+    private static final String GET_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String INSERT_USER = "INSERT INTO users (username, password, " +
             "forename, surname, address) VALUES (?, ?, ?, ?, ?)";
 
@@ -27,14 +28,24 @@ public class UserDAO extends DAO
             ResultSet result = stmt.executeQuery();
 
             if (result.next()) {
-                User user = new User();
-                user.id = result.getInt("id");
-                user.username = result.getString("username");
-                user.password = result.getString("password");
-                user.forename = result.getString("forename");
-                user.surname = result.getString("surname");
-                user.address = result.getString("address");
-                return user;
+                return createUserFromResult(result);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public User getById(int id)
+    {
+        try {
+            PreparedStatement stmt = connection.prepareStatement(GET_BY_ID);
+            stmt.setInt(1, id);
+            ResultSet result = stmt.executeQuery();
+
+            if (result.next()) {
+                return createUserFromResult(result);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,5 +74,17 @@ public class UserDAO extends DAO
         }
 
         return false;
+    }
+
+    private User createUserFromResult(ResultSet result) throws SQLException
+    {
+        User user = new User();
+        user.id = result.getInt("id");
+        user.username = result.getString("username");
+        user.password = result.getString("password");
+        user.forename = result.getString("forename");
+        user.surname = result.getString("surname");
+        user.address = result.getString("address");
+        return user;
     }
 }
