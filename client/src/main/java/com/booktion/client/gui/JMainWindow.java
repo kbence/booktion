@@ -80,20 +80,33 @@ public class JMainWindow extends JDialog
 
     private void createAdvertPanel()
     {
-        advertList = new JAdvertList();
+        createAdvertButton = new JButton("Hirdetés feladása");
+        loggedInControls.add(createAdvertButton);
+
+        tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        tabbedPane.add("Hirdetések", createAdvertListPanel());
+        tabbedPane.add("Keresés", createSearchPanel());
+        tabbedPane.add("Saját oldal", createOwnPanel());
+    }
+
+    private JPanel createOwnPanel()
+    {
+        JPanel ownPanel = new JPanel();
+        ownPanel.setLayout(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
+        ownPanel.add(createAdvertButton);
+
+        return ownPanel;
+    }
+
+    private JPanel createSearchPanel()
+    {
         searchResults = new JAdvertList();
         searchTextField = new JTextField();
         searchButton = new JButton("Keresés");
-        createAdvertButton = new JButton("Hirdetés feladása");
-
-        loggedInControls.add(createAdvertButton);
-
-        JPanel advertListPanel = new JPanel();
-        advertListPanel.setLayout(new BorderLayout(GAP, GAP));
-        advertListPanel.add(advertList, BorderLayout.CENTER);
 
         JPanel searchPanel = new JPanel();
         JPanel searchFieldPanel = new JPanel();
+
         searchFieldPanel.setLayout(new BorderLayout());
         searchFieldPanel.add(searchTextField, BorderLayout.CENTER);
         searchFieldPanel.add(searchButton, BorderLayout.EAST);
@@ -101,14 +114,18 @@ public class JMainWindow extends JDialog
         searchPanel.add(searchFieldPanel, BorderLayout.NORTH);
         searchPanel.add(searchResults, BorderLayout.CENTER);
 
-        JPanel ownPanel = new JPanel();
-        ownPanel.setLayout(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
-        ownPanel.add(createAdvertButton);
+        return searchPanel;
+    }
 
-        tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        tabbedPane.add("Hirdetések", advertListPanel);
-        tabbedPane.add("Keresés", searchPanel);
-        tabbedPane.add("Saját oldal", ownPanel);
+    private JPanel createAdvertListPanel()
+    {
+        advertList = new JAdvertList();
+
+        JPanel advertListPanel = new JPanel();
+        advertListPanel.setLayout(new BorderLayout(GAP, GAP));
+        advertListPanel.add(advertList, BorderLayout.CENTER);
+
+        return advertListPanel;
     }
 
     public void setLogStatus(boolean loggedIn)
