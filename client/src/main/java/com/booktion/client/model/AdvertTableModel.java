@@ -23,7 +23,8 @@ public class AdvertTableModel extends AbstractTableModel
     public AdvertTableModel(DataSource dataSource)
     {
         this.dataSource = dataSource;
-        this.columns = new String[] {"Cím", "Szerző", "Kiadó", "Típus", "Ár"};
+        this.columns = new String[] {"Cím", "Szerző", "Kiadó", "Kiadás éve", "Típus", "Állapot",
+                "Ár", "Hirdető"};
     }
 
     public void setAdvertList(List<Advert> advertList)
@@ -45,7 +46,7 @@ public class AdvertTableModel extends AbstractTableModel
     @Override
     public int getColumnCount()
     {
-        return 5;
+        return 8;
     }
 
     @Override
@@ -60,8 +61,11 @@ public class AdvertTableModel extends AbstractTableModel
             case 0: return item.book.title;
             case 1: return item.book.author;
             case 2: return item.book.publisher;
-            case 3: return item.advertType == AdvertType.FIX_PRICE ? "Fix áras" : "Aukció";
-            case 4: return item.price;
+            case 3: return item.book.yearOfPublication;
+            case 4: return item.advertType == AdvertType.FIX_PRICE ? "Fix áras" : "Aukció";
+            case 5: return item.book.condition;
+            case 6: return item.price;
+            case 7: return item.issuer;
         }
 
         return null;
