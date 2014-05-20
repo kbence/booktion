@@ -2,7 +2,6 @@ apply plugin: 'application'
 
 dependencies {
     compile project(':shared')
-    compile 'org.apache.derby:derby:10.10.2.0'
     compile 'org.xerial:sqlite-jdbc:+'
     compile 'com.googlecode.log4jdbc:log4jdbc:1.2'
 }
