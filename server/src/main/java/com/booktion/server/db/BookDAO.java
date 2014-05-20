@@ -53,7 +53,7 @@ public class BookDAO extends DAO
                 Book book = new Book();
                 book.id = result.getInt("id");
                 book.owner = result.getInt("owner");
-                book.title = result.getString("author");
+                book.title = result.getString("title");
                 book.author = result.getString("author");
                 book.publisher = result.getString("publisher");
                 book.yearOfPublication = result.getShort("yearOfPublication");
