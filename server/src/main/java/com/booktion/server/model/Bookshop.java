@@ -120,8 +120,10 @@ public class Bookshop
         UserSession session = sessionManager.getCurrentSession();
         List<com.booktion.thrift.Book> books = new ArrayList<com.booktion.thrift.Book>();
 
-        for (Book book : db.book.getByOwner(session.user.id)) {
-            books.add(book.toThriftBook());
+        if (session != null && session.user != null) {
+            for (Book book : db.book.getByOwner(session.user.id)) {
+                books.add(book.toThriftBook());
+            }
         }
 
         return books;
@@ -132,8 +134,10 @@ public class Bookshop
         UserSession session = sessionManager.getCurrentSession();
         ArrayList<com.booktion.thrift.Book> books = new ArrayList<com.booktion.thrift.Book>();
 
-        for (Advert advert : db.advert.listByWinner(session.user.id)) {
-            books.add(advert.book.toThriftBook());
+        if (session != null && session.user != null) {
+            for (Advert advert : db.advert.listByWinner(session.user.id)) {
+                books.add(advert.book.toThriftBook());
+            }
         }
 
         return books;
