@@ -20,6 +20,10 @@ import java.util.List;
 
 public class MainController
 {
+    public static final int ADVERT_LIST = 0;
+    public static final int SEARCH = 1;
+    public static final int OWN_PAGE = 2;
+
     JMainWindow window;
     private BooktionConnector connector;
 
@@ -119,9 +123,7 @@ public class MainController
             @Override
             public void stateChanged(ChangeEvent e)
             {
-                switch (((JTabbedPane) e.getSource()).getSelectedIndex()) {
-                    case 0: loadAdvertList(); break;
-                }
+                refresh();
             }
         });
     }
@@ -190,7 +192,11 @@ public class MainController
 
     public void refresh()
     {
-        loadAdvertList();
+        switch (window.getTabbedPane().getSelectedIndex()) {
+            case ADVERT_LIST: loadAdvertList(); break;
+            case SEARCH: searchForAdvert(); break;
+            case OWN_PAGE: refreshOwnPage(); break;
+        }
     }
 
     private void loadAdvertList()
@@ -213,6 +219,10 @@ public class MainController
         } catch (TException e) {
             e.printStackTrace();
         }
+    }
+
+    private void refreshOwnPage()
+    {
     }
 
     private void connect()
