@@ -1,5 +1,7 @@
 package com.booktion.client.gui;
 
+import com.booktion.client.model.BookTableModel;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -11,21 +13,22 @@ public class JMainWindow extends JDialog
 
     private JPanel buttonPanel;
     private JButton loginButton;
-
     private JButton logoutButton;
+    private JButton registerButton;
+
     private ArrayList<Component> loggedInControls;
     private ArrayList<Component> loggedOutControls;
 
-    private JButton registerButton;
-
     private JTabbedPane tabbedPane;
+
     private JTablePanel advertList;
     private JTablePanel searchResults;
     private JLabel statusLabel;
-    private JButton createAdvertButton;
     private JTextField searchTextField;
-
     private JButton searchButton;
+
+    private JButton createAdvertButton;
+    private JTablePanel ownBooksTable;
 
     public JMainWindow()
     {
@@ -91,12 +94,22 @@ public class JMainWindow extends JDialog
         createAdvertButton = new JButton("Hirdetés feladása");
         loggedInControls.add(createAdvertButton);
 
-        JPanel ownPanel = new JPanel(new BorderLayout(5, 5));
+        JPanel ownPanel = new JPanel(new BorderLayout(GAP, GAP));
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, GAP, GAP));
         buttonPanel.add(createAdvertButton);
 
+        ownBooksTable = new JTablePanel();
+        ownBooksTable.getTable().setModel(new BookTableModel());
+
+        JPanel ownBooksPanel = new JPanel(new BorderLayout(GAP, GAP));
+        ownBooksPanel.add(new JLabel("Saját könyvek"), BorderLayout.NORTH);
+        ownBooksPanel.add(ownBooksTable);
+
         ownPanel.add(buttonPanel, BorderLayout.NORTH);
+        ownPanel.add(ownBooksPanel, BorderLayout.CENTER);
+
+        loggedInControls.add(ownBooksPanel);
 
         return ownPanel;
     }
@@ -190,5 +203,10 @@ public class JMainWindow extends JDialog
     public JButton getCreateAdvertButton()
     {
         return createAdvertButton;
+    }
+
+    public JTablePanel getOwnBooksTable()
+    {
+        return ownBooksTable;
     }
 }
