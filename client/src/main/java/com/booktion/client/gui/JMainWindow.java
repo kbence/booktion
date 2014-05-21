@@ -29,6 +29,7 @@ public class JMainWindow extends JDialog
 
     private JButton createAdvertButton;
     private JTablePanel ownBooksTable;
+    private JTablePanel boughtBooksTable;
 
     public JMainWindow()
     {
@@ -106,10 +107,21 @@ public class JMainWindow extends JDialog
         ownBooksPanel.add(new JLabel("Saját könyvek"), BorderLayout.NORTH);
         ownBooksPanel.add(ownBooksTable);
 
-        ownPanel.add(buttonPanel, BorderLayout.NORTH);
-        ownPanel.add(ownBooksPanel, BorderLayout.CENTER);
+        boughtBooksTable = new JTablePanel();
+        boughtBooksTable.getTable().setModel(new BookTableModel());
 
-        loggedInControls.add(ownBooksPanel);
+        JPanel boughtBooksPanel = new JPanel(new BorderLayout(GAP, GAP));
+        boughtBooksPanel.add(new JLabel("Megvásárolt könyvek"), BorderLayout.NORTH);
+        boughtBooksPanel.add(boughtBooksTable);
+
+        JPanel bookListsPanel = new JPanel(new GridLayout(2, 1, 5, 5));
+        bookListsPanel.add(ownBooksPanel);
+        bookListsPanel.add(boughtBooksPanel);
+
+        ownPanel.add(buttonPanel, BorderLayout.NORTH);
+        ownPanel.add(bookListsPanel, BorderLayout.CENTER);
+
+        loggedInControls.add(bookListsPanel);
 
         return ownPanel;
     }
@@ -208,5 +220,10 @@ public class JMainWindow extends JDialog
     public JTablePanel getOwnBooksTable()
     {
         return ownBooksTable;
+    }
+
+    public JTablePanel getBoughtBooksTable()
+    {
+        return boughtBooksTable;
     }
 }
