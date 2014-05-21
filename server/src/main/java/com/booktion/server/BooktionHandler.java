@@ -84,9 +84,9 @@ public class BooktionHandler implements BooktionService.Iface
     }
 
     @Override
-    public boolean purchase(int bookId) throws TException
+    public boolean purchase(int advertId) throws TException
     {
-        return bookshop.purchase(bookId);
+        return bookshop.purchase(advertId);
     }
 
     @Override

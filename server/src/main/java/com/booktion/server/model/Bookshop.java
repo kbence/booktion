@@ -147,6 +147,10 @@ public class Bookshop
     {
         User user = sessionManager.getCurrentSession().user;
         Logger.get().log(String.format("User '%s' purchased book %d", user.username, advertId));
+
+        if (db.advert.getById(advertId).issuer.id == user.id)
+            return false;
+
         return db.advert.finalize(advertId, user.id);
     }
 
@@ -154,6 +158,9 @@ public class Bookshop
     {
         User user = sessionManager.getCurrentSession().user;
         Advert advert = db.advert.getById(advertId);
+
+        if (db.advert.getById(advertId).issuer.id == user.id)
+            return false;
 
         System.out.println(String.format("advertId: %d, advert: %s", advertId, advert));
 
