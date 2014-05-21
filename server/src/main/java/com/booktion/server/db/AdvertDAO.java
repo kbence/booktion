@@ -17,6 +17,7 @@ public class AdvertDAO extends DAO
 {
     private static final String SELECT_BY_ID = "SELECT * FROM adverts WHERE id = ?";
     private static final String SELECT_ALL = "SELECT * FROM adverts WHERE winner IS NULL";
+    private static final String SELECT_BY_WINNER = "SELECT * FROM adverts WHERE winner = ?";
     private static final String SEARCH_FOR_BOOK = "SELECT adverts.* FROM adverts JOIN books " +
             "ON adverts.bookId = books.id WHERE (books.title LIKE ? OR " +
             "books.author LIKE ? OR books.publisher LIKE ?) AND winner IS NULL";
@@ -60,6 +61,25 @@ public class AdvertDAO extends DAO
 
         try {
             PreparedStatement stmt = connection.prepareStatement(SELECT_ALL);
+            ResultSet result = stmt.executeQuery();
+
+            while (result.next()) {
+                adverts.add(createAdvertFromResult(result));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return adverts;
+    }
+
+    public List<Advert> listByWinner(int winnerId)
+    {
+        ArrayList<Advert> adverts = new ArrayList<Advert>();
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(SELECT_BY_WINNER);
+            stmt.setInt(1, winnerId);
             ResultSet result = stmt.executeQuery();
 
             while (result.next()) {
