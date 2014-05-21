@@ -4,6 +4,7 @@ import com.booktion.client.connector.BooktionConnector;
 import com.booktion.client.connector.BooktionConnectorFactory;
 import com.booktion.client.gui.*;
 import com.booktion.client.model.AdvertTableModel;
+import com.booktion.client.model.BookTableModel;
 import com.booktion.thrift.Advert;
 import com.booktion.thrift.AdvertType;
 import com.booktion.thrift.Book;
@@ -29,6 +30,8 @@ public class MainController
 
     private AdvertTableModel advertListModel;
     private AdvertTableModel searchResultsModel;
+    private BookTableModel ownBooksModel;
+    private BookTableModel boughtBooksModel;
     private List<Advert> adverts;
     private List<Advert> searchResults;
     boolean logStatus;
@@ -48,9 +51,13 @@ public class MainController
     {
         advertListModel = new AdvertTableModel();
         searchResultsModel = new AdvertTableModel();
+        ownBooksModel = new BookTableModel();
+        boughtBooksModel = new BookTableModel();
 
         window.getAdvertList().getTable().setModel(advertListModel);
         window.getSearchResults().getTable().setModel(searchResultsModel);
+        window.getOwnBooksTable().getTable().setModel(ownBooksModel);
+        window.getBoughtBooksTable().getTable().setModel(boughtBooksModel);
     }
 
     private void addListeners()
@@ -223,6 +230,14 @@ public class MainController
 
     private void refreshOwnPage()
     {
+        if (!logStatus) return;
+
+        try {
+            ownBooksModel.setAdvertList(connector.listOwnBooks());
+            boughtBooksModel.setAdvertList(connector.listBoughtBooks());
+        } catch (TException e) {
+            e.printStackTrace();
+        }
     }
 
     private void connect()

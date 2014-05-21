@@ -59,6 +59,16 @@ public class BooktionConnector
         return client.searchForAdverts(name);
     }
 
+    public List<Book> listOwnBooks() throws TException
+    {
+        return client.listOwnBooks();
+    }
+
+    public List<Book> listBoughtBooks() throws TException
+    {
+        return client.listBoughtBooks();
+    }
+
     public boolean purchase(int advertId) throws TException
     {
         return client.purchase(advertId);

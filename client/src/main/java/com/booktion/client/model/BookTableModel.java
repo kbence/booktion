@@ -1,26 +1,24 @@
 package com.booktion.client.model;
 
 import com.booktion.thrift.Advert;
-import com.booktion.thrift.AdvertType;
 import com.booktion.thrift.Book;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
-import java.util.Map;
 
 public class BookTableModel extends AbstractTableModel
 {
     private String[] columns;
-    private List<Advert> adverts;
+    private List<Book> books;
 
     public BookTableModel()
     {
         this.columns = new String[] {"Cím", "Szerző", "Kiadó", "Kiadás éve", "Állapot"};
     }
 
-    public void setAdvertList(List<Advert> advertList)
+    public void setAdvertList(List<Book> bookList)
     {
-        adverts = advertList;
+        books = bookList;
 
         fireTableDataChanged();
     }
@@ -28,10 +26,10 @@ public class BookTableModel extends AbstractTableModel
     @Override
     public int getRowCount()
     {
-        if (adverts == null)
+        if (books == null)
             return 0;
 
-        return adverts.size();
+        return books.size();
     }
 
     @Override
@@ -43,17 +41,17 @@ public class BookTableModel extends AbstractTableModel
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
-        if (adverts == null)
+        if (books == null)
             return null;
 
-        Advert item = adverts.get(rowIndex);
+        Book item = books.get(rowIndex);
 
         switch (columnIndex) {
-            case 0: return item.book.title;
-            case 1: return item.book.author;
-            case 2: return item.book.publisher;
-            case 3: return item.book.yearOfPublication;
-            case 4: return item.book.condition;
+            case 0: return item.title;
+            case 1: return item.author;
+            case 2: return item.publisher;
+            case 3: return item.yearOfPublication;
+            case 4: return item.condition;
         }
 
         return null;
