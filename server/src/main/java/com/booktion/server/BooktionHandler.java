@@ -72,6 +72,18 @@ public class BooktionHandler implements BooktionService.Iface
     }
 
     @Override
+    public List<Book> listOwnBooks() throws TException
+    {
+        return null;
+    }
+
+    @Override
+    public List<Book> listBoughtBooks() throws TException
+    {
+        return null;
+    }
+
+    @Override
     public boolean purchase(int bookId) throws TException
     {
         return bookshop.purchase(bookId);

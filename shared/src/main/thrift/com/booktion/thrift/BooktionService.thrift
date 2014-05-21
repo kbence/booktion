@@ -22,6 +22,10 @@ service BooktionService {
 
     list<Advert.Advert> listAdverts(1:i32 first, 2:i32 last),
 
+    list<Book.Book> listOwnBooks(),
+
+    list<Book.Book> listBoughtBooks(),
+
     bool purchase(1:i32 advertId),
 
     bool bid(1:i32 advertId, 2:double price),

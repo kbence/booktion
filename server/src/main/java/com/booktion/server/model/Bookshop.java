@@ -115,6 +115,16 @@ public class Bookshop
         return adverts;
     }
 
+    public List<com.booktion.thrift.Book> listOwnBooks()
+    {
+        return new ArrayList<com.booktion.thrift.Book>();
+    }
+
+    public List<com.booktion.thrift.Book> listBoughtBooks()
+    {
+        return new ArrayList<com.booktion.thrift.Book>();
+    }
+
     public boolean purchase(int advertId)
     {
         User user = sessionManager.getCurrentSession().user;
