@@ -9,7 +9,6 @@ import org.apache.thrift.TException;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import static com.booktion.server.model.Book.fromThriftBook;
@@ -151,7 +150,7 @@ public class Bookshop
         if (db.advert.getById(advertId).issuer.id == user.id)
             return false;
 
-        return db.advert.finalize(advertId, user.id);
+        return db.advert.setWinner(advertId, user.id);
     }
 
     public boolean bid(int advertId, double price)
@@ -174,6 +173,6 @@ public class Bookshop
         if (price <= db.bid.getHighestPrice(advertId) || price < advert.price)
             return false;
 
-        return db.bid.put(bid);
+        return db.bid.put(bid) && db.advert.setWinner(bid.advertId, user.id);
     }
 }

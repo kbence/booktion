@@ -10,8 +10,7 @@ import java.sql.SQLException;
 public class BidDAO extends DAO
 {
     private static final String GET_HIGHEST_PRICE = "SELECT MAX(price) AS price FROM bids WHERE advertId = ? ";
-    private static final String PUT_BID = "INSERT INTO bids (userId, advertId, price) VALUES " +
-            "(?, ?, ?)";
+    private static final String PUT_BID = "INSERT INTO bids (userId, advertId, price) VALUES (?, ?, ?)";
 
     public BidDAO(Connection connection)
     {

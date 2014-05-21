@@ -37,8 +37,8 @@ CREATE TABLE adverts (
 );
 
 INSERT INTO adverts (issuer, bookId, type, expires, price) VALUES
-    (2, 1, 'FIX_PRICE', datetime('now', '+1 hour', 'localtime'), 4300),
-    (2, 2, 'AUCTION', datetime('now', '+7 day', 'localtime'), 2590);
+    (2, 1, 'FIX_PRICE', strftime('%s', datetime('now', '+1 hour', 'localtime')) * 1000, 4300),
+    (2, 2, 'AUCTION', strftime('%s', datetime('now', '+7 day', 'localtime')) * 1000, 2590);
 
 CREATE TABLE bids (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
