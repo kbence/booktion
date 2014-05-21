@@ -117,12 +117,26 @@ public class Bookshop
 
     public List<com.booktion.thrift.Book> listOwnBooks()
     {
-        return new ArrayList<com.booktion.thrift.Book>();
+        UserSession session = sessionManager.getCurrentSession();
+        List<com.booktion.thrift.Book> books = new ArrayList<com.booktion.thrift.Book>();
+
+        for (Book book : db.book.getByOwner(session.user.id)) {
+            books.add(book.toThriftBook());
+        }
+
+        return books;
     }
 
     public List<com.booktion.thrift.Book> listBoughtBooks()
     {
-        return new ArrayList<com.booktion.thrift.Book>();
+        UserSession session = sessionManager.getCurrentSession();
+        ArrayList<com.booktion.thrift.Book> books = new ArrayList<com.booktion.thrift.Book>();
+
+        for (Advert advert : db.advert.listByWinner(session.user.id)) {
+            books.add(advert.book.toThriftBook());
+        }
+
+        return books;
     }
 
     public boolean purchase(int advertId)
