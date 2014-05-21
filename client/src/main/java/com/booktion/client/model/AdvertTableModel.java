@@ -38,7 +38,7 @@ public class AdvertTableModel extends AbstractTableModel
     @Override
     public int getColumnCount()
     {
-        return 8;
+        return this.columns.length;
     }
 
     @Override
