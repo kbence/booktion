@@ -10,19 +10,11 @@ import java.util.Map;
 
 public class AdvertTableModel extends AbstractTableModel
 {
-    public interface DataSource
-    {
-        public Book getBook(int bookId);
-    }
-
-    private DataSource dataSource;
     private String[] columns;
     private List<Advert> adverts;
-    private Map<Integer, Book> books;
 
-    public AdvertTableModel(DataSource dataSource)
+    public AdvertTableModel()
     {
-        this.dataSource = dataSource;
         this.columns = new String[] {"Cím", "Szerző", "Kiadó", "Kiadás éve", "Típus", "Állapot",
                 "Ár", "Hirdető"};
     }

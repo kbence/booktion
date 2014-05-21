@@ -42,35 +42,8 @@ public class MainController
 
     private void setUpControls()
     {
-        advertListModel = new AdvertTableModel(new AdvertTableModel.DataSource()
-        {
-            @Override
-            public Book getBook(int bookId)
-            {
-                try {
-                    return connector.getBook(bookId);
-                } catch (TException e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-        });
-
-        searchResultsModel = new AdvertTableModel(new AdvertTableModel.DataSource()
-        {
-            @Override
-            public Book getBook(int bookId)
-            {
-                try {
-                    return connector.getBook(bookId);
-                } catch (TException e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-        });
+        advertListModel = new AdvertTableModel();
+        searchResultsModel = new AdvertTableModel();
 
         window.getAdvertList().getTable().setModel(advertListModel);
         window.getSearchResults().getTable().setModel(searchResultsModel);
