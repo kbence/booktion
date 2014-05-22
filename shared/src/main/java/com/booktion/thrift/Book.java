@@ -39,8 +39,9 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
   private static final org.apache.thrift.protocol.TField TITLE_FIELD_DESC = new org.apache.thrift.protocol.TField("title", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField AUTHOR_FIELD_DESC = new org.apache.thrift.protocol.TField("author", org.apache.thrift.protocol.TType.STRING, (short)3);
   private static final org.apache.thrift.protocol.TField PUBLISHER_FIELD_DESC = new org.apache.thrift.protocol.TField("publisher", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField YEAR_OF_PUBLICATION_FIELD_DESC = new org.apache.thrift.protocol.TField("yearOfPublication", org.apache.thrift.protocol.TType.I16, (short)5);
-  private static final org.apache.thrift.protocol.TField CONDITION_FIELD_DESC = new org.apache.thrift.protocol.TField("condition", org.apache.thrift.protocol.TType.I16, (short)6);
+  private static final org.apache.thrift.protocol.TField DESCRIPTION_FIELD_DESC = new org.apache.thrift.protocol.TField("description", org.apache.thrift.protocol.TType.STRING, (short)5);
+  private static final org.apache.thrift.protocol.TField YEAR_OF_PUBLICATION_FIELD_DESC = new org.apache.thrift.protocol.TField("yearOfPublication", org.apache.thrift.protocol.TType.I16, (short)6);
+  private static final org.apache.thrift.protocol.TField CONDITION_FIELD_DESC = new org.apache.thrift.protocol.TField("condition", org.apache.thrift.protocol.TType.I16, (short)7);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -52,6 +53,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
   public String title; // required
   public String author; // required
   public String publisher; // required
+  public String description; // required
   public short yearOfPublication; // required
   public short condition; // required
 
@@ -61,8 +63,9 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     TITLE((short)2, "title"),
     AUTHOR((short)3, "author"),
     PUBLISHER((short)4, "publisher"),
-    YEAR_OF_PUBLICATION((short)5, "yearOfPublication"),
-    CONDITION((short)6, "condition");
+    DESCRIPTION((short)5, "description"),
+    YEAR_OF_PUBLICATION((short)6, "yearOfPublication"),
+    CONDITION((short)7, "condition");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -85,9 +88,11 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
           return AUTHOR;
         case 4: // PUBLISHER
           return PUBLISHER;
-        case 5: // YEAR_OF_PUBLICATION
+        case 5: // DESCRIPTION
+          return DESCRIPTION;
+        case 6: // YEAR_OF_PUBLICATION
           return YEAR_OF_PUBLICATION;
-        case 6: // CONDITION
+        case 7: // CONDITION
           return CONDITION;
         default:
           return null;
@@ -144,6 +149,8 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.PUBLISHER, new org.apache.thrift.meta_data.FieldMetaData("publisher", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.DESCRIPTION, new org.apache.thrift.meta_data.FieldMetaData("description", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.YEAR_OF_PUBLICATION, new org.apache.thrift.meta_data.FieldMetaData("yearOfPublication", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I16)));
     tmpMap.put(_Fields.CONDITION, new org.apache.thrift.meta_data.FieldMetaData("condition", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -160,6 +167,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     String title,
     String author,
     String publisher,
+    String description,
     short yearOfPublication,
     short condition)
   {
@@ -169,6 +177,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     this.title = title;
     this.author = author;
     this.publisher = publisher;
+    this.description = description;
     this.yearOfPublication = yearOfPublication;
     setYearOfPublicationIsSet(true);
     this.condition = condition;
@@ -190,6 +199,9 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     if (other.isSetPublisher()) {
       this.publisher = other.publisher;
     }
+    if (other.isSetDescription()) {
+      this.description = other.description;
+    }
     this.yearOfPublication = other.yearOfPublication;
     this.condition = other.condition;
   }
@@ -205,6 +217,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     this.title = null;
     this.author = null;
     this.publisher = null;
+    this.description = null;
     setYearOfPublicationIsSet(false);
     this.yearOfPublication = 0;
     setConditionIsSet(false);
@@ -306,6 +319,30 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     }
   }
 
+  public String getDescription() {
+    return this.description;
+  }
+
+  public Book setDescription(String description) {
+    this.description = description;
+    return this;
+  }
+
+  public void unsetDescription() {
+    this.description = null;
+  }
+
+  /** Returns true if field description is set (has been assigned a value) and false otherwise */
+  public boolean isSetDescription() {
+    return this.description != null;
+  }
+
+  public void setDescriptionIsSet(boolean value) {
+    if (!value) {
+      this.description = null;
+    }
+  }
+
   public short getYearOfPublication() {
     return this.yearOfPublication;
   }
@@ -386,6 +423,14 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
       }
       break;
 
+    case DESCRIPTION:
+      if (value == null) {
+        unsetDescription();
+      } else {
+        setDescription((String)value);
+      }
+      break;
+
     case YEAR_OF_PUBLICATION:
       if (value == null) {
         unsetYearOfPublication();
@@ -419,6 +464,9 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     case PUBLISHER:
       return getPublisher();
 
+    case DESCRIPTION:
+      return getDescription();
+
     case YEAR_OF_PUBLICATION:
       return Short.valueOf(getYearOfPublication());
 
@@ -444,6 +492,8 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
       return isSetAuthor();
     case PUBLISHER:
       return isSetPublisher();
+    case DESCRIPTION:
+      return isSetDescription();
     case YEAR_OF_PUBLICATION:
       return isSetYearOfPublication();
     case CONDITION:
@@ -498,6 +548,15 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
       if (!(this_present_publisher && that_present_publisher))
         return false;
       if (!this.publisher.equals(that.publisher))
+        return false;
+    }
+
+    boolean this_present_description = true && this.isSetDescription();
+    boolean that_present_description = true && that.isSetDescription();
+    if (this_present_description || that_present_description) {
+      if (!(this_present_description && that_present_description))
+        return false;
+      if (!this.description.equals(that.description))
         return false;
     }
 
@@ -575,6 +634,16 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetDescription()).compareTo(other.isSetDescription());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetDescription()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.description, other.description);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = Boolean.valueOf(isSetYearOfPublication()).compareTo(other.isSetYearOfPublication());
     if (lastComparison != 0) {
       return lastComparison;
@@ -640,6 +709,14 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
       sb.append("null");
     } else {
       sb.append(this.publisher);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("description:");
+    if (this.description == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.description);
     }
     first = false;
     if (!first) sb.append(", ");
@@ -727,7 +804,15 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 5: // YEAR_OF_PUBLICATION
+          case 5: // DESCRIPTION
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.description = iprot.readString();
+              struct.setDescriptionIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 6: // YEAR_OF_PUBLICATION
             if (schemeField.type == org.apache.thrift.protocol.TType.I16) {
               struct.yearOfPublication = iprot.readI16();
               struct.setYearOfPublicationIsSet(true);
@@ -735,7 +820,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 6: // CONDITION
+          case 7: // CONDITION
             if (schemeField.type == org.apache.thrift.protocol.TType.I16) {
               struct.condition = iprot.readI16();
               struct.setConditionIsSet(true);
@@ -776,6 +861,11 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
         oprot.writeString(struct.publisher);
         oprot.writeFieldEnd();
       }
+      if (struct.description != null) {
+        oprot.writeFieldBegin(DESCRIPTION_FIELD_DESC);
+        oprot.writeString(struct.description);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldBegin(YEAR_OF_PUBLICATION_FIELD_DESC);
       oprot.writeI16(struct.yearOfPublication);
       oprot.writeFieldEnd();
@@ -812,13 +902,16 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
       if (struct.isSetPublisher()) {
         optionals.set(3);
       }
-      if (struct.isSetYearOfPublication()) {
+      if (struct.isSetDescription()) {
         optionals.set(4);
       }
-      if (struct.isSetCondition()) {
+      if (struct.isSetYearOfPublication()) {
         optionals.set(5);
       }
-      oprot.writeBitSet(optionals, 6);
+      if (struct.isSetCondition()) {
+        optionals.set(6);
+      }
+      oprot.writeBitSet(optionals, 7);
       if (struct.isSetId()) {
         oprot.writeI32(struct.id);
       }
@@ -831,6 +924,9 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
       if (struct.isSetPublisher()) {
         oprot.writeString(struct.publisher);
       }
+      if (struct.isSetDescription()) {
+        oprot.writeString(struct.description);
+      }
       if (struct.isSetYearOfPublication()) {
         oprot.writeI16(struct.yearOfPublication);
       }
@@ -842,7 +938,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, Book struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(6);
+      BitSet incoming = iprot.readBitSet(7);
       if (incoming.get(0)) {
         struct.id = iprot.readI32();
         struct.setIdIsSet(true);
@@ -860,10 +956,14 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
         struct.setPublisherIsSet(true);
       }
       if (incoming.get(4)) {
+        struct.description = iprot.readString();
+        struct.setDescriptionIsSet(true);
+      }
+      if (incoming.get(5)) {
         struct.yearOfPublication = iprot.readI16();
         struct.setYearOfPublicationIsSet(true);
       }
-      if (incoming.get(5)) {
+      if (incoming.get(6)) {
         struct.condition = iprot.readI16();
         struct.setConditionIsSet(true);
       }

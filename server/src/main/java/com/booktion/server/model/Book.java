@@ -7,6 +7,7 @@ public class Book implements Cloneable
     public int owner;
     public String author;
     public String publisher;
+    public String description;
     public short yearOfPublication;
     public short condition;
 
@@ -18,6 +19,7 @@ public class Book implements Cloneable
         book.title = title;
         book.author = author;
         book.publisher = publisher;
+        book.description = description;
         book.yearOfPublication = yearOfPublication;
         book.condition = condition;
 
@@ -35,6 +37,7 @@ public class Book implements Cloneable
         return book.id == id && isStringEquals(title, book.title) &&
                 isStringEquals(author, book.author) &&
                 isStringEquals(publisher, book.publisher) &&
+                isStringEquals(description, book.description) &&
                 book.yearOfPublication == yearOfPublication &&
                 book.condition == condition;
     }
@@ -52,6 +55,7 @@ public class Book implements Cloneable
         book.title = thriftBook.title;
         book.author = thriftBook.author;
         book.publisher = thriftBook.publisher;
+        book.description = thriftBook.description;
         book.yearOfPublication = thriftBook.yearOfPublication;
         book.condition = thriftBook.condition;
 
@@ -67,6 +71,7 @@ public class Book implements Cloneable
         book.title = title;
         book.author = author;
         book.publisher = publisher;
+        book.description = description;
         book.yearOfPublication = yearOfPublication;
         book.condition = condition;
 
@@ -77,8 +82,8 @@ public class Book implements Cloneable
     public String toString()
     {
         return String.format(
-            "%d/%s/%s/%s/%d/%d",
-            id, title, author, publisher, yearOfPublication, condition
+            "%d/%s/%s/%s/%s/%d/%d",
+            id, title, author, publisher, description, yearOfPublication, condition
         );
     }
 }
