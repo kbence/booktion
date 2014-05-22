@@ -16,15 +16,13 @@ public class AdvertDAO extends DAO
 {
     private static final String NOT_SOLD = "(type = 'FIX_PRICE' AND winner IS NULL OR " +
             "type = 'AUCTION' AND expires > ?)";
-    private static final String NOT_EXPIRED = "(expires < ?)";
     private static final String SELECT_BY_ID = "SELECT * FROM adverts WHERE id = ?";
-    private static final String SELECT_ALL = "SELECT * FROM adverts WHERE " + NOT_SOLD +
-            " AND " + NOT_EXPIRED;
+    private static final String SELECT_ALL = "SELECT * FROM adverts WHERE " + NOT_SOLD;
     private static final String SELECT_BY_WINNER = "SELECT * FROM adverts WHERE winner = ? AND " +
             "(type = 'FIX_PRICE' OR expires < ?)";
     private static final String SEARCH_FOR_BOOK = "SELECT adverts.* FROM adverts JOIN books " +
             "ON adverts.bookId = books.id WHERE (books.title LIKE ? OR " +
-            "books.author LIKE ? OR books.publisher LIKE ?) AND " + NOT_SOLD + " AND " + NOT_EXPIRED;
+            "books.author LIKE ? OR books.publisher LIKE ?) AND " + NOT_SOLD;
     private static final String SET_WINNER = "UPDATE adverts SET winner = ? WHERE id = ?";
     private static final String INSERT_ADVERT = "INSERT INTO adverts (issuer, bookId, type, " +
             "expires, price) VALUES (?, ?, ?, ?, ?)";
@@ -65,10 +63,7 @@ public class AdvertDAO extends DAO
 
         try {
             PreparedStatement stmt = connection.prepareStatement(SELECT_ALL);
-            long time = new Date().getTime();
-
-            stmt.setLong(1, time);
-            stmt.setLong(2, time);
+            stmt.setLong(1, new Date().getTime());
             ResultSet result = stmt.executeQuery();
 
             while (result.next()) {
@@ -108,13 +103,11 @@ public class AdvertDAO extends DAO
         try {
             String searchString = "%" + keyword + "%";
             PreparedStatement stmt = connection.prepareStatement(SEARCH_FOR_BOOK);
-            long time = new Date().getTime();
 
             stmt.setString(1, searchString);
             stmt.setString(2, searchString);
             stmt.setString(3, searchString);
-            stmt.setLong(4, time);
-            stmt.setLong(5, time);
+            stmt.setLong(4, new Date().getTime());
             ResultSet result = stmt.executeQuery();
 
             while (result.next()) {
