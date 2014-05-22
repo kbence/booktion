@@ -18,13 +18,14 @@ CREATE TABLE books (
     title VARCHAR(64) NOT NULL,
     author VARCHAR(64) NOT NULL,
     publisher VARCHAR(32) NOT NULL,
+    description TEXT NOT NULL,
     yearOfPublication INTEGER NOT NULL,
     condition INTEGER NOT NULL
 );
 
-INSERT INTO books ( owner, title, author, publisher, yearOfPublication, condition) VALUES
-    (2, 'A C++ Programozási nyelv', 'Bjarne Stroustrup', 'Kiskapu', 1994, 87),
-    (2, 'Számítógép-hálózatok', 'Andrew S. Tanenbaum', 'Addison-Weasley', 1994, 87);
+INSERT INTO books (owner, title, author, publisher, description, yearOfPublication, condition) VALUES
+    (2, 'A C++ Programozási nyelv', 'Bjarne Stroustrup', 'Kiskapu', '', 1994, 87),
+    (2, 'Számítógép-hálózatok', 'Andrew S. Tanenbaum', 'Addison-Weasley', '', 1994, 87);
 
 CREATE TABLE adverts (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
