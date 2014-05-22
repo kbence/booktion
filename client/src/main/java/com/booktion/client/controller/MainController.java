@@ -201,7 +201,6 @@ public class MainController
     {
         switch (window.getTabbedPane().getSelectedIndex()) {
             case ADVERT_LIST: loadAdvertList(); break;
-            case SEARCH: searchForAdvert(); break;
             case OWN_PAGE: refreshOwnPage(); break;
         }
     }
