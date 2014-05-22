@@ -41,6 +41,7 @@ public class JActionDialog extends JCenteredDialog
         addField(getTranslation("book.title"), advert.book.title, componentRow++);
         addField(getTranslation("book.author"), advert.book.author, componentRow++);
         addField(getTranslation("book.publisher"), advert.book.publisher, componentRow++);
+        addField(getTranslation("book.description"), advert.book.description, componentRow++);
         addField(getTranslation("advert.type"), advert.advertType == AdvertType.FIX_PRICE ? "Fix áras" : "Aukció", componentRow++);
         addField(getTranslation("advert.price"), String.format("%.0f", advert.price), componentRow++);
         addField(getTranslation("advert.expires"), getHumanDate(new Date(advert.expires)), componentRow++);
@@ -70,6 +71,7 @@ public class JActionDialog extends JCenteredDialog
         if (id.equals("book.title")) return "Cím";
         if (id.equals("book.author")) return "Szerző";
         if (id.equals("book.publisher")) return "Kiadó";
+        if (id.equals("book.description")) return "Leírás";
         if (id.equals("advert.type")) return "Típus";
         if (id.equals("advert.expires")) return "Lejárat";
         if (id.equals("advert.price")) return "Minimálár";

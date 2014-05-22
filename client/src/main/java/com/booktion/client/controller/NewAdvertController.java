@@ -50,6 +50,7 @@ public class NewAdvertController
         book.title = newAdvertDialog.getTitleTextField().getText();
         book.author = newAdvertDialog.getAuthorTextField().getText();
         book.publisher = newAdvertDialog.getPublisherTextField().getText();
+        book.description = newAdvertDialog.getDescriptionTextArea().getText();
 
         try {
             book.yearOfPublication = Short.valueOf(newAdvertDialog.getYearOfPublicationTextField().getText());
