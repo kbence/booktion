@@ -12,7 +12,7 @@ import java.util.List;
 public class BookDAO extends DAO
 {
     private final String INSERT_BOOK = "INSERT INTO books (title, owner, author, publisher, " +
-            "yearOfPublication, condition) VALUES (?, ?, ?, ?, ?, ?)";
+            "description, yearOfPublication, condition) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE id = ?";
     private final String SELECT_BOOK_BY_OWNER = "SELECT * FROM books WHERE owner = ?";
 
@@ -29,8 +29,9 @@ public class BookDAO extends DAO
             stmt.setInt(2, book.owner);
             stmt.setString(3, book.author);
             stmt.setString(4, book.publisher);
-            stmt.setInt(5, book.yearOfPublication);
-            stmt.setInt(6, book.condition);
+            stmt.setString(5, book.description);
+            stmt.setInt(6, book.yearOfPublication);
+            stmt.setInt(7, book.condition);
 
             if (stmt.executeUpdate() == 0)
                 return -1;
